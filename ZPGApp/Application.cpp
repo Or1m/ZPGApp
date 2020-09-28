@@ -10,16 +10,19 @@ Application* Application::getInstance() {
 	return instance;
 }
 
-Application::Application() : Application::Application(800, 600, "ZPG") {}
+Application* Application::getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints) {
 
-Application::Application(int windowWidth, int windowHeight, const char* windowTitle) {
+	if (instance == NULL) {
+		instance = new Application(windowOptions, shaders, points, sizeOfPoints);
+	}
 
-	fragment_shader = NULL;
-	vertex_shader = NULL;
-	points = NULL;
-	shader = NULL;
-	sizeOfPoints = NULL;
+	return instance;
+}
 
+Application::Application() : Application::Application(new WindowOptions(800, 600, "ZPG"), new Shaders(), NULL, NULL) {}
+
+Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints) {
+	
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -27,7 +30,7 @@ Application::Application(int windowWidth, int windowHeight, const char* windowTi
 		exit(EXIT_FAILURE);
 	}
 
-	window = glfwCreateWindow(windowWidth, windowHeight, windowTitle, NULL, NULL);
+	window = glfwCreateWindow(windowOptions->windowWidth, windowOptions->windowHeight, windowOptions->windowTitle, NULL, NULL);
 
 	if (!window) {
 		glfwTerminate();
@@ -46,7 +49,12 @@ Application::Application(int windowWidth, int windowHeight, const char* windowTi
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 
-	object = new Object();
+	this->object = new Object();
+
+	if (points != NULL && sizeOfPoints != NULL && shaders->vertex_shader != NULL && shaders->fragment_shader != NULL) {
+		setPoints(points, sizeOfPoints);
+		setShaders(shaders->vertex_shader, shaders->fragment_shader);
+	}
 }
 
 Application::~Application() {
@@ -131,7 +139,7 @@ void Application::setShaders(const char* vertex_shader, const char* fragment_sha
 	setVertexShader(vertex_shader);
 	setFragmentShader(fragment_shader);
 
-	shader = new Shader(this->vertex_shader, this->fragment_shader);
+	this->shader = new Shader(this->vertex_shader, this->fragment_shader);
 }
 
 void Application::setVertexShader(const char* vertex_shader) {
@@ -146,8 +154,8 @@ void Application::setPoints(float points[], int sizeOfPoints) {
 	this->points = points;
 	this->sizeOfPoints = sizeOfPoints;
 
-	object->createVBO(this->points, this->sizeOfPoints);
-	object->createVAO();
+	this->object->createVBO(this->points, this->sizeOfPoints);
+	this->object->createVAO();
 }
 
 // Declaration of callback functions

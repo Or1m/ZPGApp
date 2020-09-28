@@ -1,13 +1,4 @@
 #include "Application.h"
-#include "Object.h"
-#include "Shader.h"
-#include <iostream>
-
-float points[] = {
-	0.0f, 0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f
-};
 
 // Shaders
 
@@ -28,23 +19,36 @@ const char* fragment_shader =
 "     frag_colour = vec4 (0.5, 1.0, .0, 1.0);"
 "}";
 
+float points[] = {
+	0.0f, 0.5f, 0.0f,
+	0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f
+};
+
 int main(void)  {
 
-	Application* application = Application::getInstance();
+	// Variant 1
+	/*Application* application = Application::getInstance();
+	application->setPoints(points, sizeof(points));
+	application->setShaders(vertex_shader, fragment_shader);*/
+
+	// Variant 2
+	Application* application = Application::getInstance(
+		new WindowOptions(800, 600, "ZPG"), 
+		new Shaders(vertex_shader, fragment_shader), 
+		points, 
+		sizeof(points)
+	);
 
 	//application->printVersionInfo();
 	//application->attachCallbacks();
 	//application->testGLM();
 
-	application->setPoints(points, sizeof(points));
-	application->setShaders(vertex_shader, fragment_shader);
-	
 	/*glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);*/
 	
 	application->run();
-
-	//std::cout << sizeof(points);
+	return 0;
 }

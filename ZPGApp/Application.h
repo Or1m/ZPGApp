@@ -18,12 +18,14 @@
 #include <stdio.h> // E.g. malloc() and free()
 
 // My includes
+#include "Header.h"
 #include "Shader.h"
 #include "Object.h"
 
 class Application {
 public:
 	static Application* getInstance();
+	static Application* getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints);
 	void run();
 	void printVersionInfo();
 	void attachCallbacks();
@@ -34,7 +36,7 @@ public:
 
 protected:
 	Application();
-	Application(int width, int height, const char* title);
+	Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints);
 	~Application();
 
 private:

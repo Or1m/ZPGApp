@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
