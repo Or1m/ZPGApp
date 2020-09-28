@@ -10,7 +10,7 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 	glShaderSource(fragmentShader, 1, &fragment_shader, NULL);
 	glCompileShader(fragmentShader);
 
-	GLuint shaderProgram = glCreateProgram(); // najdolezitejsie
+	shaderProgram = glCreateProgram(); // najdolezitejsie
 	glAttachShader(shaderProgram, fragmentShader);
 	glAttachShader(shaderProgram, vertexShader);
 	glLinkProgram(shaderProgram);
@@ -29,4 +29,8 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 
 Shader::~Shader() {
 	delete this;
+}
+
+void Shader::useProgram() {
+	glUseProgram(shaderProgram);
 }

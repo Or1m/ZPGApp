@@ -12,6 +12,7 @@ class Object
 public:
 	void createVBO(float points[]);
 	void createVAO();
+	void bindVertexArray();
 
 private:
 	GLuint VBO;
