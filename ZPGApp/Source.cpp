@@ -23,8 +23,7 @@
 // Declaration of callback functions
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
 
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
@@ -78,9 +77,9 @@ float points[] = {
 // chyba shadera sa prejavuje bielou farbou objektu
 const char* vertex_shader =
 "#version 330\n"
-"layout(location=0) in vec3 vp;"
+"layout(location=0) in vec3 vp;" // the position variable has attribute position 0
 "void main () {"
-"     gl_Position = vec4 (vp, 1.0);"
+"     gl_Position = vec4 (vp, 1.0);" // see how we directly give a vec3 to vec4's constructor
 "}";
 
 const char* fragment_shader =
@@ -90,8 +89,8 @@ const char* fragment_shader =
 "     frag_colour = vec4 (0.5, 1.0, .0, 1.0);"
 "}";
 
-int main(void)
-{
+int main(void)  {
+
 	GLFWwindow* window;
 
 	glfwSetErrorCallback(error_callback);
@@ -108,8 +107,7 @@ int main(void)
 	
 	window = glfwCreateWindow(800, 600, "ZPG", NULL, NULL);
 
-	if (!window)
-	{
+	if (!window) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
@@ -133,34 +131,35 @@ int main(void)
 	// start GLEW extension handler
 	glewExperimental = GL_TRUE;
 	glewInit();
+
 	// get version info
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
 	printf("Using GLEW %s\n", glewGetString(GLEW_VERSION));
 	printf("Vendor %s\n", glGetString(GL_VENDOR));
 	printf("Renderer %s\n", glGetString(GL_RENDERER));
 	printf("GLSL %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
 	int major, minor, revision;
 	glfwGetVersion(&major, &minor, &revision);
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
+
+	// get width and height, sets viewport
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 
-	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
-		-> void {Application::getInstance()->; cursor_pos_callback(window, mouseXPos, mouseYPos); });*/
-
-		//vertex buffer object (VBO)
+	//vertex buffer object (VBO)
 	GLuint VBO = 0;
 	glGenBuffers(1, &VBO); // generate the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points,
-		GL_STATIC_DRAW);
-	//vertex attribute object(VAO)
+	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+
+	//vertex attribute object (VAO)
 	GLuint VAO = 0;
 	glGenVertexArrays(1, &VAO); //generate the VAO
 	glBindVertexArray(VAO); //bind the VAO
-	glEnableVertexAttribArray(0); //enable vertex attributes
+	glEnableVertexAttribArray(0); //enable vertex attributes // suvisi s layout(location=0) in vec3 vp; vo vertex shaderi
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
@@ -168,9 +167,11 @@ int main(void)
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertex_shader, NULL);
 	glCompileShader(vertexShader);
+
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragment_shader, NULL);
 	glCompileShader(fragmentShader);
+
 	GLuint shaderProgram = glCreateProgram(); // najdolezitejsie
 	glAttachShader(shaderProgram, fragmentShader);
 	glAttachShader(shaderProgram, vertexShader);
@@ -178,8 +179,7 @@ int main(void)
 
 	GLint status;
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);
-	if (status == GL_FALSE)
-	{
+	if (status == GL_FALSE) {
 		GLint infoLogLength;
 		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
 		GLchar* strInfoLog = new GLchar[infoLogLength + 1];
@@ -188,8 +188,7 @@ int main(void)
 		delete[] strInfoLog;
 	}
 
-	while (!glfwWindowShouldClose(window))
-	{
+	while (!glfwWindowShouldClose(window)) {
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(shaderProgram);
