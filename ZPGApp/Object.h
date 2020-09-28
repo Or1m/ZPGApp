@@ -10,9 +10,10 @@
 class Object
 {
 public:
-	void createVBO(float points[]);
+	void createVBO(float points[], int sizeOfPoints);
 	void createVAO();
 	void bindVertexArray();
+	~Object();
 
 private:
 	GLuint VBO;

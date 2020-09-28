@@ -30,7 +30,7 @@ public:
 
 	void testGLM();
 	void setShaders(const char* vertex_shader, const char* fragment_shader);
-	void setPoints(float points[]);
+	void setPoints(float points[], int sizeOfPoints);
 
 protected:
 	Application();
@@ -46,6 +46,7 @@ private:
 	const char* vertex_shader;
 	const char* fragment_shader;
 	float* points;
+	int sizeOfPoints;
 
 	void setVertexShader(const char* vertex_shader);
 	void setFragmentShader(const char* fragment_shader);

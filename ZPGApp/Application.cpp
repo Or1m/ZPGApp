@@ -18,15 +18,16 @@ Application::Application(int windowWidth, int windowHeight, const char* windowTi
 	vertex_shader = NULL;
 	points = NULL;
 	shader = NULL;
+	sizeOfPoints = NULL;
 
-	window = glfwCreateWindow(windowWidth, windowHeight, windowTitle, NULL, NULL);
-	object = new Object();
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
 		exit(EXIT_FAILURE);
 	}
+
+	window = glfwCreateWindow(windowWidth, windowHeight, windowTitle, NULL, NULL);
 
 	if (!window) {
 		glfwTerminate();
@@ -44,10 +45,16 @@ Application::Application(int windowWidth, int windowHeight, const char* windowTi
 	glfwGetFramebufferSize(window, &width, &height);
 	float ratio = width / (float)height;
 	glViewport(0, 0, width, height);
+
+	object = new Object();
 }
 
 Application::~Application() {
 	shader->~Shader();
+	shader = NULL;
+
+	object->~Object();
+	object = NULL;
 
 	delete instance;
 	instance = NULL;
@@ -58,8 +65,10 @@ void Application::run() {
 	while (!glfwWindowShouldClose(window)) {
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		shader->useProgram(); //glUseProgram(shaderProgram);
 		object->bindVertexArray(); //glBindVertexArray(VAO);
+
 		// draw triangles
 		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
 		// update other events like input handling
@@ -67,6 +76,7 @@ void Application::run() {
 		// put the stuff we’ve been drawing onto the display
 		glfwSwapBuffers(window);
 	}
+
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
@@ -121,7 +131,7 @@ void Application::setShaders(const char* vertex_shader, const char* fragment_sha
 	setVertexShader(vertex_shader);
 	setFragmentShader(fragment_shader);
 
-	shader = new Shader(vertex_shader, fragment_shader);
+	shader = new Shader(this->vertex_shader, this->fragment_shader);
 }
 
 void Application::setVertexShader(const char* vertex_shader) {
@@ -132,10 +142,11 @@ void Application::setFragmentShader(const char* fragment_shader) {
 	this->fragment_shader = fragment_shader;
 }
 
-void Application::setPoints(float points[]) {
+void Application::setPoints(float points[], int sizeOfPoints) {
 	this->points = points;
+	this->sizeOfPoints = sizeOfPoints;
 
-	object->createVBO(points);
+	object->createVBO(this->points, this->sizeOfPoints);
 	object->createVAO();
 }
 
