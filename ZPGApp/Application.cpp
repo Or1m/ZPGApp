@@ -109,8 +109,6 @@ void Application::attachCallbacks() {
 	// Sets the key callback
 	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
 
-	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
-
 	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
 
 	glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
@@ -118,6 +116,11 @@ void Application::attachCallbacks() {
 	glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
 
 	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
+
+	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
+
+	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
+		-> void {Application::getInstance()->; cursor_callback(window, mouseXPos, mouseYPos); });*/
 }
 
 void Application::testGLM() {
@@ -182,10 +185,19 @@ void Application::window_size_callback(GLFWwindow* window, int width, int height
 	glViewport(0, 0, width, height);
 }
 
-void Application::cursor_callback(GLFWwindow* window, double x, double y) {
-	printf("cursor_callback \n");
+void Application::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
+	//printf("cursor_callback \n");
+	printf("cursor_pos_callback %d, %d; %d, %d\n", (int)mouseX, (int)mouseY, 0, 0); // (int)clickX, (int)clickY)
 }
 
 void Application::button_callback(GLFWwindow* window, int button, int action, int mode) {
-	if (action == GLFW_PRESS) printf("button_callback [%d,%d,%d]\n", button, action, mode);
+	//if (action == GLFW_PRESS) printf("button_callback [%d,%d,%d]\n", button, action, mode);
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+	{
+		double xpos, ypos;
+		//getting cursor position
+		glfwGetCursorPos(window, &xpos, &ypos);
+		printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
+	}
 }

@@ -41,7 +41,7 @@ int main(void)  {
 	);
 
 	//application->printVersionInfo();
-	//application->attachCallbacks();
+	application->attachCallbacks();
 	//application->testGLM();
 
 	/*glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
