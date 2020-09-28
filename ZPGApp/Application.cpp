@@ -41,6 +41,8 @@ Application::Application(int windowWidth, int windowHeight, const char* windowTi
 }
 
 Application::~Application() {
+	shader->~Shader();
+
 	delete instance;
 	instance = NULL;
 }
@@ -50,8 +52,8 @@ void Application::run() {
 	while (!glfwWindowShouldClose(window)) {
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
+		shader->useProgram(); //glUseProgram(shaderProgram);
+		object.bindVertexArray(); //glBindVertexArray(VAO);
 		// draw triangles
 		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
 		// update other events like input handling
@@ -107,6 +109,28 @@ void Application::testGLM() {
 	);
 	// Model matrix : an identity matrix (model will be at the origin)
 	glm::mat4 Model = glm::mat4(1.0f);
+}
+
+void Application::setShaders(const char* vertex_shader, const char* fragment_shader) {
+	setVertexShader(vertex_shader);
+	setFragmentShader(fragment_shader);
+
+	shader = new Shader(vertex_shader, fragment_shader);
+}
+
+void Application::setVertexShader(const char* vertex_shader) {
+	this->vertex_shader = vertex_shader;
+}
+
+void Application::setFragmentShader(const char* fragment_shader) {
+	this->fragment_shader = fragment_shader;
+}
+
+void Application::setPoints(float points[]) {
+	this->points = points;
+
+	object.createVBO(points);
+	object.createVAO();
 }
 
 // Declaration of callback functions

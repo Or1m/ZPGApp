@@ -34,16 +34,14 @@ int main(void)  {
 	application->attachCallbacks();
 	application->testGLM();
 
+	application->setPoints(points);
+	application->setShaders(vertex_shader, fragment_shader);
+	
+
 	/*glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);*/
 	
-	Object object;
-	object.createVBO(points);
-	object.createVAO();
-
-	Shader* shader = new Shader(vertex_shader, fragment_shader);
-
 	application->run();
 }

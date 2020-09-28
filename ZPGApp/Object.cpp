@@ -17,3 +17,7 @@ void Object::createVAO() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 }
+
+void Object::bindVertexArray() {
+	glBindVertexArray(VAO);
+}
