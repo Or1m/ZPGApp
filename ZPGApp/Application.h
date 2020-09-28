@@ -26,12 +26,14 @@ class Application {
 public:
 	static Application* getInstance();
 	static Application* getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints);
-	void run();
+
 	void printVersionInfo();
 	void attachCallbacks();
-
 	void testGLM();
-	void setShaders(const char* vertex_shader, const char* fragment_shader);
+
+	void run();
+	
+	void setShader(const char* vertex_shader, const char* fragment_shader);
 	void setPoints(float points[], int sizeOfPoints);
 
 protected:
@@ -45,13 +47,8 @@ private:
 	GLFWwindow* window;
 	Object* object;
 
-	const char* vertex_shader;
-	const char* fragment_shader;
 	float* points;
 	int sizeOfPoints;
-
-	void setVertexShader(const char* vertex_shader);
-	void setFragmentShader(const char* fragment_shader);
 
 	static void error_callback(int error, const char* description);
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

@@ -51,10 +51,18 @@ Application::Application(WindowOptions* windowOptions, Shaders* shaders, float p
 
 	this->object = new Object();
 
-	if (points != NULL && sizeOfPoints != NULL && shaders->vertex_shader != NULL && shaders->fragment_shader != NULL) {
+	if (points != NULL && sizeOfPoints != NULL)
 		setPoints(points, sizeOfPoints);
-		setShaders(shaders->vertex_shader, shaders->fragment_shader);
+	else
+	{
+		this->points = NULL;
+		this->sizeOfPoints = NULL;
 	}
+
+	if (shaders->vertex_shader != NULL && shaders->fragment_shader != NULL)
+		setShader(shaders->vertex_shader, shaders->fragment_shader);
+	else
+		this->shader = NULL;
 }
 
 Application::~Application() {
@@ -79,6 +87,10 @@ void Application::run() {
 
 		// draw triangles
 		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
+
+		// draw rectangle
+		//glDrawArrays(GL_QUADS, 0, 4);
+
 		// update other events like input handling
 		glfwPollEvents();
 		// put the stuff we’ve been drawing onto the display
@@ -138,19 +150,9 @@ void Application::testGLM() {
 	glm::mat4 Model = glm::mat4(1.0f);
 }
 
-void Application::setShaders(const char* vertex_shader, const char* fragment_shader) {
-	setVertexShader(vertex_shader);
-	setFragmentShader(fragment_shader);
+void Application::setShader(const char* vertex_shader, const char* fragment_shader) {
 
-	this->shader = new Shader(this->vertex_shader, this->fragment_shader);
-}
-
-void Application::setVertexShader(const char* vertex_shader) {
-	this->vertex_shader = vertex_shader;
-}
-
-void Application::setFragmentShader(const char* fragment_shader) {
-	this->fragment_shader = fragment_shader;
+	this->shader = new Shader(vertex_shader, fragment_shader);
 }
 
 void Application::setPoints(float points[], int sizeOfPoints) {

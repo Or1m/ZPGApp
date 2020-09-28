@@ -14,7 +14,11 @@ public:
 	~Shader();
 
 	void useProgram();
+	void setVertexShader(const char* vertex_shader);
+	void setFragmentShader(const char* fragment_shader);
 
 private:
 	GLuint shaderProgram;
+	const char* vertex_shader;
+	const char* fragment_shader;
 };

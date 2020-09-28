@@ -19,29 +19,37 @@ const char* fragment_shader =
 "     frag_colour = vec4 (0.5, 1.0, .0, 1.0);"
 "}";
 
+// points of triangle
 float points[] = {
 	0.0f, 0.5f, 0.0f,
 	0.5f, -0.5f, 0.0f,
 	-0.5f, -0.5f, 0.0f
 };
 
+// points of rectangle
+//float points[] = {
+//	-0.5f, 0.5f, 0.0f,
+//	0.5f, 0.5f, 0.0f,
+//	0.5f, -0.5f, 0.0f,
+//	-0.5f, -0.5f, 0.0f
+//};
+
 int main(void)  {
 
 	// Variant 1
 	/*Application* application = Application::getInstance();
 	application->setPoints(points, sizeof(points));
-	application->setShaders(vertex_shader, fragment_shader);*/
+	application->setShader(vertex_shader, fragment_shader);*/
 
 	// Variant 2
 	Application* application = Application::getInstance(
 		new WindowOptions(800, 600, "ZPG"), 
 		new Shaders(vertex_shader, fragment_shader), 
-		points, 
-		sizeof(points)
+		points, sizeof(points)
 	);
 
 	//application->printVersionInfo();
-	application->attachCallbacks();
+	//application->attachCallbacks();
 	//application->testGLM();
 
 	/*glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

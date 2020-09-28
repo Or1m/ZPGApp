@@ -1,13 +1,16 @@
 #include "Shader.h"
 
+//create and compile shaders
 Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
-	//create and compile shaders
+	this->vertex_shader = vertex_shader;
+	this->fragment_shader = fragment_shader;
+
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertex_shader, NULL);
+	glShaderSource(vertexShader, 1, &this->vertex_shader, NULL);
 	glCompileShader(vertexShader);
 
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragment_shader, NULL);
+	glShaderSource(fragmentShader, 1, &this->fragment_shader, NULL);
 	glCompileShader(fragmentShader);
 
 	shaderProgram = glCreateProgram(); // najdolezitejsie
@@ -33,4 +36,12 @@ Shader::~Shader() {
 
 void Shader::useProgram() {
 	glUseProgram(shaderProgram);
+}
+
+void Shader::setVertexShader(const char* vertex_shader) {
+	this->vertex_shader = vertex_shader;
+}
+
+void Shader::setFragmentShader(const char* fragment_shader) {
+	this->fragment_shader = fragment_shader;
 }

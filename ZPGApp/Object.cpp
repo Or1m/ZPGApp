@@ -1,15 +1,16 @@
 #include "Object.h"
-#include <iostream>
 
+//vertex buffer object (VBO)
 void Object::createVBO(float points[], int sizeOfPoints) {
-	//vertex buffer object (VBO)
+
 	glGenBuffers(1, &VBO); // generate the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeOfPoints, points, GL_STATIC_DRAW);
 }
 
+//vertex attribute object (VAO)
 void Object::createVAO() {
-	//vertex attribute object (VAO)
+
 	glGenVertexArrays(1, &VAO); //generate the VAO
 	glBindVertexArray(VAO); //bind the VAO
 	glEnableVertexAttribArray(0); //enable vertex attributes // suvisi s layout(location=0) in vec3 vp; vo vertex shaderi
@@ -21,7 +22,11 @@ void Object::bindVertexArray() {
 	glBindVertexArray(VAO);
 }
 
-Object::~Object()
-{
+Object::Object() {
+	VBO = 0;
+	VAO = 0;
+}
+
+Object::~Object() {
 	delete this;
 }
