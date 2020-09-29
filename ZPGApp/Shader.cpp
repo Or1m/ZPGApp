@@ -20,6 +20,16 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 
 	GLint status;
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);
+
+	testStatus(status);
+}
+
+void Shader::useProgram() {
+	glUseProgram(shaderProgram);
+}
+
+void Shader::testStatus(GLint status) {
+	
 	if (status == GL_FALSE) {
 		GLint infoLogLength;
 		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
@@ -32,16 +42,4 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 
 Shader::~Shader() {
 	delete this;
-}
-
-void Shader::useProgram() {
-	glUseProgram(shaderProgram);
-}
-
-void Shader::setVertexShader(const char* vertex_shader) {
-	this->vertex_shader = vertex_shader;
-}
-
-void Shader::setFragmentShader(const char* fragment_shader) {
-	this->fragment_shader = fragment_shader;
 }

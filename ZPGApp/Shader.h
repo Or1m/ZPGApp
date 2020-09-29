@@ -7,6 +7,7 @@
 #include <stdlib.h> // E.g. printf() and scanf()
 #include <stdio.h> // E.g. malloc() and free()
 
+// pridat GLinty akoze ideèka vertex a fragmentu
 class Shader
 {
 public:
@@ -14,8 +15,7 @@ public:
 	~Shader();
 
 	void useProgram();
-	void setVertexShader(const char* vertex_shader);
-	void setFragmentShader(const char* fragment_shader);
+	void testStatus(GLint status);
 
 private:
 	GLuint shaderProgram;
