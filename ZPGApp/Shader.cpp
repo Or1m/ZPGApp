@@ -1,5 +1,12 @@
 #include "Shader.h"
 
+// Include GLM  
+#include <glm/vec3.hpp> // glm::vec3
+#include <glm/vec4.hpp> // glm::vec4
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
+
 //create and compile shaders
 Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 	this->vertex_shader = vertex_shader;
@@ -17,6 +24,19 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 	glAttachShader(shaderProgram, fragmentShader);
 	glAttachShader(shaderProgram, vertexShader);
 	glLinkProgram(shaderProgram);
+
+	glm::mat4 M = glm::mat4(1.0f);
+	//M = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+	//M = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	//M = glm::rotate(M, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//M = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.0f, 0.0f));
+
+	// ... create shader
+	GLint modelMatrixID = glGetUniformLocation(shaderProgram, "modelMatrix");
+	//Render
+	glUseProgram(shaderProgram);
+	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, glm::value_ptr(M));
+	//location, count, transpose, *value
 
 	GLint status;
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);

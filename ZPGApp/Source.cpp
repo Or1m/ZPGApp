@@ -35,7 +35,7 @@ float points[] = {
 //};
 
 int main(void)  {
-	glm::mat4 M = glm::mat4(1.0f);
+	
 
 	// in vertex shader 
 	const char* vertex_shader = "#version 330\n"
@@ -48,6 +48,7 @@ int main(void)  {
 	/*M = glm::rotate(glm::mat4(1.0f), rotationx, glm::vec3(0.0f, 1.0f, 0.0f));
 	M = glm::rotate(M, angle, glm::vec3(1.0f, 0.0f, 0.0f));
 	M = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, myView));*/
+	glm::mat4 M = glm::mat4(1.0f);
 	M = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
 
 	// Variant 1
