@@ -1,11 +1,5 @@
 #pragma once
-
-// Include GLEW
-#include <GL/glew.h>
-
-// Include the standard C++ headers  
-#include <stdlib.h> // E.g. printf() and scanf()
-#include <stdio.h> // E.g. malloc() and free()
+#include "Header.h"
 
 // pridat GLinty akoze ideèka vertex a fragmentu
 class Shader
@@ -16,6 +10,8 @@ public:
 
 	void useProgram();
 	void testStatus(GLint status);
+	void sendUniform(const GLchar* name, glm::vec4 data);
+	void sendUniform(const GLchar* name, glm::mat4 M);
 
 private:
 	GLuint shaderProgram;

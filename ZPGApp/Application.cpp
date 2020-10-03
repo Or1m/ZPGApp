@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Utils.h"
 
 Application* Application::instance = NULL;
 Application* Application::getInstance() {
@@ -22,7 +23,7 @@ Application* Application::getInstance(WindowOptions* windowOptions, Shaders* sha
 Application::Application() : Application::Application(new WindowOptions(800, 600, "ZPG"), new Shaders(), NULL, NULL) {}
 
 Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints) {
-	
+	this->M = glm::mat4(1.0f);
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -83,8 +84,11 @@ void Application::run() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader->useProgram(); //glUseProgram(shaderProgram);
-		object->bindVertexArray(); //glBindVertexArray(VAO);
 
+		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
+		shader->sendUniform("modelMatrix", M);
+		object->bindVertexArray(); //glBindVertexArray(VAO);
+		
 		// draw triangles
 		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
 
@@ -116,25 +120,6 @@ void Application::printVersionInfo() {
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 }
 
-void Application::attachCallbacks() {
-
-	// Sets the key callback
-	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
-
-	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
-
-	glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
-
-	glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
-
-	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
-
-	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
-
-	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
-		-> void {Application::getInstance()->; cursor_callback(window, mouseXPos, mouseYPos); });*/
-}
-
 void Application::testGLM() {
 	
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
@@ -163,7 +148,31 @@ void Application::setPoints(float points[], int sizeOfPoints) {
 	this->object->createVAO();
 }
 
-// Declaration of callback functions
+void Application::setTransform(glm::mat4 M){
+	this->M = M;
+}
+
+#pragma region Callbacks
+void Application::attachCallbacks() {
+
+	// Sets the key callback
+	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
+
+	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
+
+	glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
+
+	glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
+
+	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
+
+	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
+
+	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
+		-> void {Application::getInstance()->cursor_callback(window, mouseXPos, mouseYPos); });*/
+}
+
+
 void Application::error_callback(int error, const char* description) {
 	fputs(description, stderr);
 }
@@ -203,3 +212,4 @@ void Application::button_callback(GLFWwindow* window, int button, int action, in
 		printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
 	}
 }
+#pragma endregion
