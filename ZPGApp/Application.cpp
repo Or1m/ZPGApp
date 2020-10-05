@@ -85,8 +85,11 @@ void Application::run() {
 
 		shader->useProgram(); //glUseProgram(shaderProgram);
 
-		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
+		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+
 		shader->sendUniform("modelMatrix", M);
+		//shader->sendUniform("modelMatrix", V);
+
 		object->bindVertexArray(); //glBindVertexArray(VAO);
 		
 		// draw triangles
@@ -150,6 +153,10 @@ void Application::setPoints(float points[], int sizeOfPoints) {
 
 void Application::setTransform(glm::mat4 M){
 	this->M = M;
+}
+
+void Application::setTransform(glm::vec3 V) {
+	this->V = V;
 }
 
 #pragma region Callbacks

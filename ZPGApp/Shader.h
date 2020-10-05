@@ -10,7 +10,7 @@ public:
 
 	void useProgram();
 	void testStatus(GLint status);
-	void sendUniform(const GLchar* name, glm::vec4 data);
+	void sendUniform(const GLchar* name, glm::vec3 V);
 	void sendUniform(const GLchar* name, glm::mat4 M);
 
 private:

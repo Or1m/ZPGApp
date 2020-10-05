@@ -36,9 +36,12 @@ float points[] = {
 int main(void)  {
 
 	glm::mat4 M = glm::mat4(1.0f); 
-	M = glm::translate(M, glm::vec3(.5f, 0.0f, 0.0f));
-	M =	glm::scale(M, glm::vec3(0.5f));
+	glm::vec3 V = glm::vec3(.5f, 0.5f, 0.0f);
+	//M = glm::translate(M, glm::vec3(.5f, 0.5f, 0.0f));
+	//M = glm::scale(M, glm::vec3(0.5f));
 	//M = glm::rotate(M, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	//std::cout << glm::to_string(M) << std::endl;
+	
 	
 	// Variant 1
 	/*Application* application = Application::getInstance();
@@ -53,6 +56,7 @@ int main(void)  {
 	);
 
 	application->setTransform(M);
+	application->setTransform(V);
 
 	//application->printVersionInfo();
 	//application->attachCallbacks();

@@ -57,6 +57,18 @@ void Shader::sendUniform(const GLchar* name, glm::mat4 M) {
 	}
 }
 
+void Shader::sendUniform(const GLchar* name, glm::vec3 V) {
+	GLint uniformID = glGetUniformLocation(this->shaderProgram, name);
+	if (uniformID >= 0) {
+		glm::mat4 M = glm::mat4(1.0f);
+		M = glm::translate(M, V);
+		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(M)); // glm::value_ptr(M) == &M[0][0]
+	}
+	else {
+		fprintf(stderr, "Uniform variable not found\n");
+	}
+}
+
 Shader::~Shader() {
 	delete this;
 }

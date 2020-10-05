@@ -18,6 +18,7 @@ public:
 	void setShader(const char* vertex_shader, const char* fragment_shader);
 	void setPoints(float points[], int sizeOfPoints);
 	void setTransform(glm::mat4 M);
+	void setTransform(glm::vec3 V);
 
 protected:
 	Application();
@@ -31,6 +32,7 @@ private:
 	Object* object;
 
 	glm::mat4 M;
+	glm::vec3 V;
 
 	float* points;
 	int sizeOfPoints;
