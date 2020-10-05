@@ -25,14 +25,7 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 }
 
 void Shader::useProgram() {
-	//Render
-
-	/*glm::mat4 M = glm::mat4(1.0f);
-	M = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
-
-	GLint modelMatrixID = glGetUniformLocation(this->shaderProgram, "modelMatrix");*/
 	glUseProgram(this->shaderProgram);
-	//glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, glm::value_ptr(M));
 }
 
 void Shader::testStatus(GLint status) {
@@ -62,7 +55,7 @@ void Shader::sendUniform(const GLchar* name, glm::vec3 V) {
 	if (uniformID >= 0) {
 		glm::mat4 M = glm::mat4(1.0f);
 		M = glm::translate(M, V);
-		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(M)); // glm::value_ptr(M) == &M[0][0]
+		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(M));
 	}
 	else {
 		fprintf(stderr, "Uniform variable not found\n");

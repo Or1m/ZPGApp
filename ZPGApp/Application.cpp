@@ -24,6 +24,7 @@ Application::Application() : Application::Application(new WindowOptions(800, 600
 
 Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints) {
 	this->M = glm::mat4(1.0f);
+	this->V = glm::vec3(.0f, .0f, .0f);
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -80,28 +81,26 @@ Application::~Application() {
 void Application::run() {
 
 	while (!glfwWindowShouldClose(window)) {
-		// clear color and depth buffer
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear color and depth buffer
 		shader->useProgram(); //glUseProgram(shaderProgram);
 
 		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
-
-		shader->sendUniform("modelMatrix", M);
-		//shader->sendUniform("modelMatrix", V);
+		shader->sendUniform("modelMatrix", this->M);
+		//shader->sendUniform("modelMatrix", this->V);
 
 		object->bindVertexArray(); //glBindVertexArray(VAO);
 		
-		// draw triangles
-		glDrawArrays(GL_TRIANGLES, 0, 3); //mode,first,count
+		/*
+		 * Draw triangle 
+		 * Params - mode,first,count
+		 */
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_QUADS, 0, 4); // draw rectangle
 
-		// draw rectangle
-		//glDrawArrays(GL_QUADS, 0, 4);
-
-		// update other events like input handling
-		glfwPollEvents();
-		// put the stuff we’ve been drawing onto the display
-		glfwSwapBuffers(window);
+		glfwPollEvents(); // update other events like input handling
+		
+		glfwSwapBuffers(window); // put the stuff we’ve been drawing onto the display
 	}
 
 	glfwDestroyWindow(window);
@@ -111,7 +110,6 @@ void Application::run() {
 
 void Application::printVersionInfo() {
 
-	// get version info
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
 	printf("Using GLEW %s\n", glewGetString(GLEW_VERSION));
 	printf("Vendor %s\n", glGetString(GL_VENDOR));

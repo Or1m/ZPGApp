@@ -1,9 +1,5 @@
 #include "Application.h"
 
-// Shaders
-// chybovy vypis zavisi od vyrobcu a druhu grafiky
-// na MX150 sa vypise len v ktorom shaderi je chyba
-// chyba shadera sa prejavuje bielou farbou objektu
 const char* vertex_shader = "#version 330\n"
 "uniform mat4 modelMatrix;"
 "layout(location=0) in vec3 vp;"
@@ -18,8 +14,10 @@ const char* fragment_shader =
 "     frag_colour = vec4 (0.5, 1.0, .0, 1.0);"
 "}";
 
+const int numOfElements = 9;
+
 // points of triangle
-float points[] = {
+float points[numOfElements] = { 
 	0.0f, 0.5f, 0.0f,
 	0.5f, -0.5f, 0.0f,
 	-0.5f, -0.5f, 0.0f
@@ -52,7 +50,7 @@ int main(void)  {
 	Application* application = Application::getInstance(
 		new WindowOptions(800, 600, "ZPG"), 
 		new Shaders(vertex_shader, fragment_shader), 
-		points, sizeof(points)
+		points, numOfElements * sizeof(float)
 	);
 
 	application->setTransform(M);
