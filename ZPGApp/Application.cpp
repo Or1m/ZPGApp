@@ -11,20 +11,21 @@ Application* Application::getInstance() {
 	return instance;
 }
 
-Application* Application::getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints) {
+Application* Application::getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]) {
 
 	if (instance == NULL) {
-		instance = new Application(windowOptions, shaders, points, sizeOfPoints);
+		instance = new Application(windowOptions, shaders, points, sizeOfPoints, indices);
 	}
 
 	return instance;
 }
 
-Application::Application() : Application::Application(new WindowOptions(800, 600, "ZPG"), new Shaders(), NULL, NULL) {}
+Application::Application() : Application::Application(new WindowOptions(800, 600, "ZPG"), new Shaders(), NULL, NULL, NULL) {}
 
-Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints) {
+Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]) {
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(.0f, .0f, .0f);
+	this->indices = indices;
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -95,7 +96,7 @@ void Application::run() {
 		 * Draw triangle 
 		 * Params - mode,first,count
 		 */
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL); // six indices
 		//glDrawArrays(GL_QUADS, 0, 4); // draw rectangle
 
 		glfwPollEvents(); // update other events like input handling
@@ -146,7 +147,7 @@ void Application::setPoints(float points[], int sizeOfPoints) {
 	this->sizeOfPoints = sizeOfPoints;
 
 	this->object->createVBO(this->points, this->sizeOfPoints);
-	this->object->createVAO();
+	this->object->createVAO(this->indices);
 }
 
 void Application::setTransform(glm::mat4 M){

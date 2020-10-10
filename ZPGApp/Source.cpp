@@ -3,22 +3,21 @@
 #include <string>
 #include <sstream>
 
-const int numOfElements = 9;
+const int numOfElements = 12;
 
-// points of triangle
-float points[numOfElements] = { 
-	0.0f, 0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f
+// points of triangle in Index buffer
+float points[] = {
+	-0.5f, -0.5f, 0.0f, // 0
+	 0.5f, -0.5f, 0.0f,	// 1
+	 0.5f,  0.5f, 0.0f,	// 2
+	-0.5f,  0.5f, 0.0f	// 3
 };
 
-// points of rectangle
-//float points[] = {
-//	-0.5f, 0.5f, 0.0f,
-//	0.5f, 0.5f, 0.0f,
-//	0.5f, -0.5f, 0.0f,
-//	-0.5f, -0.5f, 0.0f
-//};
+// indexes of points
+unsigned int indices[]{
+	0, 1, 2,
+	2, 3, 0
+};
 
 struct ShaderProgramSource {
 	std::string vertexSource;
@@ -60,7 +59,7 @@ int main(void)  {
 
 	glm::mat4 M = glm::mat4(1.0f); 
 	glm::vec3 V = glm::vec3(2.5f, .5f, 0.0f);
-	M = glm::translate(M, glm::vec3(.5f, 0.5f, 0.0f));
+	//M = glm::translate(M, glm::vec3(.5f, 0.5f, 0.0f));
 	//M = glm::scale(M, glm::vec3(0.5f));
 	//M = glm::rotate(M, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	//std::cout << glm::to_string(M) << std::endl;
@@ -77,7 +76,7 @@ int main(void)  {
 	Application* application = Application::getInstance(
 		new WindowOptions(800, 600, "ZPG"), 
 		new Shaders(source.vertexSource.c_str(), source.fragmentSource.c_str()),
-		points, numOfElements * sizeof(float)
+		points, numOfElements * sizeof(float), indices
 	);
 
 	application->setTransform(M);

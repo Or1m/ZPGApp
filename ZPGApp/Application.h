@@ -7,7 +7,7 @@
 class Application {
 public:
 	static Application* getInstance();
-	static Application* getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints);
+	static Application* getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]);
 
 	void printVersionInfo();
 	void attachCallbacks();
@@ -22,7 +22,7 @@ public:
 
 protected:
 	Application();
-	Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints);
+	Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]);
 	~Application();
 
 private:
@@ -36,6 +36,7 @@ private:
 
 	float* points;
 	int sizeOfPoints;
+	unsigned int* indices;
 
 	static void error_callback(int error, const char* description);
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

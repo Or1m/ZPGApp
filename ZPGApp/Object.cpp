@@ -4,6 +4,7 @@
  * Create vertex buffer object VBO  
 */
 void Object::createVBO(float points[], int sizeOfPoints) {
+	this->sizeOfPoints = sizeOfPoints;
 	/*
 	 * Parametre
 	 * 1. -> pocet bufferov (v tomto pripade 1)
@@ -22,7 +23,7 @@ void Object::createVBO(float points[], int sizeOfPoints) {
 /**
  * vertex attribute object (VAO)
 */
-void Object::createVAO() {
+void Object::createVAO(unsigned int indices[]) {
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -38,6 +39,11 @@ void Object::createVAO() {
 	 * 6	-> offset - null alebo 0 v tomto pripade
 	 */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	GLuint ibo;
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
 void Object::bindVertexArray() {

@@ -8,10 +8,12 @@ public:
 	~Object();
 
 	void createVBO(float points[], int sizeOfPoints);
-	void createVAO();
+	void createVAO(unsigned int indices[]);
 	void bindVertexArray();
 
 private:
 	GLuint VBO;
 	GLuint VAO;
+
+	int sizeOfPoints;
 };
