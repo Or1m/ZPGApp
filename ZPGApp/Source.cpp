@@ -14,7 +14,7 @@ float points[] = {
 };
 
 // indexes of points
-unsigned int indices[]{
+unsigned int indices[] {
 	0, 1, 2,
 	2, 3, 0
 };

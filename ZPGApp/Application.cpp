@@ -96,9 +96,8 @@ void Application::run() {
 		 * Draw triangle 
 		 * Params - mode,first,count
 		 */
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL); // six indices
-		//glDrawArrays(GL_QUADS, 0, 4); // draw rectangle
-
+		glDrawElements(GL_TRIANGLES, 6, GL_INT, NULL); // six indices
+		
 		glfwPollEvents(); // update other events like input handling
 		
 		glfwSwapBuffers(window); // put the stuff we’ve been drawing onto the display
