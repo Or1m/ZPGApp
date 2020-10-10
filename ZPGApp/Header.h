@@ -19,6 +19,8 @@
 #include <stdio.h> // E.g. malloc() and free()
 #include <iostream>
 
+
+
 struct WindowOptions
 {
 	int windowWidth; 

@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "Utils.h"
 
 //create and compile shaders
 Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
@@ -36,6 +37,7 @@ void Shader::useProgram() {
 	glUseProgram(this->shaderProgram);
 }
 
+// Shader tests
 GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {
 
 	if (status == GL_FALSE) {
@@ -61,31 +63,60 @@ void Shader::testLinkStatus(GLint status) {
 		glGetProgramiv(this->shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
 		GLchar* strInfoLog = new GLchar[infoLogLength + 1];
 		glGetProgramInfoLog(this->shaderProgram, infoLogLength, NULL, strInfoLog);
-		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
+		std::cout << "Linker failure due to " << strInfoLog << "\n"; // fprintf(stderr, "Linker failure: %s\n", strInfoLog);
 		delete[] strInfoLog;
 
 		glDeleteProgram(this->shaderProgram);
 	}
 }
 
-void Shader::sendUniform(const GLchar* name, glm::mat4 M) {
-	GLint uniformID = glGetUniformLocation(this->shaderProgram, name);
-	if (uniformID >= 0) {
-		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(M)); // glm::value_ptr(M) == &M[0][0]
-	}
-	else {
-		fprintf(stderr, "Uniform variable not found\n");
-	}
+// Overloaded sendUniform 
+void Shader::sendUniform(const GLchar* name, glm::mat4 M4) {
+	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
+
+	ASSERT(uniformLocation != -1);
+
+	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4)); // glm::value_ptr(M) == &M[0][0]
 }
 
-void Shader::sendUniform(const GLchar* name, glm::vec3 V) {
-	GLint uniformID = glGetUniformLocation(this->shaderProgram, name);
-	if (uniformID >= 0) {
-		glUniform3f(uniformID, V.x, V.y, V.z);
-	}
-	else {
-		fprintf(stderr, "Uniform variable not found\n");
-	}
+void Shader::sendUniform(const GLchar* name, glm::vec4 V4) {
+	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
+
+	ASSERT(uniformLocation != -1);
+
+	glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w);
+}
+
+void Shader::sendUniform(const GLchar* name, glm::vec3 V3) {
+	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
+
+	ASSERT(uniformLocation != -1);
+
+	glUniform3f(uniformLocation, V3.x, V3.y, V3.z);
+}
+
+void Shader::sendUniform(const GLchar* name, GLfloat F) {
+	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
+
+	ASSERT(uniformLocation != -1);
+
+	glUniform1f(uniformLocation, F);
+}
+
+void Shader::sendUniform(const GLchar* name, GLint I) {
+	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
+
+	ASSERT(uniformLocation != -1);
+
+	glUniform1i(uniformLocation, I);
+}
+
+void Shader::sendUniform(const GLchar* name, GLuint U) {
+	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
+
+	ASSERT(uniformLocation != -1);
+
+	glUniform1ui(uniformLocation, U);
 }
 
 Shader::~Shader() {

@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "Utils.h"
 
 Application* Application::instance = NULL;
 Application* Application::getInstance() {
@@ -24,7 +23,7 @@ Application::Application() : Application::Application(new WindowOptions(800, 600
 
 Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]) {
 	this->M = glm::mat4(1.0f);
-	this->V = glm::vec3(.0f, .0f, .0f);
+	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
 	this->indices = indices;
 	glfwSetErrorCallback(error_callback);
 
@@ -89,6 +88,9 @@ void Application::run() {
 		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		shader->sendUniform("modelMatrix", this->M);
 		shader->sendUniform("vec", this->V);
+		shader->sendUniform("flo", 1);
+
+		shader->sendUniform("vec", glm::vec4(V, 2));
 
 		object->bindVertexArray(); //glBindVertexArray(VAO);
 		
@@ -96,7 +98,7 @@ void Application::run() {
 		 * Draw triangle 
 		 * Params - mode,first,count
 		 */
-		glDrawElements(GL_TRIANGLES, 6, GL_INT, NULL); // six indices
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL); // six indices
 		
 		glfwPollEvents(); // update other events like input handling
 		

@@ -58,7 +58,7 @@ int main(void)  {
 	const std::string shaderPath = "Resources/Shaders/Basic.shader";
 
 	glm::mat4 M = glm::mat4(1.0f); 
-	glm::vec3 V = glm::vec3(2.5f, .5f, 0.0f);
+	glm::vec3 V = glm::vec3(.0f, 1.0f, .0f);
 	//M = glm::translate(M, glm::vec3(.5f, 0.5f, 0.0f));
 	//M = glm::scale(M, glm::vec3(0.5f));
 	//M = glm::rotate(M, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));

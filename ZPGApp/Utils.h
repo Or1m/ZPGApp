@@ -1,5 +1,4 @@
 #pragma once
-#include "Header.h"
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 
