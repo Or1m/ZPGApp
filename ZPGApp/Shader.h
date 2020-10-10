@@ -18,6 +18,9 @@ public:
 
 private:
 	GLuint shaderProgram;
+	GLuint vertexShader;
+	GLuint fragmentShader;
+
 	const char* vertex_shader;
 	const char* fragment_shader;
 };

@@ -1,24 +1,7 @@
 #include "Application.h"
-
-const char* vertex_shader = "#version 330\n"
-"uniform mat4 modelMatrix;"
-"uniform mat4 viewMatrix;"
-"uniform mat4 projectionMatrix;"
-"uniform vec3 vec;"
-"out vec4 color;"
-"layout(location=0) in vec3 vp;"
-"void main () {"
-"color = vec4(vec, 1.0);"
-" gl_Position = modelMatrix * vec4 (vp, 1.0);"
-"}";
-
-const char* fragment_shader =
-"#version 330\n"
-"in vec4 color;"
-"out vec4 frag_colour;"
-"void main () {"
-"     frag_colour = color;"
-"}";
+#include <fstream>
+#include <string>
+#include <sstream>
 
 const int numOfElements = 9;
 
@@ -37,7 +20,43 @@ float points[numOfElements] = {
 //	-0.5f, -0.5f, 0.0f
 //};
 
+struct ShaderProgramSource {
+	std::string vertexSource;
+	std::string fragmentSource;
+};
+
+static ShaderProgramSource ParseShader(const std::string& filePath) {
+	std::ifstream stream(filePath);
+
+	enum class ShaderType {
+		NONE = -1,
+		VERTEX = 0,
+		FRAGMENT = 1
+	};
+
+	std::string line;
+	std::stringstream ss[2];
+	ShaderType type = ShaderType::NONE;
+
+	while (getline(stream, line)) {
+		if (line.find("#shader") != std::string::npos) {
+			if (line.find("vertex") != std::string::npos)
+				type = ShaderType::VERTEX;
+			else if(line.find("fragment") != std::string::npos)
+				type = ShaderType::FRAGMENT;
+		}
+		else
+		{
+			ss[(int)type] << line << "\n";
+		}
+	}
+
+	return { ss[0].str(), ss[1].str() };
+}
+
 int main(void)  {
+
+	const std::string shaderPath = "Resources/Shaders/Basic.shader";
 
 	glm::mat4 M = glm::mat4(1.0f); 
 	glm::vec3 V = glm::vec3(2.5f, .5f, 0.0f);
@@ -52,10 +71,12 @@ int main(void)  {
 	application->setPoints(points, sizeof(points));
 	application->setShader(vertex_shader, fragment_shader);*/
 
+	ShaderProgramSource source = ParseShader(shaderPath);
+
 	// Variant 2
 	Application* application = Application::getInstance(
 		new WindowOptions(800, 600, "ZPG"), 
-		new Shaders(vertex_shader, fragment_shader), 
+		new Shaders(source.vertexSource.c_str(), source.fragmentSource.c_str()),
 		points, numOfElements * sizeof(float)
 	);
 

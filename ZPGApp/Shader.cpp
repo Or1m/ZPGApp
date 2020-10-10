@@ -7,11 +7,11 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 
 	this->shaderProgram = glCreateProgram(); // najdolezitejsie
 
-	GLuint vertexShader = compileShader(GL_VERTEX_SHADER, this->vertex_shader);
-	GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, this->fragment_shader);
+	this->vertexShader = compileShader(GL_VERTEX_SHADER, this->vertex_shader);
+	this->fragmentShader = compileShader(GL_FRAGMENT_SHADER, this->fragment_shader);
 
-	glAttachShader(this->shaderProgram, fragmentShader);
-	glAttachShader(this->shaderProgram, vertexShader);
+	glAttachShader(this->shaderProgram, this->fragmentShader);
+	glAttachShader(this->shaderProgram, this->vertexShader);
 
 	glLinkProgram(this->shaderProgram);
 
@@ -63,6 +63,8 @@ void Shader::testLinkStatus(GLint status) {
 		glGetProgramInfoLog(this->shaderProgram, infoLogLength, NULL, strInfoLog);
 		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
 		delete[] strInfoLog;
+
+		glDeleteProgram(this->shaderProgram);
 	}
 }
 
@@ -87,5 +89,8 @@ void Shader::sendUniform(const GLchar* name, glm::vec3 V) {
 }
 
 Shader::~Shader() {
+	glDeleteShader(this->vertexShader);
+	glDeleteShader(this->fragmentShader);
+	glDeleteProgram(this->shaderProgram);
 	delete this;
 }
