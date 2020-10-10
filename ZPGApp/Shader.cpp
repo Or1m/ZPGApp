@@ -5,30 +5,56 @@ Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
 	this->vertex_shader = vertex_shader;
 	this->fragment_shader = fragment_shader;
 
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &this->vertex_shader, NULL);
-	glCompileShader(vertexShader);
-
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &this->fragment_shader, NULL);
-	glCompileShader(fragmentShader);
-
 	this->shaderProgram = glCreateProgram(); // najdolezitejsie
+
+	GLuint vertexShader = compileShader(GL_VERTEX_SHADER, this->vertex_shader);
+	GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, this->fragment_shader);
+
 	glAttachShader(this->shaderProgram, fragmentShader);
 	glAttachShader(this->shaderProgram, vertexShader);
+
 	glLinkProgram(this->shaderProgram);
 
 	GLint status;
 	glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &status);
 
-	testStatus(status);
+	testLinkStatus(status);
+}
+
+GLuint Shader::compileShader(GLuint type, const char* source) {
+	GLuint shaderID = glCreateShader(type);
+	glShaderSource(shaderID, 1, &source, NULL);
+	glCompileShader(shaderID);
+
+	GLint status;
+	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &status);
+
+	return testCompileStatus(status, shaderID, type) == 1 ? shaderID : 0;
 }
 
 void Shader::useProgram() {
 	glUseProgram(this->shaderProgram);
 }
 
-void Shader::testStatus(GLint status) {
+GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {
+
+	if (status == GL_FALSE) {
+		GLint infoLogLength;
+		glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
+		GLchar* strInfoLog = new GLchar[infoLogLength + 1]; // (GLchar*)alloca(infoLogLength * sizeof(char));
+		glGetShaderInfoLog(shaderID, infoLogLength, NULL, strInfoLog);
+		std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader" << std::endl;
+		std::cout << strInfoLog << std::endl;
+		glDeleteShader(shaderID);
+		delete[] strInfoLog;
+
+		return 0;
+	}
+
+	return 1;
+}
+
+void Shader::testLinkStatus(GLint status) {
 	
 	if (status == GL_FALSE) {
 		GLint infoLogLength;
@@ -53,9 +79,7 @@ void Shader::sendUniform(const GLchar* name, glm::mat4 M) {
 void Shader::sendUniform(const GLchar* name, glm::vec3 V) {
 	GLint uniformID = glGetUniformLocation(this->shaderProgram, name);
 	if (uniformID >= 0) {
-		glm::mat4 M = glm::mat4(1.0f);
-		M = glm::translate(M, V);
-		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(M));
+		glUniform3f(uniformID, V.x, V.y, V.z);
 	}
 	else {
 		fprintf(stderr, "Uniform variable not found\n");

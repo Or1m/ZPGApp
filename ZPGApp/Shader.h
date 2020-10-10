@@ -9,7 +9,10 @@ public:
 	~Shader();
 
 	void useProgram();
-	void testStatus(GLint status);
+	GLuint compileShader(GLuint type, const char* source);
+	void testLinkStatus(GLint status);
+	GLuint testCompileStatus(GLint status, GLuint shaderID, GLuint type);
+
 	void sendUniform(const GLchar* name, glm::vec3 V);
 	void sendUniform(const GLchar* name, glm::mat4 M);
 

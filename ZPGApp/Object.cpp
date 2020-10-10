@@ -27,15 +27,15 @@ void Object::createVAO() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
-	glEnableVertexAttribArray(0); // suvisi s layout(location=0) in vec3 vp; vo vertex shaderi
+	glEnableVertexAttribArray(0); 
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 	/*
 	 * Parametre
-	 * 1. -> index generickeho vertex atributu
-	 * 2. -> pocet komponentov na 1 genericky atribut teda 3 floaty (3D coordinaty) na 1 bod
+	 * 1.	-> index generickeho vertex atributu - layout(location=0) in vec3 vp; vo vertex shaderi ukazje ze dany atribut je na idx 0
+	 * 2.	-> pocet komponentov na 1 genericky atribut teda 3 floaty (3D coordinaty) na 1 bod
 	 * 3, 4 -> datovy typ, normalized - floaty uz su normalizovane
-	 * 5 -> stride - velkost vertexu (o kolko bytov sa mam posunut ked chcem prejst na dalsi vertex) sizeof(float) * 3
-	 * 6 -> offset - null alebo 0 v tomto pripade
+	 * 5	-> stride - velkost vertexu (o kolko bytov sa mam posunut ked chcem prejst na dalsi vertex) sizeof(float) * 3
+	 * 6	-> offset - null alebo 0 v tomto pripade
 	 */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 }

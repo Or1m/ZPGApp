@@ -87,7 +87,7 @@ void Application::run() {
 
 		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		shader->sendUniform("modelMatrix", this->M);
-		shader->sendUniform("vec", this->V);
+		//shader->sendUniform("modelMatrix", this->V);
 
 		object->bindVertexArray(); //glBindVertexArray(VAO);
 		
