@@ -15,8 +15,8 @@ public:
 private:
 	GLuint VAO;
 
-	VertexBuffer* vertex;
-	IndexBuffer* index;
+	VertexBuffer* vertexBuffer;
+	IndexBuffer* indexBuffer;
 
 	int sizeOfPoints;
 	float* points;

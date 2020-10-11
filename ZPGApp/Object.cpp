@@ -13,7 +13,7 @@ void Object::createVAO(unsigned int indices[]) {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
-	this->vertex = new VertexBuffer(this->points, this->sizeOfPoints);
+	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints);
 
 	glEnableVertexAttribArray(0); 
 	//glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
@@ -28,13 +28,13 @@ void Object::createVAO(unsigned int indices[]) {
 	 */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	this->index = new IndexBuffer(indices, 6);
+	this->indexBuffer = new IndexBuffer(indices, 6);
 }
 
 void Object::bindVertexArray() {
 
-	vertex->bind();
-	index->bind();
+	vertexBuffer->bind();
+	indexBuffer->bind();
 }
 
 Object::Object() {
@@ -43,8 +43,8 @@ Object::Object() {
 }
 
 Object::~Object() {
-	delete this->vertex;
-	delete this->index;
+	delete this->vertexBuffer;
+	delete this->indexBuffer;
 
 	delete this;
 }
