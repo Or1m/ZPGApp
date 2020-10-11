@@ -1,5 +1,7 @@
 #pragma once
 #include "Header.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 class Object {
 public:
@@ -16,5 +18,9 @@ private:
 	GLuint VAO;
 	GLuint IBO;
 
+	VertexBuffer* vertex;
+	IndexBuffer* index;
+
 	int sizeOfPoints;
+	float* points;
 };

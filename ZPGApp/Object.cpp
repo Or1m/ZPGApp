@@ -1,23 +1,27 @@
 #include "Object.h"
 
+
 /**
  * Create vertex buffer object VBO  
 */
 void Object::createVBO(float points[], int sizeOfPoints) {
 	this->sizeOfPoints = sizeOfPoints;
-	/*
-	 * Parametre
-	 * 1. -> pocet bufferov (v tomto pripade 1)
-	 * 2. -> pointer na unsigned int - na tu adresu sa ulozi ID vygenerovaneho bufferu
-	 */
-	glGenBuffers(1, &this->VBO);
-	/*
-	 * Parametre
-	 * 1. -> ucel bufferu (array)
-	 * 2. -> ID buffer
-	 */
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeOfPoints, points, GL_STATIC_DRAW);
+	this->points = points;
+	///*
+	// * Parametre
+	// * 1. -> pocet bufferov (v tomto pripade 1)
+	// * 2. -> pointer na unsigned int - na tu adresu sa ulozi ID vygenerovaneho bufferu
+	// */
+	//glGenBuffers(1, &this->VBO);
+	///*
+	// * Parametre
+	// * 1. -> ucel bufferu (array)
+	// * 2. -> ID buffer
+	// */
+	//glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeOfPoints, points, GL_STATIC_DRAW);
+
+	//VertexBuffer vertex(points, sizeOfPoints);
 }
 
 /**
@@ -28,8 +32,10 @@ void Object::createVAO(unsigned int indices[]) {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
+	this->vertex = new VertexBuffer(this->points, this->sizeOfPoints);
+
 	glEnableVertexAttribArray(0); 
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 	/*
 	 * Linkuje array buffer object s VAO, potom vo vykreslovacej smycke staci volat bind VAO a netreba bindovat ostatne veci, viac vo videu o VA
 	 * Parametre
@@ -41,19 +47,24 @@ void Object::createVAO(unsigned int indices[]) {
 	 */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	createIBO(indices);
+	this->index = new IndexBuffer(indices, 6);
 }
 
 void Object::createIBO(unsigned int indices[]) {
 
-	glGenBuffers(1, &this->IBO);
+	/*glGenBuffers(1, &this->IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);*/
+
+	//IndexBuffer index(indices, 6);
 }
 
 void Object::bindVertexArray() {
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);
+	/*glBindVertexArray(VAO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);*/
+
+	vertex->bind();
+	index->bind();
 }
 
 Object::Object() {
