@@ -7,7 +7,7 @@
 class Application {
 public:
 	static Application* getInstance();
-	static Application* getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]);
+	static Application* getInstance(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]);
 
 	void printVersionInfo();
 	void attachCallbacks();
@@ -15,14 +15,13 @@ public:
 
 	void run();
 	
-	void setShader(const char* vertex_shader, const char* fragment_shader);
 	void setPoints(float points[], int sizeOfPoints);
 	void setTransform(glm::mat4 M);
 	void setTransform(glm::vec3 V);
 
 protected:
 	Application();
-	Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]);
+	Application(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]);
 	~Application();
 
 private:

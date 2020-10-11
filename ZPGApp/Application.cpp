@@ -10,18 +10,20 @@ Application* Application::getInstance() {
 	return instance;
 }
 
-Application* Application::getInstance(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]) {
+Application* Application::getInstance(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]) {
 
 	if (instance == NULL) {
-		instance = new Application(windowOptions, shaders, points, sizeOfPoints, indices);
+		instance = new Application(windowOptions, shaderPath, points, sizeOfPoints, indices);
 	}
 
 	return instance;
 }
 
-Application::Application() : Application::Application(new WindowOptions(800, 600, "ZPG"), new Shaders(), NULL, NULL, NULL) {}
+Application::Application() {
 
-Application::Application(WindowOptions* windowOptions, Shaders* shaders, float points[], int sizeOfPoints, unsigned int indices[]) {
+}
+
+Application::Application(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]) {
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
 	this->indices = indices;
@@ -61,10 +63,7 @@ Application::Application(WindowOptions* windowOptions, Shaders* shaders, float p
 		this->sizeOfPoints = NULL;
 	}
 
-	if (shaders->vertex_shader != NULL && shaders->fragment_shader != NULL)
-		setShader(shaders->vertex_shader, shaders->fragment_shader);
-	else
-		this->shader = NULL;
+	this->shader = new Shader(shaderPath);
 }
 
 Application::~Application() {
@@ -136,11 +135,6 @@ void Application::testGLM() {
 	);
 	// Model matrix : an identity matrix (model will be at the origin)
 	glm::mat4 Model = glm::mat4(1.0f);
-}
-
-void Application::setShader(const char* vertex_shader, const char* fragment_shader) {
-
-	this->shader = new Shader(vertex_shader, fragment_shader);
 }
 
 void Application::setPoints(float points[], int sizeOfPoints) {

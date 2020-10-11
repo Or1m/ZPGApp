@@ -18,7 +18,9 @@
 #include <stdlib.h> // E.g. printf() and scanf()
 #include <stdio.h> // E.g. malloc() and free()
 #include <iostream>
-
+#include <fstream>
+#include <string>
+#include <sstream>
 
 
 struct WindowOptions {
@@ -33,17 +35,7 @@ struct WindowOptions {
 	}
 };
 
-struct Shaders {
-	const char* vertex_shader;
-	const char* fragment_shader;
-
-	Shaders() {
-		vertex_shader = NULL;
-		fragment_shader = NULL;
-	}
-
-	Shaders(const char* vertex_shader, const char* fragment_shader) {
-		this->vertex_shader = vertex_shader;
-		this->fragment_shader = fragment_shader;
-	}
+struct ShaderProgramSource {
+	std::string vertexSource;
+	std::string fragmentSource;
 };

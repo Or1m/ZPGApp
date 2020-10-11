@@ -1,26 +1,54 @@
 #include "Shader.h"
 #include "Utils.h"
 
-//create and compile shaders
-Shader::Shader(const char* vertex_shader, const char* fragment_shader) {
-	this->vertex_shader = vertex_shader;
-	this->fragment_shader = fragment_shader;
-
-	this->shaderProgram = glCreateProgram(); // najdolezitejsie
-
-	this->vertexShader = compileShader(GL_VERTEX_SHADER, this->vertex_shader);
-	this->fragmentShader = compileShader(GL_FRAGMENT_SHADER, this->fragment_shader);
-
-	glAttachShader(this->shaderProgram, this->fragmentShader);
-	glAttachShader(this->shaderProgram, this->vertexShader);
-
-	glLinkProgram(this->shaderProgram);
-
-	GLint status;
-	glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &status);
-
-	testLinkStatus(status);
+Shader::Shader(const std::string& filePath) {
+	this->filePath = filePath;
+	this->shaderProgram = 0;
+	
+	ShaderProgramSource source = this->parseShader();
+	this->vertexShaderSource = source.vertexSource.c_str();
+	this->fragmentShaderSource = source.fragmentSource.c_str();
+	this->createShader();
 }
+
+Shader::~Shader() {
+	glDeleteShader(this->vertexShader);
+	glDeleteShader(this->fragmentShader);
+	glDeleteProgram(this->shaderProgram);
+	delete this;
+}
+
+#pragma warning(push)
+#pragma warning(disable:6385)
+ShaderProgramSource Shader::parseShader() {
+	std::ifstream stream(this->filePath);
+
+	enum class ShaderType {
+		NONE = -1,
+		VERTEX = 0,
+		FRAGMENT = 1
+	};
+
+	std::string line;
+	std::stringstream ss[2];
+	ShaderType type = ShaderType::NONE;
+
+	while (getline(stream, line)) {
+		if (line.find("#shader") != std::string::npos) {
+			if (line.find("vertex") != std::string::npos)
+				type = ShaderType::VERTEX;
+			else if (line.find("fragment") != std::string::npos)
+				type = ShaderType::FRAGMENT;
+		}
+		else
+		{
+			ss[(int)type] << line << "\n";
+		}
+	}
+
+	return { ss[0].str(), ss[1].str() };
+}
+#pragma warning(pop)
 
 GLuint Shader::compileShader(GLuint type, const char* source) {
 	GLuint shaderID = glCreateShader(type);
@@ -33,8 +61,30 @@ GLuint Shader::compileShader(GLuint type, const char* source) {
 	return testCompileStatus(status, shaderID, type) == 1 ? shaderID : 0;
 }
 
-void Shader::useProgram() {
+void Shader::createShader() {
+
+	this->shaderProgram = glCreateProgram(); // najdolezitejsie
+
+	this->vertexShader = compileShader(GL_VERTEX_SHADER, this->vertexShaderSource);
+	this->fragmentShader = compileShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
+
+	glAttachShader(this->shaderProgram, this->fragmentShader);
+	glAttachShader(this->shaderProgram, this->vertexShader);
+
+	glLinkProgram(this->shaderProgram);
+
+	GLint status;
+	glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &status);
+
+	testLinkStatus(status);
+}
+
+void Shader::useProgram() const {
 	glUseProgram(this->shaderProgram);
+}
+
+void Shader::unbindProgram() const {
+	glUseProgram(0);
 }
 
 // Shader tests
@@ -117,11 +167,4 @@ void Shader::sendUniform(const GLchar* name, GLuint U) {
 	ASSERT(uniformLocation != -1);
 
 	glUniform1ui(uniformLocation, U);
-}
-
-Shader::~Shader() {
-	glDeleteShader(this->vertexShader);
-	glDeleteShader(this->fragmentShader);
-	glDeleteProgram(this->shaderProgram);
-	delete this;
 }

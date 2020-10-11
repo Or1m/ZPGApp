@@ -1,16 +1,15 @@
 #pragma once
 #include "Header.h"
 
-// pridat GLinty akoze ideèka vertex a fragmentu
 class Shader {
 public:
-	Shader(const char* vertex_shader, const char* fragment_shader);
+	Shader(const std::string& filePath);
 	~Shader();
 
-	void useProgram();
-	GLuint compileShader(GLuint type, const char* source);
-	void testLinkStatus(GLint status);
-	GLuint testCompileStatus(GLint status, GLuint shaderID, GLuint type);
+	void useProgram() const;
+	void unbindProgram() const;
+
+	
 
 	void sendUniform(const GLchar* name, glm::mat4 M4);
 	void sendUniform(const GLchar* name, glm::vec4 V4);
@@ -20,10 +19,20 @@ public:
 	void sendUniform(const GLchar* name, GLuint U);
 
 private:
+	std::string filePath;
+
 	GLuint shaderProgram;
 	GLuint vertexShader;
 	GLuint fragmentShader;
 
-	const char* vertex_shader;
-	const char* fragment_shader;
+	const char* vertexShaderSource;
+	const char* fragmentShaderSource;
+
+
+	ShaderProgramSource parseShader();
+	void createShader();
+	GLuint compileShader(GLuint type, const char* source);
+
+	GLuint testCompileStatus(GLint status, GLuint shaderID, GLuint type);
+	void testLinkStatus(GLint status);
 };
