@@ -9,6 +9,9 @@ public:
 
 	void addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout);
 
+	void bind() const;
+	void unbind() const;
+
 private:
 	GLuint VAO;
 };

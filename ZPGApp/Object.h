@@ -1,7 +1,9 @@
 #pragma once
 #include "Header.h"
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
+#include "VertexArray.h"
 
 class Object {
 public:
@@ -17,6 +19,8 @@ private:
 
 	VertexBuffer* vertexBuffer;
 	IndexBuffer* indexBuffer;
+	VertexArray* vertexArray;
+	VertexBufferLayout* vertexBufferLayout;
 
 	int sizeOfPoints;
 	float* points;

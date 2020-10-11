@@ -1,9 +1,11 @@
 #include "VertexArray.h"
 
 VertexArray::VertexArray() {
+	glGenVertexArrays(1, &this->VAO);
 }
 
 VertexArray::~VertexArray() {
+	glDeleteVertexArrays(1, &this->VAO);
 }
 
 /*
@@ -17,6 +19,7 @@ VertexArray::~VertexArray() {
  * 6	-> offset - null alebo 0 v tomto pripade
  */
 void VertexArray::addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout) {
+	this->bind();
 	vertexBuffer.bind();
 
 	const auto& elements = layout.getElements();
@@ -31,4 +34,12 @@ void VertexArray::addBuffer(const VertexBuffer& vertexBuffer, const VertexBuffer
 		glVertexAttribPointer(i, element.count, element.type, element.normalized, layout.getStride(), (const void*)offset); 
 		offset += element.count * VertexBufferElement::getSizeOfType(element.type);
 	}
+}
+
+void VertexArray::bind() const {
+	glBindVertexArray(this->VAO);
+}
+
+void VertexArray::unbind() const {
+	glBindVertexArray(0);
 }
