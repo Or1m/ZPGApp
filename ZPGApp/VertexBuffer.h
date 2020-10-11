@@ -1,6 +1,7 @@
 #pragma once
 #include "Header.h"
 
+// buffer s datami
 class VertexBuffer {
 public:
 	VertexBuffer(const void* data, unsigned int size);

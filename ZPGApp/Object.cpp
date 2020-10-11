@@ -1,32 +1,13 @@
 #include "Object.h"
 
 
-/**
- * Create vertex buffer object VBO  
-*/
 void Object::createVBO(float points[], int sizeOfPoints) {
 	this->sizeOfPoints = sizeOfPoints;
 	this->points = points;
-	///*
-	// * Parametre
-	// * 1. -> pocet bufferov (v tomto pripade 1)
-	// * 2. -> pointer na unsigned int - na tu adresu sa ulozi ID vygenerovaneho bufferu
-	// */
-	//glGenBuffers(1, &this->VBO);
-	///*
-	// * Parametre
-	// * 1. -> ucel bufferu (array)
-	// * 2. -> ID buffer
-	// */
-	//glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeOfPoints, points, GL_STATIC_DRAW);
-
-	//VertexBuffer vertex(points, sizeOfPoints);
 }
 
-/**
- * vertex attribute object (VAO)
-*/
+// hovori ako velky je kazdy vertex vo vertex bufferi apod
+// Vertex array spaja vertex buffer s layoutom (rozlozenim dat)
 void Object::createVAO(unsigned int indices[]) {
 
 	glGenVertexArrays(1, &VAO);
@@ -50,30 +31,20 @@ void Object::createVAO(unsigned int indices[]) {
 	this->index = new IndexBuffer(indices, 6);
 }
 
-void Object::createIBO(unsigned int indices[]) {
-
-	/*glGenBuffers(1, &this->IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);*/
-
-	//IndexBuffer index(indices, 6);
-}
-
 void Object::bindVertexArray() {
-	/*glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);*/
 
 	vertex->bind();
 	index->bind();
 }
 
 Object::Object() {
-	this->VBO = 0;
-	this->VAO = 0;
 
 	this->sizeOfPoints = -1;
 }
 
 Object::~Object() {
+	delete this->vertex;
+	delete this->index;
+
 	delete this;
 }
