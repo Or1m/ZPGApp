@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Renderer.h"
 
 Application* Application::instance = NULL;
 Application* Application::getInstance() {
@@ -78,26 +79,21 @@ Application::~Application() {
 }
 
 void Application::run() {
+	Renderer renderer;
 
 	while (!glfwWindowShouldClose(window)) {
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear color and depth buffer
-		shader->useProgram(); //glUseProgram(shaderProgram);
+		renderer.clear();
 
-		//M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+		//shader->useProgram();
+		M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+
 		shader->sendUniform("modelMatrix", this->M);
 		shader->sendUniform("vec", this->V);
 		shader->sendUniform("flo", 1);
-
 		shader->sendUniform("vec", glm::vec4(V, 2));
 
-		object->bindVertexArray(); //glBindVertexArray(VAO);
-		
-		/*
-		 * Draw triangle 
-		 * Params - mode,first,count
-		 */
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL); // six indices
+		renderer.draw(*this->object->vertexArray, *this->object->indexBuffer, *this->shader);
 		
 		glfwPollEvents(); // update other events like input handling
 		

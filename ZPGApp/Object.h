@@ -14,12 +14,14 @@ public:
 	void createVAO(unsigned int indices[]);
 	void bindVertexArray();
 
+	IndexBuffer* indexBuffer; // docasne
+	VertexArray* vertexArray;
+
 private:
 	GLuint VAO;
 
 	VertexBuffer* vertexBuffer;
-	IndexBuffer* indexBuffer;
-	VertexArray* vertexArray;
+	
 	VertexBufferLayout* vertexBufferLayout;
 
 	int sizeOfPoints;
