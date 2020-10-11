@@ -7,7 +7,7 @@
 	x;\
 	ASSERT(glLogCall(#x, __FILE__, __LINE__));
 
-bool glLogCall(const char* function, const char* file, int line) {
+static bool glLogCall(const char* function, const char* file, int line) {
 	while (GLenum error = glGetError()) {
 		std::cout << "OpenGL error with code " << error << " occurs."
 			<< "\nFunction: "	<< function 
@@ -19,11 +19,11 @@ bool glLogCall(const char* function, const char* file, int line) {
 	return true;
 }
 
-void glClearErrors() {
+static void glClearErrors() {
 	while (glGetError() != GL_NO_ERROR);
 }
 
-void glCheckError() {
+static void glCheckError() {
 	while (GLenum error = glGetError())
 		std::cout << "OpenGL error: " << error << "\n";
 }
