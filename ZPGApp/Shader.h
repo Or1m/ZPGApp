@@ -2,8 +2,7 @@
 #include "Header.h"
 
 // pridat GLinty akoze ideèka vertex a fragmentu
-class Shader
-{
+class Shader {
 public:
 	Shader(const char* vertex_shader, const char* fragment_shader);
 	~Shader();

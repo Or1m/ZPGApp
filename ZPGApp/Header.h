@@ -21,8 +21,7 @@
 
 
 
-struct WindowOptions
-{
+struct WindowOptions {
 	int windowWidth; 
 	int windowHeight; 
 	const char* windowTitle;
@@ -34,8 +33,7 @@ struct WindowOptions
 	}
 };
 
-struct Shaders
-{
+struct Shaders {
 	const char* vertex_shader;
 	const char* fragment_shader;
 
