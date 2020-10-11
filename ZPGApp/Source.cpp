@@ -24,6 +24,8 @@ struct ShaderProgramSource {
 	std::string fragmentSource;
 };
 
+#pragma warning(push)
+#pragma warning(disable:6385)
 static ShaderProgramSource ParseShader(const std::string& filePath) {
 	std::ifstream stream(filePath);
 
@@ -52,6 +54,7 @@ static ShaderProgramSource ParseShader(const std::string& filePath) {
 
 	return { ss[0].str(), ss[1].str() };
 }
+#pragma warning(pop)
 
 int main(void)  {
 

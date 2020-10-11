@@ -31,6 +31,7 @@ void Object::createVAO(unsigned int indices[]) {
 	glEnableVertexAttribArray(0); 
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 	/*
+	 * Linkuje array buffer object s VAO, potom vo vykreslovacej smycke staci volat bind VAO a netreba bindovat ostatne veci
 	 * Parametre
 	 * 1.	-> index generickeho vertex atributu - layout(location=0) in vec3 vp; vo vertex shaderi ukazje ze dany atribut je na idx 0
 	 * 2.	-> pocet komponentov na 1 genericky atribut teda 3 floaty (3D coordinaty) na 1 bod
@@ -40,19 +41,26 @@ void Object::createVAO(unsigned int indices[]) {
 	 */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	GLuint ibo;
-	glGenBuffers(1, &ibo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	createIBO(indices);
+}
+
+void Object::createIBO(unsigned int indices[]) {
+
+	glGenBuffers(1, &this->IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
 void Object::bindVertexArray() {
 	glBindVertexArray(VAO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);
 }
 
 Object::Object() {
-	VBO = 0;
-	VAO = 0;
+	this->VBO = 0;
+	this->VAO = 0;
+
+	this->sizeOfPoints = -1;
 }
 
 Object::~Object() {
