@@ -22,35 +22,13 @@ Application* Application::getInstance(int width, int height, const char* title) 
 }
 
 Application::Application(int width, int height, const char* title) {
+	this->object = NULL;
+	this->shader = NULL;
+
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
-	
 
-	glfwSetErrorCallback(error_callback);
-
-	if (!glfwInit()) {
-		fprintf(stderr, "ERROR: could not start GLFW3\n");
-		exit(EXIT_FAILURE);
-	}
-
-	window = glfwCreateWindow(width, height, title, NULL, NULL);
-
-	if (!window) {
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
-
-	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
-
-	// start GLEW extension handler
-	glewExperimental = GL_TRUE;
-	glewInit();
-
-	int wwidth, hheight;
-	glfwGetFramebufferSize(window, &wwidth, &hheight);
-	float ratio = wwidth / (float)hheight;
-	glViewport(0, 0, wwidth, hheight);
+	this->window = Window::getInstance(width, height, title);
 }
 
 Application::~Application() {
@@ -77,7 +55,7 @@ void Application::run() {
 	Renderer renderer;
 	float test = 0.0;
 
-	while (!glfwWindowShouldClose(window)) {
+	while (this->window->windowShouldNotClose()) {
 
 		renderer.clear();
 
@@ -92,10 +70,10 @@ void Application::run() {
 		
 		glfwPollEvents(); // update other events like input handling
 		
-		glfwSwapBuffers(window); // put the stuff we’ve been drawing onto the display
+		this->window->swapBuffer();//glfwSwapBuffers(window); // put the stuff we’ve been drawing onto the display
 	}
 
-	glfwDestroyWindow(window);
+	this->window->destroyWindow(); //glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
 }
@@ -136,64 +114,6 @@ void Application::setTransform(glm::vec3 V) {
 	this->V = V;
 }
 
-#pragma region Callbacks
 void Application::attachCallbacks() {
-
-	// Sets the key callback
-	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
-
-	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
-
-	glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
-
-	glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
-
-	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
-
-	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
-
-	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
-		-> void {Application::getInstance()->cursor_callback(window, mouseXPos, mouseYPos); });*/
+	this->window->attachCallbacks();
 }
-
-
-void Application::error_callback(int error, const char* description) {
-	fputs(description, stderr);
-}
-
-void Application::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
-}
-
-void Application::window_focus_callback(GLFWwindow* window, int focused) {
-	printf("window_focus_callback \n");
-}
-
-void Application::window_iconify_callback(GLFWwindow* window, int iconified) {
-	printf("window_iconify_callback \n");
-}
-
-void Application::window_size_callback(GLFWwindow* window, int width, int height) {
-	printf("resize %d, %d \n", width, height);
-	glViewport(0, 0, width, height);
-}
-
-void Application::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
-	//printf("cursor_callback \n");
-	printf("cursor_pos_callback %d, %d; %d, %d\n", (int)mouseX, (int)mouseY, 0, 0); // (int)clickX, (int)clickY)
-}
-
-void Application::button_callback(GLFWwindow* window, int button, int action, int mode) {
-	//if (action == GLFW_PRESS) printf("button_callback [%d,%d,%d]\n", button, action, mode);
-
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-	{
-		double xpos, ypos;
-		//getting cursor position
-		glfwGetCursorPos(window, &xpos, &ypos);
-		printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
-	}
-}
-#pragma endregion
