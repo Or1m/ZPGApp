@@ -38,6 +38,7 @@ private:
 	glm::mat4 M;
 	glm::vec3 V;
 
+	void initShaderProgram();
 	Application(int width, int height, const char* title);
 	~Application();
 };

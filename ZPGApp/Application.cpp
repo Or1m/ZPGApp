@@ -44,17 +44,27 @@ void Application::createObject(std::string& shaderPath, float floats[], int size
 }
 
 void Application::run() {
-	ASSERT(this->object != NULL);
+	this->initShaderProgram();
 
 	float test = 0.0;
+
+	//glm::mat4 projection = glm::ortho(.0f, 800.0f, .0f, 600.0f, -1.0f, 1.0f);
+	glm::mat4 projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+	//Projection matrix :
+	//45° Field of View, 4:3 ratio, display range : 0.1 unit < 100 units
+	//glm::mat4 projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+
+	glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(-1, 0, 0));
+	
+
+	this->object->sendUniformToShader("projectionMatrix", projection);
+	this->object->sendUniformToShader("viewMatrix", view);
 
 	while (this->window->windowShouldNotClose()) {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		this->V = glm::vec3(0.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
 
 		this->renderer->clear();
-
-		this->object->useShaderProgram();
 
 		this->object->sendUniformToShader("modelMatrix", this->M);
 		this->object->sendUniformToShader("col", this->V);
@@ -68,6 +78,12 @@ void Application::run() {
 	this->window->destroyWindow();
 	this->window->terminateWindow();
 	exit(EXIT_SUCCESS);
+}
+
+void Application::initShaderProgram() {
+	ASSERT(this->object != NULL);
+
+	this->object->useShaderProgram();
 }
 
 void Application::printVersionInfo() {

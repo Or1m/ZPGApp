@@ -11,6 +11,13 @@ float floats[] = {
 	-0.5f,  0.5f, 0.0f	// 3
 };
 
+//float floats[] = {
+//	-100.5f, -100.5f, 0.0f, // 0
+//	 100.5f, -100.5f, 0.0f,	// 1
+//	 100.5f,  100.5f, 0.0f,	// 2
+//	-100.5f,  100.5f, 0.0f	// 3
+//};
+
 // indexes of points
 const int countOfIndexes = 6;
 unsigned int indexes[]{

@@ -3,6 +3,7 @@
 #include<iostream>
 
 Window* Window::instance = NULL;
+
 Window* Window::getInstance() {
 	if (instance == NULL) {
 		instance = new Window(800, 600, "ZPG");
