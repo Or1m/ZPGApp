@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "Renderer.h"
 
 Application* Application::instance = NULL;
 Application* Application::getInstance() {
@@ -48,12 +47,12 @@ void Application::run() {
 	float test = 0.0;
 
 	while (this->window->windowShouldNotClose()) {
+		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+		this->V = glm::vec3(0.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
 
 		this->renderer->clear();
 
-		//shader->useProgram();
-		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
-		this->V = glm::vec3(1.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
+		this->object->useShaderProgram();
 
 		this->object->sendUniformToShader("modelMatrix", this->M);
 		this->object->sendUniformToShader("col", this->V);

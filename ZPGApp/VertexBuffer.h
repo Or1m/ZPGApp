@@ -1,5 +1,6 @@
 #pragma once
-#include "Header.h"
+
+#include <GL/glew.h>
 
 // buffer s datami
 class VertexBuffer {

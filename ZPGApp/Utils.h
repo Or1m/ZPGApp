@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #define ASSERT(x) if (!(x)) __debugbreak();
 
 // use it like GLCall(glDrawElements(GL_TRIANGLES, 6, GL_INT, NULL));
@@ -27,3 +29,8 @@ static void glCheckError() {
 	while (GLenum error = glGetError())
 		std::cout << "OpenGL error: " << error << "\n";
 }
+
+struct ShaderProgramSource {
+	std::string vertexSource;
+	std::string fragmentSource;
+};

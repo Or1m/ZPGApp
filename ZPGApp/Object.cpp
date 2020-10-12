@@ -1,6 +1,5 @@
 #include "Object.h"
 
-
 Object::Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, std::string& shaderPath) {
 	this->sizeOfPoints = sizeOfPoints;
 	this->points = points;
@@ -30,4 +29,8 @@ void Object::bindBuffers() {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
 	this->indexBuffer->bind();
+}
+
+void Object::useShaderProgram() {
+	this->shader->useProgram();
 }

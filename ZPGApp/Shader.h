@@ -1,5 +1,18 @@
 #pragma once
-#include "Header.h"
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include <glm/vec3.hpp> // glm::vec3
+#include <glm/vec4.hpp> // glm::vec4
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/gtc/type_ptr.hpp> // glm::value_ptr
+
+#include <fstream>
+#include <string>
+#include <sstream>
+
+#include "Utils.h"
 
 class Shader {
 public:
@@ -8,8 +21,6 @@ public:
 
 	void useProgram() const;
 	void unbindProgram() const;
-
-	
 
 	void sendUniform(const GLchar* name, glm::mat4 M4);
 	void sendUniform(const GLchar* name, glm::vec4 V4);
@@ -27,7 +38,6 @@ private:
 
 	const char* vertexShaderSource;
 	const char* fragmentShaderSource;
-
 
 	ShaderProgramSource parseShader();
 	void createShader();

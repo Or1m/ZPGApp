@@ -1,5 +1,4 @@
 #pragma once
-#include "Header.h"
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
@@ -12,6 +11,7 @@ public:
 	~Object();
 
 	void bindBuffers();
+	void useShaderProgram();
 	inline int getIndexBufferCount() const { return this->indexBuffer->getCount(); }
 
 	template <typename T>

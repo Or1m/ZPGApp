@@ -1,8 +1,4 @@
 #include "Application.h"
-#include <fstream>
-#include <string>
-#include <sstream>
-#include "Utils.h"
 
 std::string shaderPath = "Resources/Shaders/Basic.shader";
 
@@ -36,7 +32,7 @@ int main(void)  {
 	//application->setTransform(M);
 	//application->setTransform(V);
 
-	application->printVersionInfo();
+	//application->printVersionInfo();
 	//application->attachCallbacks();
 	//application->testGLM();
 	
