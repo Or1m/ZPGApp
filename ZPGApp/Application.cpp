@@ -23,7 +23,6 @@ Application* Application::getInstance(int width, int height, const char* title) 
 
 Application::Application(int width, int height, const char* title) {
 	this->object = NULL;
-	this->shader = NULL;
 
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
@@ -32,8 +31,6 @@ Application::Application(int width, int height, const char* title) {
 }
 
 Application::~Application() {
-	shader->~Shader();
-	shader = NULL;
 
 	object->~Object();
 	object = NULL;
@@ -42,13 +39,8 @@ Application::~Application() {
 	instance = NULL;
 }
 
-void Application::createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int sizeOfIndexes) {
-	this->object = new Object();
-
-	this->object->createVBO(floats, sizeOfPoints);
-	this->object->createVAO(indexes);
-	
-	this->shader = new Shader(shaderPath);
+void Application::createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes) {
+	this->object = new Object(floats, sizeOfPoints, indexes, countOfIndexes, shaderPath);
 }
 
 void Application::run() {
@@ -63,10 +55,10 @@ void Application::run() {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		this->V = glm::vec3(1.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
 
-		shader->sendUniform("modelMatrix", this->M);
-		shader->sendUniform("col", this->V);
+		this->object->getShader()->sendUniform("modelMatrix", this->M);
+		this->object->getShader()->sendUniform("col", this->V);
 
-		renderer.draw(*this->object->vertexArray, *this->object->indexBuffer, *this->shader);
+		renderer.draw(*this->object->vertexArray, *this->object->indexBuffer, *this->object->getShader());
 		
 		glfwPollEvents(); // update other events like input handling
 		

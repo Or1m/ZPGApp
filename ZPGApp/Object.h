@@ -4,26 +4,28 @@
 #include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
+#include "Shader.h"
 
 class Object {
 public:
-	Object();
+	Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, std::string& shaderPath);
 	~Object();
 
-	void createVBO(float points[], int sizeOfPoints);
-	void createVAO(unsigned int indices[]);
 	void bindVertexArray();
+
+	Shader* getShader();
 
 	IndexBuffer* indexBuffer; // docasne
 	VertexArray* vertexArray;
 
 private:
-	GLuint VAO;
-
 	VertexBuffer* vertexBuffer;
-	
 	VertexBufferLayout* vertexBufferLayout;
 
+	Shader* shader;
+
 	int sizeOfPoints;
+	int countOfIndexes;
 	float* points;
+	unsigned int* indexes;
 };
