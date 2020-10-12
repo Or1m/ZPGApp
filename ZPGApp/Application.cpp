@@ -23,6 +23,7 @@ Application* Application::getInstance(int width, int height, const char* title) 
 
 Application::Application(int width, int height, const char* title) {
 	this->object = NULL;
+	this->renderer = new Renderer();
 
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
@@ -44,12 +45,11 @@ void Application::createObject(std::string& shaderPath, float floats[], int size
 }
 
 void Application::run() {
-	Renderer renderer;
 	float test = 0.0;
 
 	while (this->window->windowShouldNotClose()) {
 
-		renderer.clear();
+		this->renderer->clear();
 
 		//shader->useProgram();
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -58,11 +58,10 @@ void Application::run() {
 		this->object->sendUniformToShader("modelMatrix", this->M);
 		this->object->sendUniformToShader("col", this->V);
 
-		renderer.draw(this->object);
+		this->renderer->draw(this->object);
 		
-		glfwPollEvents(); // update other events like input handling
-		
-		this->window->swapBuffer();//glfwSwapBuffers(window); // put the stuff we’ve been drawing onto the display
+		this->window->pollEvents();
+		this->window->swapBuffer(); 
 	}
 
 	this->window->destroyWindow(); //glfwDestroyWindow(window);

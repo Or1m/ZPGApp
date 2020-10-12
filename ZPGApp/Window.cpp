@@ -56,8 +56,12 @@ bool Window::windowShouldNotClose() {
 	return !glfwWindowShouldClose(this->window);
 }
 
-void Window::swapBuffer() {
-	glfwSwapBuffers(this->window);
+void Window::swapBuffer() { 
+	glfwSwapBuffers(this->window); // put the stuff we’ve been drawing onto the display
+}
+
+void Window::pollEvents() {
+	glfwPollEvents(); // update other events like input handling
 }
 
 void Window::destroyWindow() {

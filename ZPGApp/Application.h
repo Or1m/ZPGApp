@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Object.h"
 #include "Window.h"
+#include "Renderer.h"
 
 class Application {
 public:
@@ -26,6 +27,7 @@ private:
 	static Application* instance;
 	Window* window;
 	Object* object;
+	Renderer* renderer;
 
 	glm::mat4 M;
 	glm::vec3 V;

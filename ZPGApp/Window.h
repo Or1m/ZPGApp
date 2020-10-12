@@ -10,6 +10,7 @@ public:
 
 	bool windowShouldNotClose();
 	void swapBuffer();
+	void pollEvents();
 	void destroyWindow();
 
 	void attachCallbacks();
