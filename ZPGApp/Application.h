@@ -29,7 +29,6 @@ public:
 	void setTransform(glm::mat4 M);
 	void setTransform(glm::vec3 V);
 
-
 private:
 	static Application* instance;
 	Window* window;

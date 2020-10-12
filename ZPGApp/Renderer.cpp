@@ -1,5 +1,21 @@
 #include "Renderer.h"
 
+Renderer* Renderer::instance = NULL;
+
+Renderer* Renderer::getInstance() {
+	if (instance == NULL) {
+		instance = new Renderer();
+	}
+
+	return instance;
+}
+
+Renderer::Renderer() {}
+
+Renderer::~Renderer() {
+	delete this;
+}
+
 void Renderer::draw(Object* objectToDraw) const {
 	objectToDraw->bindBuffers();
 

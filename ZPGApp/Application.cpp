@@ -1,6 +1,7 @@
 #include "Application.h"
 
 Application* Application::instance = NULL;
+
 Application* Application::getInstance() {
 
 	if (instance == NULL) {
@@ -22,12 +23,11 @@ Application* Application::getInstance(int width, int height, const char* title) 
 
 Application::Application(int width, int height, const char* title) {
 	this->object = NULL;
-	this->renderer = new Renderer();
+	this->renderer = Renderer::getInstance();
+	this->window = Window::getInstance(width, height, title);
 
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
-
-	this->window = Window::getInstance(width, height, title);
 }
 
 Application::~Application() {
@@ -44,6 +44,8 @@ void Application::createObject(std::string& shaderPath, float floats[], int size
 }
 
 void Application::run() {
+	ASSERT(this->object != NULL);
+
 	float test = 0.0;
 
 	while (this->window->windowShouldNotClose()) {
