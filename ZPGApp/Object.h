@@ -14,13 +14,14 @@ public:
 	void bindVertexArray();
 
 	Shader* getShader();
-
-	IndexBuffer* indexBuffer; // docasne
-	VertexArray* vertexArray;
+	IndexBuffer* getIndexBuffer();
+	VertexArray* getVertexArray();
 
 private:
 	VertexBuffer* vertexBuffer;
 	VertexBufferLayout* vertexBufferLayout;
+	IndexBuffer* indexBuffer;
+	VertexArray* vertexArray;
 
 	Shader* shader;
 

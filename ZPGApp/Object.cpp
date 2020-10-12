@@ -35,3 +35,10 @@ void Object::bindVertexArray() {
 Shader* Object::getShader() {
 	return this->shader;
 }
+
+IndexBuffer* Object::getIndexBuffer() {
+	return this->indexBuffer;
+}
+VertexArray* Object::getVertexArray() {
+	return this->vertexArray;
+}

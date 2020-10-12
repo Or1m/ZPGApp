@@ -58,7 +58,7 @@ void Application::run() {
 		this->object->getShader()->sendUniform("modelMatrix", this->M);
 		this->object->getShader()->sendUniform("col", this->V);
 
-		renderer.draw(*this->object->vertexArray, *this->object->indexBuffer, *this->object->getShader());
+		renderer.draw(*this->object->getVertexArray(), *this->object->getIndexBuffer(), *this->object->getShader());
 		
 		glfwPollEvents(); // update other events like input handling
 		
