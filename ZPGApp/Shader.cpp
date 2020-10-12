@@ -125,7 +125,7 @@ void Shader::sendUniform(const GLchar* name, glm::mat4 M4) {
 
 	ASSERT(uniformLocation != -1);
 
-	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4)); // glm::value_ptr(M) == &M[0][0]
+	GLCall(glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4))); // glm::value_ptr(M) == &M[0][0]
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec4 V4) {
@@ -133,7 +133,7 @@ void Shader::sendUniform(const GLchar* name, glm::vec4 V4) {
 
 	ASSERT(uniformLocation != -1);
 
-	glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w);
+	GLCall(glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w));
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec3 V3) {
@@ -141,7 +141,7 @@ void Shader::sendUniform(const GLchar* name, glm::vec3 V3) {
 
 	ASSERT(uniformLocation != -1);
 
-	glUniform3f(uniformLocation, V3.x, V3.y, V3.z);
+	GLCall(glUniform3f(uniformLocation, V3.x, V3.y, V3.z));
 }
 
 void Shader::sendUniform(const GLchar* name, GLfloat F) {
@@ -149,7 +149,7 @@ void Shader::sendUniform(const GLchar* name, GLfloat F) {
 
 	ASSERT(uniformLocation != -1);
 
-	glUniform1f(uniformLocation, F);
+	GLCall(glUniform1f(uniformLocation, F));
 }
 
 void Shader::sendUniform(const GLchar* name, GLint I) {
@@ -157,7 +157,7 @@ void Shader::sendUniform(const GLchar* name, GLint I) {
 
 	ASSERT(uniformLocation != -1);
 
-	glUniform1i(uniformLocation, I);
+	GLCall(glUniform1i(uniformLocation, I));
 }
 
 void Shader::sendUniform(const GLchar* name, GLuint U) {
@@ -165,6 +165,6 @@ void Shader::sendUniform(const GLchar* name, GLuint U) {
 
 	ASSERT(uniformLocation != -1);
 
-	glUniform1ui(uniformLocation, U);
+	GLCall(glUniform1ui(uniformLocation, U));
 }
 #pragma endregion
