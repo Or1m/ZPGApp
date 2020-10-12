@@ -36,7 +36,7 @@ int main(void)  {
 	//application->setTransform(M);
 	//application->setTransform(V);
 
-	//application->printVersionInfo();
+	application->printVersionInfo();
 	//application->attachCallbacks();
 	//application->testGLM();
 	

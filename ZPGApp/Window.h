@@ -12,6 +12,7 @@ public:
 	void swapBuffer();
 	void pollEvents();
 	void destroyWindow();
+	void terminateWindow();
 
 	void attachCallbacks();
 

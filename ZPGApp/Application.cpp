@@ -64,8 +64,8 @@ void Application::run() {
 		this->window->swapBuffer(); 
 	}
 
-	this->window->destroyWindow(); //glfwDestroyWindow(window);
-	glfwTerminate();
+	this->window->destroyWindow();
+	this->window->terminateWindow();
 	exit(EXIT_SUCCESS);
 }
 

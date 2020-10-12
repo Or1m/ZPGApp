@@ -120,7 +120,7 @@ void Shader::testLinkStatus(GLint status) {
 	}
 }
 
-// Overloaded sendUniform 
+#pragma region SendUniforms
 void Shader::sendUniform(const GLchar* name, glm::mat4 M4) {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
@@ -168,3 +168,4 @@ void Shader::sendUniform(const GLchar* name, GLuint U) {
 
 	glUniform1ui(uniformLocation, U);
 }
+#pragma endregion

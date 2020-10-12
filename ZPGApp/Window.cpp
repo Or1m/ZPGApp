@@ -68,6 +68,10 @@ void Window::destroyWindow() {
 	glfwDestroyWindow(this->window);
 }
 
+void Window::terminateWindow() {
+	glfwTerminate();
+}
+
 #pragma region Callbacks
 void Window::attachCallbacks() {
 
