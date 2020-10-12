@@ -11,11 +11,13 @@ public:
 	Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, std::string& shaderPath);
 	~Object();
 
-	void bindVertexArray();
+	void bindBuffers();
+	inline int getIndexBufferCount() const { return this->indexBuffer->getCount(); }
 
-	Shader* getShader();
-	IndexBuffer* getIndexBuffer();
-	VertexArray* getVertexArray();
+	template <typename T>
+	void sendUniformToShader(const GLchar* name, T t) {
+		this->shader->sendUniform(name, t);
+	}
 
 private:
 	VertexBuffer* vertexBuffer;

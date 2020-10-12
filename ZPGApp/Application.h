@@ -21,9 +21,6 @@ public:
 	void setTransform(glm::mat4 M);
 	void setTransform(glm::vec3 V);
 
-protected:
-	Application(int width, int height, const char* title);
-	~Application();
 
 private:
 	static Application* instance;
@@ -32,4 +29,7 @@ private:
 
 	glm::mat4 M;
 	glm::vec3 V;
+
+	Application(int width, int height, const char* title);
+	~Application();
 };

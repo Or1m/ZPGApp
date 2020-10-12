@@ -22,9 +22,6 @@
 #include <string>
 #include <sstream>
 
-
-
-
 struct ShaderProgramSource {
 	std::string vertexSource;
 	std::string fragmentSource;

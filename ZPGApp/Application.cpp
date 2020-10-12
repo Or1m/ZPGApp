@@ -55,10 +55,10 @@ void Application::run() {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		this->V = glm::vec3(1.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
 
-		this->object->getShader()->sendUniform("modelMatrix", this->M);
-		this->object->getShader()->sendUniform("col", this->V);
+		this->object->sendUniformToShader("modelMatrix", this->M);
+		this->object->sendUniformToShader("col", this->V);
 
-		renderer.draw(*this->object->getVertexArray(), *this->object->getIndexBuffer(), *this->object->getShader());
+		renderer.draw(this->object);
 		
 		glfwPollEvents(); // update other events like input handling
 		

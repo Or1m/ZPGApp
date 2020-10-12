@@ -26,19 +26,8 @@ Object::~Object() {
 	delete this;
 }
 
-void Object::bindVertexArray() {
-
-	vertexBuffer->bind();
-	indexBuffer->bind();
-}
-
-Shader* Object::getShader() {
-	return this->shader;
-}
-
-IndexBuffer* Object::getIndexBuffer() {
-	return this->indexBuffer;
-}
-VertexArray* Object::getVertexArray() {
-	return this->vertexArray;
+void Object::bindBuffers() {
+	this->shader->useProgram();
+	this->vertexBuffer->bind();
+	this->indexBuffer->bind();
 }

@@ -1,12 +1,10 @@
 #include "Renderer.h"
 
-void Renderer::draw(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) const {
-	shader.useProgram();
-	vertexArray.bind();
-	indexBuffer.bind();
+void Renderer::draw(Object* objectToDraw) const {
+	objectToDraw->bindBuffers();
 
 	// Params - mode,first,count
-	glDrawElements(GL_TRIANGLES, indexBuffer.getCount(), GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, objectToDraw->getIndexBufferCount(), GL_UNSIGNED_INT, NULL);
 }
 
 void Renderer::clear() const {
