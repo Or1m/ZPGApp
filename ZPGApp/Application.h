@@ -7,7 +7,9 @@
 class Application {
 public:
 	static Application* getInstance();
-	static Application* getInstance(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]);
+	static Application* getInstance(int width, int height, const char* title);
+
+	void createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int sizeOfIndexes);
 
 	void printVersionInfo();
 	void attachCallbacks();
@@ -15,13 +17,11 @@ public:
 
 	void run();
 	
-	void setPoints(float points[], int sizeOfPoints);
 	void setTransform(glm::mat4 M);
 	void setTransform(glm::vec3 V);
 
 protected:
-	Application();
-	Application(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]);
+	Application(int width, int height, const char* title);
 	~Application();
 
 private:
@@ -32,10 +32,6 @@ private:
 
 	glm::mat4 M;
 	glm::vec3 V;
-
-	float* points;
-	int sizeOfPoints;
-	unsigned int* indices;
 
 	static void error_callback(int error, const char* description);
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

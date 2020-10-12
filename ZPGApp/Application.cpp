@@ -5,29 +5,27 @@ Application* Application::instance = NULL;
 Application* Application::getInstance() {
 
 	if (instance == NULL) {
-		instance = new Application();
+		instance = new Application(800, 600, "ZPG");
 	}
 
 	return instance;
 }
 
-Application* Application::getInstance(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]) {
+Application* Application::getInstance(int width, int height, const char* title) {
 
-	if (instance == NULL) {
-		instance = new Application(windowOptions, shaderPath, points, sizeOfPoints, indices);
-	}
+	if (instance != NULL)
+		std::cout << "Warning instance is already created";
+	else
+		instance = new Application(width, height, title);
 
 	return instance;
 }
 
-Application::Application() {
-
-}
-
-Application::Application(WindowOptions* windowOptions, std::string& shaderPath, float points[], int sizeOfPoints, unsigned int indices[]) {
+Application::Application(int width, int height, const char* title) {
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
-	this->indices = indices;
+	
+
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -35,7 +33,7 @@ Application::Application(WindowOptions* windowOptions, std::string& shaderPath, 
 		exit(EXIT_FAILURE);
 	}
 
-	window = glfwCreateWindow(windowOptions->windowWidth, windowOptions->windowHeight, windowOptions->windowTitle, NULL, NULL);
+	window = glfwCreateWindow(width, height, title, NULL, NULL);
 
 	if (!window) {
 		glfwTerminate();
@@ -49,22 +47,10 @@ Application::Application(WindowOptions* windowOptions, std::string& shaderPath, 
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	int width, height;
-	glfwGetFramebufferSize(window, &width, &height);
-	float ratio = width / (float)height;
-	glViewport(0, 0, width, height);
-
-	this->object = new Object();
-
-	if (points != NULL && sizeOfPoints != NULL)
-		setPoints(points, sizeOfPoints);
-	else
-	{
-		this->points = NULL;
-		this->sizeOfPoints = NULL;
-	}
-
-	this->shader = new Shader(shaderPath);
+	int wwidth, hheight;
+	glfwGetFramebufferSize(window, &wwidth, &hheight);
+	float ratio = wwidth / (float)hheight;
+	glViewport(0, 0, wwidth, hheight);
 }
 
 Application::~Application() {
@@ -78,20 +64,29 @@ Application::~Application() {
 	instance = NULL;
 }
 
+void Application::createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int sizeOfIndexes) {
+	this->object = new Object();
+
+	this->object->createVBO(floats, sizeOfPoints);
+	this->object->createVAO(indexes);
+	
+	this->shader = new Shader(shaderPath);
+}
+
 void Application::run() {
 	Renderer renderer;
+	float test = 0.0;
 
 	while (!glfwWindowShouldClose(window)) {
 
 		renderer.clear();
 
 		//shader->useProgram();
-		M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+		this->V = glm::vec3(1.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
 
 		shader->sendUniform("modelMatrix", this->M);
-		shader->sendUniform("vec", this->V);
-		shader->sendUniform("flo", 1);
-		shader->sendUniform("vec", glm::vec4(V, 2));
+		shader->sendUniform("col", this->V);
 
 		renderer.draw(*this->object->vertexArray, *this->object->indexBuffer, *this->shader);
 		
@@ -131,14 +126,6 @@ void Application::testGLM() {
 	);
 	// Model matrix : an identity matrix (model will be at the origin)
 	glm::mat4 Model = glm::mat4(1.0f);
-}
-
-void Application::setPoints(float points[], int sizeOfPoints) {
-	this->points = points;
-	this->sizeOfPoints = sizeOfPoints;
-
-	this->object->createVBO(this->points, this->sizeOfPoints);
-	this->object->createVAO(this->indices);
 }
 
 void Application::setTransform(glm::mat4 M){

@@ -23,17 +23,7 @@
 #include <sstream>
 
 
-struct WindowOptions {
-	int windowWidth; 
-	int windowHeight; 
-	const char* windowTitle;
 
-	WindowOptions(int windowWidth, int windowHeight, const char* windowTitle) {
-		this->windowWidth = windowWidth;
-		this->windowHeight = windowHeight;
-		this->windowTitle = windowTitle;
-	}
-};
 
 struct ShaderProgramSource {
 	std::string vertexSource;

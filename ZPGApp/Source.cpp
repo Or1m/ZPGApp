@@ -2,11 +2,13 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "Utils.h"
 
-const int numOfElements = 12;
+std::string shaderPath = "Resources/Shaders/Basic.shader";
 
 // points of triangle in Index buffer
-float points[] = {
+const int countOfFloats = 4 * 3;
+float floats[] = {
 	-0.5f, -0.5f, 0.0f, // 0
 	 0.5f, -0.5f, 0.0f,	// 1
 	 0.5f,  0.5f, 0.0f,	// 2
@@ -14,15 +16,14 @@ float points[] = {
 };
 
 // indexes of points
-unsigned int indices[] {
+const int countOfIndexes = 6;
+unsigned int indexes[]{
 	0, 1, 2,
 	2, 3, 0
 };
 
-
 int main(void)  {
-
-	std::string shaderPath = "Resources/Shaders/Basic.shader";
+	
 
 	glm::mat4 M = glm::mat4(1.0f); 
 	glm::vec3 V = glm::vec3(1.0f, 1.0f, .0f);
@@ -32,11 +33,14 @@ int main(void)  {
 	//std::cout << glm::to_string(M) << std::endl;
 	
 
-	Application* application = Application::getInstance(
+	/*Application* application = Application::getInstance(
 		new WindowOptions(800, 600, "ZPG"), 
 		shaderPath, points, numOfElements * sizeof(float), indices
-	);
+	);*/
 
+	Application* application = Application::getInstance();
+	application->createObject(shaderPath, floats, countOfFloats * sizeof(float), indexes, countOfIndexes);
+	glGetError();
 	application->setTransform(M);
 	application->setTransform(V);
 
