@@ -19,8 +19,10 @@ Renderer::~Renderer() {
 void Renderer::draw(Object* objectToDraw) const {
 	objectToDraw->bindBuffers();
 
-	// Params - mode,first,count
-	glDrawElements(GL_TRIANGLES, objectToDraw->getIndexBufferCount(), GL_UNSIGNED_INT, NULL);
+	if(objectToDraw->isWithIndexes())
+		glDrawElements(GL_TRIANGLES, objectToDraw->getIndexBufferCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
+	else
+		glDrawArrays(GL_TRIANGLES, 0, 3); // bacha nahardcodene 3 vertexy
 }
 
 void Renderer::clear() const {

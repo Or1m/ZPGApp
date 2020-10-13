@@ -7,12 +7,13 @@
 
 class Object {
 public:
-	Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, std::string& shaderPath);
+	Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath);
 	~Object();
 
 	void bindBuffers();
 	void useShaderProgram();
 	inline int getIndexBufferCount() const { return this->indexBuffer->getCount(); }
+	bool isWithIndexes();
 
 	template <typename T>
 	void sendUniformToShader(const GLchar* name, T t) {
@@ -27,6 +28,7 @@ private:
 
 	Shader* shader;
 
+	bool hasIndexes;
 	int sizeOfPoints;
 	int countOfIndexes;
 	float* points;

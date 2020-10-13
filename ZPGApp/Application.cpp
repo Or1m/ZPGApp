@@ -39,8 +39,8 @@ Application::~Application() {
 	instance = NULL;
 }
 
-void Application::createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes) {
-	this->object = new Object(floats, sizeOfPoints, indexes, countOfIndexes, shaderPath);
+void Application::createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes) {
+	this->object = new Object(floats, sizeOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
 
 void Application::run() {

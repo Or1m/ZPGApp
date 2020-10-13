@@ -146,6 +146,10 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Resources\Models\plain.h" />
+    <ClInclude Include="Resources\Models\sphere.h" />
+    <ClInclude Include="Resources\Models\suzi_flat.h" />
+    <ClInclude Include="Resources\Models\suzi_smooth.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="VertexArray.h" />

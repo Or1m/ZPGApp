@@ -18,7 +18,7 @@ public:
 	static Application* getInstance();
 	static Application* getInstance(int width, int height, const char* title);
 
-	void createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes);
+	void createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes);
 
 	void printVersionInfo();
 	void attachCallbacks();

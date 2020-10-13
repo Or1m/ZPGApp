@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Resources/Models/plain.h"
 
 std::string shaderPath = "Resources/Shaders/Basic.shader";
 
@@ -12,7 +13,7 @@ const int countOfFloats = 4 * 3;
 //};
 
 float floats[] = {
-	-50.0f, -50.0f, 0.0f, // 0
+	-50.0f, -50.0f, 0.0f,	// 0
 	 50.0f, -50.0f, 0.0f,	// 1
 	 50.0f,  50.0f, 0.0f,	// 2
 	-50.0f,  50.0f, 0.0f	// 3
@@ -34,7 +35,7 @@ int main(void)  {
 	//std::cout << glm::to_string(M) << std::endl;
 
 	Application* application = Application::getInstance();
-	application->createObject(shaderPath, floats, countOfFloats * sizeof(float), indexes, countOfIndexes);
+	application->createObject(shaderPath, floats, countOfFloats * sizeof(float), indexes, countOfIndexes, true);
 
 	//application->setTransform(M);
 	//application->setTransform(V);
