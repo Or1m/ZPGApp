@@ -20,9 +20,9 @@ public:
 
 	void createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes);
 
-	void printVersionInfo();
-	void attachCallbacks();
-	void testGLM();
+	void printVersionInfo() const;
+	void attachCallbacks() const;
+	void testGLM() const;
 
 	void run();
 	
@@ -38,7 +38,7 @@ private:
 	glm::mat4 M;
 	glm::vec3 V;
 
-	void initShaderProgram();
+	void initShaderProgram() const;
 	Application(int width, int height, const char* title);
 	~Application();
 };

@@ -1,7 +1,7 @@
 #include "IndexBuffer.h"
 
-IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count) {
-	this->count = count;
+IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count) 
+: count(count) {
 
 	glGenBuffers(1, &this->IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->IBO);

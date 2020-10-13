@@ -1,11 +1,7 @@
 #include "Object.h"
 
-Object::Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath) {
-	this->sizeOfPoints = sizeOfPoints;
-	this->points = points;
-	this->indexes = indexes;
-	this->countOfIndexes = countOfIndexes;
-	this->hasIndexes = isWithIndexes;
+Object::Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath) 
+: points(points), sizeOfPoints(sizeOfPoints), indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes) {
 
 	this->vertexArray = new VertexArray();// creating VAO
 	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints); // creating VBO
@@ -30,7 +26,7 @@ Object::~Object() {
 	delete this;
 }
 
-void Object::bindBuffers() {
+void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
 
@@ -38,10 +34,10 @@ void Object::bindBuffers() {
 		this->indexBuffer->bind();
 }
 
-void Object::useShaderProgram() {
+void Object::useShaderProgram() const {
 	this->shader->useProgram();
 }
 
-bool Object::isWithIndexes() {
+bool Object::isWithIndexes() const {
 	return this->hasIndexes;
 }

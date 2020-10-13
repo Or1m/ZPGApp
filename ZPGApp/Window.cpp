@@ -53,28 +53,28 @@ Window::~Window() {
 	delete this;
 }
 
-bool Window::windowShouldNotClose() {
+bool Window::windowShouldNotClose() const {
 	return !glfwWindowShouldClose(this->window);
 }
 
-void Window::swapBuffer() { 
+void Window::swapBuffer() const { 
 	glfwSwapBuffers(this->window); // put the stuff we’ve been drawing onto the display
 }
 
-void Window::pollEvents() {
+void Window::pollEvents() const {
 	glfwPollEvents(); // update other events like input handling
 }
 
-void Window::destroyWindow() {
+void Window::destroyWindow() const {
 	glfwDestroyWindow(this->window);
 }
 
-void Window::terminateWindow() {
+void Window::terminateWindow() const {
 	glfwTerminate();
 }
 
 #pragma region Callbacks
-void Window::attachCallbacks() {
+void Window::attachCallbacks() const{
 
 	// Sets the key callback
 	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy

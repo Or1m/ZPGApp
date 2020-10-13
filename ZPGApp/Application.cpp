@@ -21,10 +21,8 @@ Application* Application::getInstance(int width, int height, const char* title) 
 	return instance;
 }
 
-Application::Application(int width, int height, const char* title) {
-	this->object = NULL;
-	this->renderer = Renderer::getInstance();
-	this->window = Window::getInstance(width, height, title);
+Application::Application(int width, int height, const char* title) 
+: window(Window::getInstance(width, height, title)), object(NULL), renderer(Renderer::getInstance()) {
 
 	this->M = glm::mat4(1.0f);
 	this->V = glm::vec3(0.5f, 0.5f, 0.5f);
@@ -43,7 +41,7 @@ void Application::createObject(std::string& shaderPath, float floats[], int size
 	this->object = new Object(floats, sizeOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
 
-void Application::run() {
+void Application::run()  { //const ked tam nebude to priradenie?
 	this->initShaderProgram();
 
 	float test = 0.0;
@@ -65,7 +63,7 @@ void Application::run() {
 
 	while (this->window->windowShouldNotClose()) {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * 0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
-		this->V = glm::vec3(0.0f, test > 1 ? test = 0.0 : test += 0.005, 1.0);
+		this->V = glm::vec3(0.0f, test > 1 ? test = 0.0f: test += 0.005f, 1.0f);
 
 		this->renderer->clear();
 
@@ -74,13 +72,13 @@ void Application::run() {
 		this->object->sendUniformToShader("viewMatrix", view);
 		this->object->sendUniformToShader("col", this->V);
 
-		this->renderer->draw(this->object);
+		this->renderer->draw(*this->object);
 		
 		this->object->sendUniformToShader("viewMatrix", glm::translate(glm::mat4(1.0), glm::vec3(400, 300, 0)));
 		this->object->sendUniformToShader("modelMatrix", glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f)));
-		this->object->sendUniformToShader("col", glm::vec3(1.0f, 0.0f, test > 1 ? test = 0.0 : test += 0.005));
+		this->object->sendUniformToShader("col", glm::vec3(1.0f, 0.0f, test > 1 ? test = 0.0f : test += 0.005f));
 
-		this->renderer->draw(this->object);
+		this->renderer->draw(*this->object);
 
 		
 		this->window->pollEvents();
@@ -92,13 +90,13 @@ void Application::run() {
 	exit(EXIT_SUCCESS);
 }
 
-void Application::initShaderProgram() {
+void Application::initShaderProgram() const {
 	ASSERT(this->object != NULL);
 
 	this->object->useShaderProgram();
 }
 
-void Application::printVersionInfo() {
+void Application::printVersionInfo() const {
 
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
 	printf("Using GLEW %s\n", glewGetString(GLEW_VERSION));
@@ -111,7 +109,7 @@ void Application::printVersionInfo() {
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 }
 
-void Application::testGLM() {
+void Application::testGLM() const {
 	
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.01f, 100.0f);
@@ -134,6 +132,6 @@ void Application::setTransform(glm::vec3 V) {
 	this->V = V;
 }
 
-void Application::attachCallbacks() {
+void Application::attachCallbacks() const {
 	this->window->attachCallbacks();
 }

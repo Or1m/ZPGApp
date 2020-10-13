@@ -22,12 +22,12 @@ public:
 	void useProgram() const;
 	void unbindProgram() const;
 
-	void sendUniform(const GLchar* name, glm::mat4 M4);
-	void sendUniform(const GLchar* name, glm::vec4 V4);
-	void sendUniform(const GLchar* name, glm::vec3 V3);
-	void sendUniform(const GLchar* name, GLfloat F);
-	void sendUniform(const GLchar* name, GLint I);
-	void sendUniform(const GLchar* name, GLuint U);
+	void sendUniform(const GLchar* name, glm::mat4 M4) const;
+	void sendUniform(const GLchar* name, glm::vec4 V4) const;
+	void sendUniform(const GLchar* name, glm::vec3 V3) const;
+	void sendUniform(const GLchar* name, GLfloat F) const;
+	void sendUniform(const GLchar* name, GLint I) const;
+	void sendUniform(const GLchar* name, GLuint U) const;
 
 private:
 	std::string filePath;

@@ -18,7 +18,7 @@ VertexArray::~VertexArray() {
  * 5	-> stride - velkost vertexu (o kolko bytov sa mam posunut ked chcem prejst na dalsi vertex) sizeof(float) * 3
  * 6	-> offset - null alebo 0 v tomto pripade
  */
-void VertexArray::addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout) {
+void VertexArray::addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout) const {
 	this->bind();
 	vertexBuffer.bind();
 

@@ -5,7 +5,7 @@ class Renderer {
 public:
 	static Renderer* getInstance();
 
-	void draw(Object* objectToDraw) const;
+	void draw(const Object& objectToDraw) const;
 	void clear() const;
 
 private:

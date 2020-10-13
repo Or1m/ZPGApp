@@ -9,7 +9,7 @@ public:
 	VertexArray();
 	~VertexArray();
 
-	void addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout);
+	void addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout) const;
 
 	void bind() const;
 	void unbind() const;

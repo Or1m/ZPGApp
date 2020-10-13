@@ -16,11 +16,11 @@ Renderer::~Renderer() {
 	delete this;
 }
 
-void Renderer::draw(Object* objectToDraw) const {
-	objectToDraw->bindBuffers();
+void Renderer::draw(const Object& objectToDraw) const {
+	objectToDraw.bindBuffers();
 
-	if(objectToDraw->isWithIndexes())
-		glDrawElements(GL_TRIANGLES, objectToDraw->getIndexBufferCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
+	if(objectToDraw.isWithIndexes())
+		glDrawElements(GL_TRIANGLES, objectToDraw.getIndexBufferCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
 	else
 		glDrawArrays(GL_TRIANGLES, 0, 3); // bacha nahardcodene 3 vertexy
 }

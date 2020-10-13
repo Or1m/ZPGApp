@@ -8,13 +8,13 @@ public:
 	static Window* getInstance();
 	static Window* getInstance(int width, int height, const char* title);
 
-	bool windowShouldNotClose();
-	void swapBuffer();
-	void pollEvents();
-	void destroyWindow();
-	void terminateWindow();
+	bool windowShouldNotClose() const;
+	void swapBuffer() const;
+	void pollEvents() const;
+	void destroyWindow() const;
+	void terminateWindow() const;
 
-	void attachCallbacks();
+	void attachCallbacks() const;
 
 private:
 	static Window* instance;
