@@ -57,6 +57,11 @@ void Application::run() {
 	this->object->sendUniformToShader("projectionMatrix", projection);
 
 	glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(100, 100, 0));
+	/*glm::mat4 view = glm::lookAt(	glm::vec3(0.0f, 0.0f, -100.0f),
+									glm::vec3(0.0f, 0.0f, 0.0f),
+									glm::vec3(0.0f, 1.0f, 0.0f));*/
+
+	//this->eye, this->eye + this->target, this->up
 
 	while (this->window->windowShouldNotClose()) {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * 0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
