@@ -9,6 +9,7 @@ uniform vec3 col;
 out vec4 color;
 
 layout(location=0) in vec3 vp;
+layout(location = 1) in vec3 vertNormal;
 
 void main () {
     color = vec4(col, 1.0);

@@ -45,16 +45,20 @@ void Application::run()  { //const ked tam nebude to priradenie?
 	this->initShaderProgram();
 
 	float test = 0.0;
+	glEnable(GL_DEPTH_TEST);
 
-	glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
 	//Projection matrix :
 	//45° Field of View, 4:3 ratio, display range : 0.1 unit < 100 units
 	//glm::mat4 projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
 
-	this->object->sendUniformToShader("projectionMatrix", projection);
+	//this->object->sendUniformToShader("projectionMatrix", projection);
+	this->object->sendUniformToShader("projectionMatrix", glm::mat4(1.0f));
+	this->object->sendUniformToShader("viewMatrix", glm::mat4(1.0f));
+	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
 
-	glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(100, 100, 0));
+	//glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(100, 100, 0));
 	/*glm::mat4 view = glm::lookAt(	glm::vec3(0.0f, 0.0f, -100.0f),
 									glm::vec3(0.0f, 0.0f, 0.0f),
 									glm::vec3(0.0f, 1.0f, 0.0f));*/
@@ -68,17 +72,17 @@ void Application::run()  { //const ked tam nebude to priradenie?
 		this->renderer->clear();
 
 
-		this->object->sendUniformToShader("modelMatrix", this->M);
-		this->object->sendUniformToShader("viewMatrix", view);
+		//this->object->sendUniformToShader("modelMatrix", this->M);
+		//this->object->sendUniformToShader("viewMatrix", view);
 		this->object->sendUniformToShader("col", this->V);
 
 		this->renderer->draw(*this->object);
 		
-		this->object->sendUniformToShader("viewMatrix", glm::translate(glm::mat4(1.0), glm::vec3(400, 300, 0)));
+		/*this->object->sendUniformToShader("viewMatrix", glm::translate(glm::mat4(1.0), glm::vec3(400, 300, 0)));
 		this->object->sendUniformToShader("modelMatrix", glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f)));
 		this->object->sendUniformToShader("col", glm::vec3(1.0f, 0.0f, test > 1 ? test = 0.0f : test += 0.005f));
 
-		this->renderer->draw(*this->object);
+		this->renderer->draw(*this->object);*/
 
 		
 		this->window->pollEvents();

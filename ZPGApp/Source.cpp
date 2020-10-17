@@ -1,23 +1,23 @@
 #include "Application.h"
-#include "Resources/Models/plain.h"
+#include "Resources/Models/sphere.h"
 
 std::string shaderPath = "Resources/Shaders/Basic.shader";
 
 // points of triangle in Index buffer
 const int countOfFloats = 4 * 3;
-//float floats[] = {
-//	-0.5f, -0.5f, 0.0f, // 0
-//	 0.5f, -0.5f, 0.0f,	// 1
-//	 0.5f,  0.5f, 0.0f,	// 2
-//	-0.5f,  0.5f, 0.0f	// 3
-//};
-
 float floats[] = {
-	-50.0f, -50.0f, 0.0f,	// 0
-	 50.0f, -50.0f, 0.0f,	// 1
-	 50.0f,  50.0f, 0.0f,	// 2
-	-50.0f,  50.0f, 0.0f	// 3
+	-0.5f, -0.5f, 0.0f, // 0
+	 0.5f, -0.5f, 0.0f,	// 1
+	 0.5f,  0.5f, 0.0f,	// 2
+	-0.5f,  0.5f, 0.0f	// 3
 };
+
+//float floats[] = {
+//	-50.0f, -50.0f, 0.0f,	// 0
+//	 50.0f, -50.0f, 0.0f,	// 1
+//	 50.0f,  50.0f, 0.0f,	// 2
+//	-50.0f,  50.0f, 0.0f	// 3
+//};
 
 // indexes of points
 const int countOfIndexes = 6;
@@ -35,7 +35,8 @@ int main(void)  {
 	//std::cout << glm::to_string(M) << std::endl;
 
 	Application* application = Application::getInstance();
-	application->createObject(shaderPath, floats, countOfFloats * sizeof(float), indexes, countOfIndexes, true);
+	//application->createObject(shaderPath, floats, countOfFloats * sizeof(float), indexes, countOfIndexes, true);
+	application->createObject(shaderPath, sphere, 2880, indexes, countOfIndexes, false);
 
 	//application->setTransform(M);
 	//application->setTransform(V);

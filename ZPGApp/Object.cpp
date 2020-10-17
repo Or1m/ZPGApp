@@ -8,6 +8,7 @@ Object::Object(float points[], int sizeOfPoints, unsigned int indexes[], int cou
 
 	this->vertexBufferLayout = new VertexBufferLayout();
 	this->vertexBufferLayout->push<float>(3); // glVertexAttribPointer(0, 3 <---)
+	this->vertexBufferLayout->push<float>(3);
 
 	this->vertexArray->addBuffer(*this->vertexBuffer, *this->vertexBufferLayout);
 
