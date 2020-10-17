@@ -36,7 +36,7 @@ int main(void)  {
 
 	Application* application = Application::getInstance();
 	//application->createObject(shaderPath, floats, countOfFloats * sizeof(float), indexes, countOfIndexes, true);
-	application->createObject(shaderPath, sphere, 2880, indexes, countOfIndexes, false);
+	application->createObject(shaderPath, sphere,  2880 * 6 * sizeof(float), indexes, countOfIndexes, false);
 
 	//application->setTransform(M);
 	//application->setTransform(V);
