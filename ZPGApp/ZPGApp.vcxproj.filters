@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\Models">
       <UniqueIdentifier>{70977cd5-98d2-4c53-abbc-854203c0e899}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Behavior">
+      <UniqueIdentifier>{8e91a89b-b820-43c7-821b-2fcebecd6d52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -97,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="Resources\Models\suzi_flat.h">
       <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="IObserver.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="ISubject.h">
+      <Filter>Header Files\Behavior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

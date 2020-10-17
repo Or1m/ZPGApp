@@ -7,19 +7,34 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #include <glm/gtx/string_cast.hpp> // glm::to_string()
 
-class Camera {
+#include "ISubject.h"
+#include "IObserver.h"
+#include <vector>
+
+class Camera : public ISubject {
 public:
 	static Camera* getInstance();
 
 	glm::mat4 getCamera();
+	void toFront();
+	void toLeft();
 
 private:
 	static Camera* instance;
+
+	glm::mat4 projection;
 
 	glm::vec3 eye;
 	glm::vec3 target;
 	glm::vec3 up;
 
+	// Observer
+	std::vector<IObserver*> observers;
+
+	void attach(IObserver* observer) override;
+	void detach(IObserver* observer) override;
+	void notify() override;
+	
 	Camera();
 	~Camera();
 };

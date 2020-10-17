@@ -54,22 +54,33 @@ void Application::run()  { //const ked tam nebude to priradenie?
 	//glm::mat4 projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
 
 	//this->object->sendUniformToShader("projectionMatrix", projection);
-	this->object->sendUniformToShader("projectionMatrix", glm::mat4(1.0f));
-	this->object->sendUniformToShader("viewMatrix", glm::mat4(1.0f));
-	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
+	
 
 	//glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(100, 100, 0));
-	/*glm::mat4 view = glm::lookAt(	glm::vec3(0.0f, 0.0f, -100.0f),
+	glm::mat4 view = glm::lookAt(	glm::vec3(0.0f, 0.0f, -5.0f),
 									glm::vec3(0.0f, 0.0f, 0.0f),
-									glm::vec3(0.0f, 1.0f, 0.0f));*/
+									glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//this->eye, this->eye + this->target, this->up
+
+	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+	this->object->sendUniformToShader("projectionMatrix", projection);
+	this->object->sendUniformToShader("viewMatrix", view);
+	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
+
+	float dis = -100.0f;
 
 	while (this->window->windowShouldNotClose()) {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * 0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
 		this->V = glm::vec3(0.0f, test > 1 ? test = 0.0f: test += 0.005f, 1.0f);
 
 		this->renderer->clear();
+
+		/*glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, dis += 0.5f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f));
+
+		this->object->sendUniformToShader("viewMatrix", view);*/
 
 
 		//this->object->sendUniformToShader("modelMatrix", this->M);
