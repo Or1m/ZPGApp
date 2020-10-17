@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 
+#include "Resources/sphere.h"
+
 const int numOfElements = 9;
 
 // points of triangle
@@ -77,10 +79,10 @@ int main(void)  {
 	Application* application = Application::getInstance(
 		new WindowOptions(800, 600, "ZPG"), 
 		new Shaders(source.vertexSource.c_str(), source.fragmentSource.c_str()),
-		points, numOfElements * sizeof(float)
+		sphere, 2880 * sizeof(float)
 	);
 
-	application->setTransform(M);
+	//application->setTransform(M);
 	application->setTransform(V);
 
 	//application->printVersionInfo();

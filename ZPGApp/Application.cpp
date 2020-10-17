@@ -79,6 +79,7 @@ Application::~Application() {
 }
 
 void Application::run() {
+	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -95,7 +96,7 @@ void Application::run() {
 		 * Draw triangle 
 		 * Params - mode,first,count
 		 */
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 2880);
 		//glDrawArrays(GL_QUADS, 0, 4); // draw rectangle
 
 		glfwPollEvents(); // update other events like input handling

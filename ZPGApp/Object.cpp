@@ -16,7 +16,7 @@ void Object::createVBO(float points[], int sizeOfPoints) {
 	 * 2. -> ID buffer
 	 */
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeOfPoints, points, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 17280, points, GL_STATIC_DRAW);
 }
 
 /**
@@ -28,6 +28,7 @@ void Object::createVAO() {
 	glBindVertexArray(VAO);
 
 	glEnableVertexAttribArray(0); 
+	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 	/*
 	 * Parametre
@@ -37,7 +38,9 @@ void Object::createVAO() {
 	 * 5	-> stride - velkost vertexu (o kolko bytov sa mam posunut ked chcem prejst na dalsi vertex) sizeof(float) * 3
 	 * 6	-> offset - null alebo 0 v tomto pripade
 	 */
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 }
 
 void Object::bindVertexArray() {
