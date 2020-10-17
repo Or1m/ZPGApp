@@ -1,9 +1,9 @@
 #shader vertex
 #version 330
 
-uniform mat4 projectionMatrix;
-uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 
 uniform vec3 col;
 out vec4 color;
