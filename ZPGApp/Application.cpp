@@ -35,7 +35,7 @@ void Application::createObject(std::string& shaderPath, const float floats[], in
 
 void Application::run() const {
 	this->initShaderProgram();
-	glEnable(GL_DEPTH_TEST);
+	
 
 	float test = 0.0;
 	glm::mat4 M;
@@ -46,6 +46,7 @@ void Application::run() const {
 	this->object->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
 	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
 
+	//Camera::getInstance()->toFront();
 
 	while (this->window->windowShouldNotClose()) {
 		M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * 0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
@@ -53,7 +54,8 @@ void Application::run() const {
 
 		this->renderer->clear();
 
-		Camera::getInstance()->toBack();
+		
+		
 
 
 		//this->object->sendUniformToShader("modelMatrix", this->M);

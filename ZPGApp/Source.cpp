@@ -8,7 +8,7 @@ int main(void)  {
 	application->createObject(shaderPath, sphere, 2880, NULL, NULL, false);
 
 	//application->printVersionInfo();
-	//application->attachCallbacks();
+	application->attachCallbacks();
 	
 	application->run();
 	return 0;

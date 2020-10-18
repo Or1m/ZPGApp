@@ -1,6 +1,7 @@
 #include "Window.h"
 
 #include<iostream>
+#include "Camera.h"
 
 Window* Window::instance = NULL;
 
@@ -47,6 +48,8 @@ Window::Window(int width, int height, const char* title) {
 	glfwGetFramebufferSize(window, &w_width, &h_height);
 	float ratio = w_width / (float)h_height;
 	glViewport(0, 0, w_width, h_height);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 bool Window::windowShouldNotClose() const {
@@ -75,13 +78,13 @@ void Window::attachCallbacks() const{
 	// Sets the key callback
 	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
 
-	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
+	//glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
 
-	glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
+	//glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
 
-	glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
+	//glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
 
-	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
+	//glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
 
 	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
 
@@ -97,6 +100,16 @@ void Window::key_callback(GLFWwindow* window, int key, int scancode, int action,
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
+
+	if (key == GLFW_KEY_W)
+		Camera::getInstance()->toFront();
+	if (key == GLFW_KEY_S)
+		Camera::getInstance()->toBack();
+	if (key == GLFW_KEY_A)
+		Camera::getInstance()->toLeft();
+	if (key == GLFW_KEY_D)
+		Camera::getInstance()->toRight();
+
 }
 
 void Window::window_focus_callback(GLFWwindow* window, int focused) {
@@ -115,6 +128,8 @@ void Window::window_size_callback(GLFWwindow* window, int width, int height) {
 void Window::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
 	//printf("cursor_callback \n");
 	printf("cursor_pos_callback %d, %d; %d, %d\n", (int)mouseX, (int)mouseY, 0, 0); // (int)clickX, (int)clickY)
+
+	Camera::getInstance()->changeDirection((int)mouseX, (int)mouseY);
 }
 
 void Window::button_callback(GLFWwindow* window, int button, int action, int mode) {
