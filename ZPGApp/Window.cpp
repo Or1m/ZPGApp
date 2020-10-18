@@ -32,12 +32,12 @@ Window::Window(int width, int height, const char* title) {
 
 	this->window = glfwCreateWindow(width, height, title, NULL, NULL);
 
-	if (!window) {
+	if (!this->window) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(this->window);
 	glfwSwapInterval(1);
 
 	// start GLEW extension handler
@@ -45,12 +45,16 @@ Window::Window(int width, int height, const char* title) {
 	glewInit();
 
 	int w_width, h_height;
-	glfwGetFramebufferSize(window, &w_width, &h_height);
+	glfwGetFramebufferSize(this->window, &w_width, &h_height);
 	float ratio = w_width / (float)h_height;
 	glViewport(0, 0, w_width, h_height);
 
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST); 
+	//glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	Camera::getInstance()->setCenter(width, height);
 }
+
 
 bool Window::windowShouldNotClose() const {
 	return !glfwWindowShouldClose(this->window);
@@ -72,11 +76,14 @@ void Window::terminateWindow() const {
 	glfwTerminate();
 }
 
+
 #pragma region Callbacks
 void Window::attachCallbacks() const{
 
 	// Sets the key callback
 	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
+
+	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
 
 	//glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
 
@@ -85,8 +92,6 @@ void Window::attachCallbacks() const{
 	//glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
 
 	//glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
-
-	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
 
 	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
 		-> void {Window::getInstance()->cursor_callback(window, mouseXPos, mouseYPos); });*/
@@ -97,9 +102,10 @@ void Window::error_callback(int error, const char* description) {
 }
 
 void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	//printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
+	
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
-	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
 
 	if (key == GLFW_KEY_W)
 		Camera::getInstance()->toFront();
@@ -109,8 +115,14 @@ void Window::key_callback(GLFWwindow* window, int key, int scancode, int action,
 		Camera::getInstance()->toLeft();
 	if (key == GLFW_KEY_D)
 		Camera::getInstance()->toRight();
-
 }
+
+void Window::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
+	//printf("cursor_pos_callback %f, %f; %d, %d\n", (float)mouseX, (float)mouseY, 0, 0); // (int)clickX, (int)clickY)
+
+	Camera::getInstance()->changeDirection((float)mouseX, (float)mouseY);
+}
+
 
 void Window::window_focus_callback(GLFWwindow* window, int focused) {
 	printf("window_focus_callback \n");
@@ -123,13 +135,6 @@ void Window::window_iconify_callback(GLFWwindow* window, int iconified) {
 void Window::window_size_callback(GLFWwindow* window, int width, int height) {
 	printf("resize %d, %d \n", width, height);
 	glViewport(0, 0, width, height);
-}
-
-void Window::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
-	//printf("cursor_callback \n");
-	printf("cursor_pos_callback %d, %d; %d, %d\n", (int)mouseX, (int)mouseY, 0, 0); // (int)clickX, (int)clickY)
-
-	Camera::getInstance()->changeDirection((int)mouseX, (int)mouseY);
 }
 
 void Window::button_callback(GLFWwindow* window, int button, int action, int mode) {

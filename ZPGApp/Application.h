@@ -23,7 +23,7 @@ public:
 	void printVersionInfo() const;
 	void attachCallbacks() const;
 
-	void run() const;
+	void run();
 
 private:
 	static Application* instance;
@@ -31,7 +31,12 @@ private:
 	Object* object;
 	Renderer* renderer;
 
+	float deltaTime;
+	float lastFrame;
+
 	void initShaderProgram() const;
+	void countDeltaTime();
+
 	Application(int width, int height, const char* title);
 	~Application();
 };

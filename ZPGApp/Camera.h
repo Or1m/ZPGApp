@@ -22,7 +22,10 @@ public:
 	void toLeft();
 	void toBack();
 	void toRight();
-	void changeDirection(int mouseX, int mouseY);
+	void changeDirection(float mouseX, float mouseY);
+
+	void setCenter(int width, int height);
+	void setDeltaTime(float delta);
 
 	void attach(IObserver* observer) override;
 	void detach(IObserver* observer) override;
@@ -37,6 +40,9 @@ private:
 	glm::vec3 up;
 
 	float cameraSpeed;
+	float deltaTime;
+	float sensitivity;
+
 	float yaw;
 	float pitch;
 	float lastX;

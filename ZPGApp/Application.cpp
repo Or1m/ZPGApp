@@ -23,7 +23,8 @@ Application* Application::getInstance(int width, int height, const char* title) 
 }
 
 Application::Application(int width, int height, const char* title) 
-: window(Window::getInstance(width, height, title)), object(NULL), renderer(Renderer::getInstance()) {}
+:	window(Window::getInstance(width, height, title)), object(NULL), renderer(Renderer::getInstance()),
+	deltaTime(0.0), lastFrame(0.0) {}
 
 Application::~Application() { 
 	delete this->object; 
@@ -33,7 +34,7 @@ void Application::createObject(std::string& shaderPath, const float floats[], in
 	this->object = new Object(floats, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
 
-void Application::run() const {
+void Application::run() {
 	this->initShaderProgram();
 	
 
@@ -54,10 +55,6 @@ void Application::run() const {
 
 		this->renderer->clear();
 
-		
-		
-
-
 		//this->object->sendUniformToShader("modelMatrix", this->M);
 		//this->object->sendUniformToShader("viewMatrix", view);
 		this->object->sendUniformToShader("col", V);
@@ -73,11 +70,21 @@ void Application::run() const {
 		
 		this->window->pollEvents();
 		this->window->swapBuffer(); 
+
+		this->countDeltaTime();
 	}
 
 	this->window->destroyWindow();
 	this->window->terminateWindow();
 	exit(EXIT_SUCCESS);
+}
+
+void Application::countDeltaTime() {
+	float currentFrame = (float)glfwGetTime();
+	this->deltaTime = currentFrame - this->lastFrame;
+	this->lastFrame = currentFrame;
+
+	Camera::getInstance()->setDeltaTime(this->deltaTime);
 }
 
 void Application::initShaderProgram() const {

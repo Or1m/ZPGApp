@@ -17,16 +17,11 @@ Camera* Camera::getInstance() {
 Camera::Camera()
 :	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
 	eye(glm::vec3(0.0f, 0.0f, 3.0f)), target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
-	cameraSpeed(0.5f), yaw(-90.0f), pitch(0.0f), lastX(400), lastY(300), firstMouse(true) {}
+	cameraSpeed(2.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-90.0f), pitch(0.0f), lastX(400), lastY(300), firstMouse(true) {}
 
 
 glm::mat4 Camera::getCamera() {
-	// eye, eye + target, up
 	return glm::lookAt(this->eye, this->eye + this->target, this->up);
-
-	/*return glm::lookAt(	glm::vec3(0.0f, 0.0f, -5.0f),
-							glm::vec3(0.0f, 0.0f, 0.0f),
-							glm::vec3(0.0f, 1.0f, 0.0f));*/
 }
 
 glm::mat4 Camera::getProjection() {
@@ -34,65 +29,78 @@ glm::mat4 Camera::getProjection() {
 }
 
 
+void Camera::setCenter(int width, int height) {
+	this->lastX = width / 2.0f;
+	this->lastY = height / 2.0f;
+}
+
+void Camera::setDeltaTime(float delta) {
+	this->deltaTime = delta;
+}
+
+
 void Camera::toFront() {
-	//glm::vec3 temp = glm::normalize(this->target - this->eye);
-	this->eye += this->cameraSpeed * this->target;
+	this->eye += this->target * this->cameraSpeed * this->deltaTime;
 
 	this->notify();
 }
 
 void Camera::toBack() {
-	//glm::vec3 temp = glm::normalize(this->target - this->eye);
-	this->eye -= this->cameraSpeed * this->target;
+	this->eye -= this->target * this->cameraSpeed * this->deltaTime;
 
 	this->notify();
 }
 
 void Camera::toLeft() {
-	//glm::vec3 temp = glm::normalize(glm::cross(this->target - this->eye, this->up));
-	this->eye -= glm::normalize(glm::cross(this->target, this->up)) * cameraSpeed;;
+	this->eye -= glm::normalize(glm::cross(this->target, this->up)) * this->cameraSpeed * this->deltaTime;
 
 	this->notify();
 }
 
 void Camera::toRight() {
-	//glm::vec3 temp = glm::normalize(glm::cross(this->target - this->eye, this->up));
-	this->eye += glm::normalize(glm::cross(this->target, this->up)) * cameraSpeed;
+	this->eye += glm::normalize(glm::cross(this->target, this->up)) * cameraSpeed * this->deltaTime;
 
 	this->notify();
 }
 
 // pozriet ine varianty
-void Camera::changeDirection(int mouseX, int mouseY) {
+void Camera::changeDirection(float mouseX, float mouseY) {
 
-	if (this->firstMouse)
-	{
+	if (this->firstMouse) {
 		this->lastX = mouseX;
 		this->lastY = mouseY;
 		this->firstMouse = false;
 	}
 
-	float xoffset = mouseX - this->lastX;
-	float yoffset = this->lastY - mouseY;
+	float xOffset = mouseX - this->lastX;
+	float yOffset = this->lastY - mouseY;
 	this->lastX = mouseX;
 	this->lastY = mouseY;
 
-	float sensitivity = 0.1f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
+	xOffset *= this->sensitivity;
+	yOffset *= this->sensitivity;
 
-	this->yaw += xoffset;
-	this->pitch += yoffset;
+	this->yaw += xOffset;
+	this->pitch += yOffset;
 
-	if (this->pitch > 89.0f)
-		this->pitch = 89.0f;
-	if (this->pitch < -89.0f)
-		this->pitch = -89.0f;
+	if (this->pitch > 89.0f)	this->pitch = 89.0f;
+	if (this->pitch < -89.0f)	this->pitch = -89.0f;
+
+	if (this->yaw > 360.0f || this->yaw < -360.0f)
+		this->yaw = 0.0f;
+
+	// Direction
+	//target.x = cos(fi);
+	//target.z = sin(fi);
+	//target.y = sin(psi);
+
+	//direction.x = cos(glm::radians(yaw)); 2D rotation, yaw - dolava doprava
+	//direction.z = sin(glm::radians(yaw)); direction.y = 0
 
 	glm::vec3 direction;
-	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	direction.y = sin(glm::radians(pitch));
-	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	direction.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch)); // funguje aj bez * cos(glm::radians(pitch)
+	direction.y = sin(glm::radians(this->pitch));
+	direction.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch)); // funguje aj bez * cos(glm::radians(pitch)
 
 	this->target = glm::normalize(direction);
 
