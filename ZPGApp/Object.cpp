@@ -22,10 +22,10 @@ Object::Object(const float points[], int countOfPoints, unsigned int indexes[], 
 }
 
 Object::~Object() {
+	delete this->vertexArray;
 	delete this->vertexBuffer;
+	delete this->vertexBufferLayout;
 	delete this->indexBuffer;
-
-	delete this;
 }
 
 void Object::bindBuffers() const {

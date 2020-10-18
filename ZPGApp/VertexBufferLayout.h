@@ -54,4 +54,3 @@ private:
 	std::vector<VertexBufferElement> elements;
 	unsigned int stride;
 };
-

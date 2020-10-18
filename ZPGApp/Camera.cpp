@@ -16,9 +16,6 @@ Camera::Camera()
 :	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
 	eye(glm::vec3(0.0f, 0.0f, -5.0f)), target(glm::vec3(0.0f, 0.0f, 0.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)) {}
 
-Camera::~Camera() {
-	delete this;
-}
 
 glm::mat4 Camera::getCamera() {
 	// eye, eye + target, up
@@ -35,13 +32,26 @@ glm::mat4 Camera::getProjection() {
 
 void Camera::toFront() {
 	//this->eye += glm::normalize(this->target);
-	this->eye.z -= 0.05f;
 
 	this->notify();
 }
 
 void Camera::toLeft() {
 	this->eye += glm::normalize(glm::cross(this->target, this->up));
+
+	this->notify();
+}
+
+void Camera::toBack() {
+	this->eye.z -= 0.05f;
+
+	this->notify();
+}
+
+void Camera::toRight() {
+	//this->eye += glm::normalize(glm::cross(this->target, this->up));
+
+	this->notify();
 }
 
 // Observer

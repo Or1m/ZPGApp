@@ -16,7 +16,6 @@ Shader::~Shader() {
 	glDeleteShader(this->vertexShader);
 	glDeleteShader(this->fragmentShader);
 	glDeleteProgram(this->shaderProgram);
-	delete this;
 }
 
 #pragma warning(push)
@@ -88,6 +87,10 @@ void Shader::unbindProgram() const {
 	glUseProgram(0);
 }
 
+void Shader::update(glm::mat4 view) {
+	this->sendUniform("viewMatrix", view);
+}
+
 // Shader tests
 GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {
 
@@ -119,10 +122,6 @@ void Shader::testLinkStatus(GLint status) {
 
 		glDeleteProgram(this->shaderProgram);
 	}
-}
-
-void Shader::update(glm::mat4 view) {
-	this->sendUniform("viewMatrix", view);
 }
 
 #pragma region SendUniforms

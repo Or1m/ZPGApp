@@ -49,10 +49,6 @@ Window::Window(int width, int height, const char* title) {
 	glViewport(0, 0, w_width, h_height);
 }
 
-Window::~Window() {
-	delete this;
-}
-
 bool Window::windowShouldNotClose() const {
 	return !glfwWindowShouldClose(this->window);
 }
@@ -92,7 +88,6 @@ void Window::attachCallbacks() const{
 	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
 		-> void {Window::getInstance()->cursor_callback(window, mouseXPos, mouseYPos); });*/
 }
-
 
 void Window::error_callback(int error, const char* description) {
 	fputs(description, stderr);

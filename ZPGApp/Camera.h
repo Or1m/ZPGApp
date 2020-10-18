@@ -20,6 +20,8 @@ public:
 
 	void toFront();
 	void toLeft();
+	void toBack();
+	void toRight();
 
 	void attach(IObserver* observer) override;
 	void detach(IObserver* observer) override;
@@ -38,6 +40,6 @@ private:
 	void notify() override;
 	
 	Camera();
-	~Camera();
+	~Camera() {}
 };
 

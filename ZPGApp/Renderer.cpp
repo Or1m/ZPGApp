@@ -10,12 +10,6 @@ Renderer* Renderer::getInstance() {
 	return instance;
 }
 
-Renderer::Renderer() {}
-
-Renderer::~Renderer() {
-	delete this;
-}
-
 void Renderer::draw(const Object& objectToDraw) const {
 	objectToDraw.bindBuffers();
 

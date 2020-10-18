@@ -1,11 +1,11 @@
 #include "VertexArray.h"
 
 VertexArray::VertexArray() {
-	glGenVertexArrays(1, &this->VAO);
+	glGenVertexArrays(1, &this->VAO); 
 }
 
 VertexArray::~VertexArray() {
-	glDeleteVertexArrays(1, &this->VAO);
+	glDeleteVertexArrays(1, &this->VAO); 
 }
 
 /*

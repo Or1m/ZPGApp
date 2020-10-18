@@ -22,21 +22,14 @@ public:
 
 	void printVersionInfo() const;
 	void attachCallbacks() const;
-	void testGLM() const;
 
-	void run();
-	
-	void setTransform(glm::mat4 M);
-	void setTransform(glm::vec3 V);
+	void run() const;
 
 private:
 	static Application* instance;
 	Window* window;
 	Object* object;
 	Renderer* renderer;
-
-	glm::mat4 M;
-	glm::vec3 V;
 
 	void initShaderProgram() const;
 	Application(int width, int height, const char* title);

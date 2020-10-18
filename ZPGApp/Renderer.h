@@ -10,7 +10,7 @@ public:
 
 private:
 	static Renderer* instance;
-	Renderer();
-	~Renderer();
+	Renderer() {}
+	~Renderer() {}
 };
 
