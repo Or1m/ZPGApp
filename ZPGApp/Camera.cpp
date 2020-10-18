@@ -20,13 +20,24 @@ Camera::~Camera() {
 	delete this;
 }
 
-glm::mat4 Camera::getCamera()
-{
-	return glm::lookAt(this->eye, this->eye + this->target, this->up);
+glm::mat4 Camera::getCamera() {
+	// eye, eye + target, up
+	return glm::lookAt(this->eye, glm::vec3(0.0f, 0.0f, 0.0f), this->up);
+
+	/*return glm::lookAt(	glm::vec3(0.0f, 0.0f, -5.0f),
+							glm::vec3(0.0f, 0.0f, 0.0f),
+							glm::vec3(0.0f, 1.0f, 0.0f));*/
+}
+
+glm::mat4 Camera::getProjection() {
+	return this->projection;
 }
 
 void Camera::toFront() {
-	this->eye += glm::normalize(this->target);
+	//this->eye += glm::normalize(this->target);
+	this->eye.z -= 0.05f;
+
+	this->notify();
 }
 
 void Camera::toLeft() {

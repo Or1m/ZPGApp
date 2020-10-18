@@ -13,14 +13,17 @@
 #include <sstream>
 
 #include "Utils.h"
+#include "IObserver.h"
 
-class Shader {
+class Shader : IObserver {
 public:
 	Shader(const std::string& filePath);
 	~Shader();
 
 	void useProgram() const;
 	void unbindProgram() const;
+
+	void update(glm::mat4 view);
 
 	void sendUniform(const GLchar* name, glm::mat4 M4) const;
 	void sendUniform(const GLchar* name, glm::vec4 V4) const;

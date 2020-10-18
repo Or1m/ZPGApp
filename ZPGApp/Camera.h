@@ -16,8 +16,13 @@ public:
 	static Camera* getInstance();
 
 	glm::mat4 getCamera();
+	glm::mat4 getProjection();
+
 	void toFront();
 	void toLeft();
+
+	void attach(IObserver* observer) override;
+	void detach(IObserver* observer) override;
 
 private:
 	static Camera* instance;
@@ -28,11 +33,8 @@ private:
 	glm::vec3 target;
 	glm::vec3 up;
 
-	// Observer
 	std::vector<IObserver*> observers;
 
-	void attach(IObserver* observer) override;
-	void detach(IObserver* observer) override;
 	void notify() override;
 	
 	Camera();

@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Camera.h"
 
 Application* Application::instance = NULL;
 
@@ -37,38 +38,20 @@ Application::~Application() {
 	instance = NULL;
 }
 
-void Application::createObject(std::string& shaderPath, float floats[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes) {
-	this->object = new Object(floats, sizeOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
+void Application::createObject(std::string& shaderPath, const float floats[], int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes) {
+	this->object = new Object(floats, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
 
 void Application::run()  { //const ked tam nebude to priradenie?
 	this->initShaderProgram();
-
-	float test = 0.0;
 	glEnable(GL_DEPTH_TEST);
 
-	//glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, -1.0f, 1.0f);
-	//glm::mat4 projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-	//Projection matrix :
-	//45° Field of View, 4:3 ratio, display range : 0.1 unit < 100 units
-	//glm::mat4 projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-
-	//this->object->sendUniformToShader("projectionMatrix", projection);
+	float test = 0.0;
 	
-
-	//glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(100, 100, 0));
-	glm::mat4 view = glm::lookAt(	glm::vec3(0.0f, 0.0f, -5.0f),
-									glm::vec3(0.0f, 0.0f, 0.0f),
-									glm::vec3(0.0f, 1.0f, 0.0f));
-
-	//this->eye, this->eye + this->target, this->up
-
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-	this->object->sendUniformToShader("projectionMatrix", projection);
-	this->object->sendUniformToShader("viewMatrix", view);
+	this->object->sendUniformToShader("projectionMatrix", Camera::getInstance()->getProjection());
+	this->object->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
 	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
 
-	float dis = -100.0f;
 
 	while (this->window->windowShouldNotClose()) {
 		this->M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * 0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
@@ -76,11 +59,7 @@ void Application::run()  { //const ked tam nebude to priradenie?
 
 		this->renderer->clear();
 
-		/*glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, dis += 0.5f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f));
-
-		this->object->sendUniformToShader("viewMatrix", view);*/
+		Camera::getInstance()->toFront();
 
 
 		//this->object->sendUniformToShader("modelMatrix", this->M);

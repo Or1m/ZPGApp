@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "Camera.h"
 
 Shader::Shader(const std::string& filePath) 
 : filePath(filePath), shaderProgram(0) {
@@ -7,6 +8,8 @@ Shader::Shader(const std::string& filePath)
 	this->vertexShaderSource = source.vertexSource.c_str();
 	this->fragmentShaderSource = source.fragmentSource.c_str();
 	this->createShader();
+
+	Camera::getInstance()->attach(this);
 }
 
 Shader::~Shader() {
@@ -116,6 +119,10 @@ void Shader::testLinkStatus(GLint status) {
 
 		glDeleteProgram(this->shaderProgram);
 	}
+}
+
+void Shader::update(glm::mat4 view) {
+	this->sendUniform("viewMatrix", view);
 }
 
 #pragma region SendUniforms

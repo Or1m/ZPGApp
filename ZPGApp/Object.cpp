@@ -1,9 +1,10 @@
 #include "Object.h"
 
-Object::Object(float points[], int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath) 
-: points(points), sizeOfPoints(sizeOfPoints), indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes) {
+Object::Object(const float points[], int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath) 
+:	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
+	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes) {
 
-	this->vertexArray = new VertexArray();// creating VAO
+	this->vertexArray = new VertexArray(); // creating VAO
 	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints); // creating VBO
 
 	this->vertexBufferLayout = new VertexBufferLayout();

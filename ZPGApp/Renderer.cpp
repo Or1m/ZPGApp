@@ -18,13 +18,11 @@ Renderer::~Renderer() {
 
 void Renderer::draw(const Object& objectToDraw) const {
 	objectToDraw.bindBuffers();
-	//glEnable(GL_DEPTH_TEST);
 
 	if(objectToDraw.isWithIndexes())
-		glDrawElements(GL_TRIANGLES, objectToDraw.getIndexBufferCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
+		glDrawElements(GL_TRIANGLES, objectToDraw.getIndexCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
 	else
-		//glDrawArrays(GL_TRIANGLES, 0, 3); // bacha nahardcodene 3 vertexy
-		glDrawArrays(GL_TRIANGLES, 0, 2880);
+		glDrawArrays(GL_TRIANGLES, 0, objectToDraw.getVertexCount());
 }
 
 void Renderer::clear() const {
