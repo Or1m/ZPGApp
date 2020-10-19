@@ -22,7 +22,7 @@ void main () {
 #shader fragment
 #version 400
 
-out vec4 frag_colour;
+out vec4 frag_color;
 
 uniform vec3 color;
 uniform vec3 viewPosition;
@@ -51,5 +51,5 @@ void main () {
     vec3 specular = specularStrength * spec * lightColor;
     
     vec3 result = (ambient + diffuse + specular) * color;
-    frag_colour = vec4(result, 1.0);
+    frag_color = vec4(result, 1.0);
 };
