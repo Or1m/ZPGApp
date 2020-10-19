@@ -47,7 +47,7 @@ private:
 	float pitch;
 	float lastX;
 	float lastY;
-	bool firstMouse;
+	bool firstTimeMouse;
 
 	std::vector<IObserver*> observers;
 

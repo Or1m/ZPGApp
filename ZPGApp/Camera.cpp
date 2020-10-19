@@ -12,12 +12,10 @@ Camera* Camera::getInstance() {
 	return instance;
 }
 
-//Projection matrix :
-//45° Field of View, 4:3 ratio, display range : 0.1 unit - 100.0 unit
 Camera::Camera()
 :	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
 	eye(glm::vec3(0.0f, 0.0f, 3.0f)), target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
-	cameraSpeed(2.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-90.0f), pitch(0.0f), lastX(400), lastY(300), firstMouse(true) {}
+	cameraSpeed(2.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-90.0f), pitch(0.0f), lastX(400), lastY(300), firstTimeMouse(true) {}
 
 
 glm::mat4 Camera::getCamera() {
@@ -25,6 +23,8 @@ glm::mat4 Camera::getCamera() {
 }
 
 glm::mat4 Camera::getProjection() {
+	//Projection matrix :
+	//45° Field of View, 4:3 ratio, display range : 0.1 unit - 100.0 unit
 	return this->projection;
 }
 
@@ -40,13 +40,13 @@ void Camera::setDeltaTime(float delta) {
 
 
 void Camera::toFront() {
-	this->eye += this->target * this->cameraSpeed * this->deltaTime;
+	this->eye += glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
 
 	this->notify();
 }
 
 void Camera::toBack() {
-	this->eye -= this->target * this->cameraSpeed * this->deltaTime;
+	this->eye -= glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
 
 	this->notify();
 }
@@ -66,10 +66,10 @@ void Camera::toRight() {
 // pozriet ine varianty
 void Camera::changeDirection(float mouseX, float mouseY) {
 
-	if (this->firstMouse) {
+	if (this->firstTimeMouse) {
 		this->lastX = mouseX;
 		this->lastY = mouseY;
-		this->firstMouse = false;
+		this->firstTimeMouse = false;
 	}
 
 	float xOffset = mouseX - this->lastX;
