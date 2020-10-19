@@ -28,10 +28,6 @@ glm::mat4 Camera::getProjection() {
 	return this->projection;
 }
 
-glm::vec3 Camera::getCameraPosition() {
-	return this->eye;
-}
-
 
 void Camera::setCenter(int width, int height) {
 	this->lastX = width / 2.0f;
@@ -126,5 +122,5 @@ void Camera::detach(IObserver* observer) {
 
 void Camera::notify() {
 	for (IObserver* observer : observers)
-		observer->update(this->getCamera());
+		observer->update(this->getCamera(), this->eye);
 }

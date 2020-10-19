@@ -1,7 +1,10 @@
 #include "Object.h"
+#include "Camera.h"
+#include "Light.h"
 
 Object::Object(const float points[], int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath) 
-:	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
+:	modelMatrix(glm::mat4(1.0f)),
+	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes) {
 
 	this->vertexArray = new VertexArray(); // creating VAO
@@ -42,4 +45,23 @@ void Object::useShaderProgram() const {
 
 bool Object::isWithIndexes() const {
 	return this->hasIndexes;
+}
+
+
+void Object::init() {
+	this->shader->sendUniform("modelMatrix", this->modelMatrix);
+	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
+	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
+
+	Light light;
+	this->shader->sendUniform("lightPosition", light.getLightPosition());
+	this->shader->sendUniform("lightColor", light.getLightColor());
+}
+
+void Object::changeColor(glm::vec3 color) {
+	this->shader->sendUniform("color", color);
+}
+
+void Object::move(glm::vec3 translation) {
+	this->shader->sendUniform("modelMatrix", glm::translate(glm::mat4(1.0f), translation));
 }

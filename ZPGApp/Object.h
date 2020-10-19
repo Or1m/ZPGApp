@@ -22,12 +22,18 @@ public:
 		this->shader->sendUniform(name, t);
 	}
 
+	void init();
+	void changeColor(glm::vec3 color);
+	void move(glm::vec3 translation);
+
 private:
 	VertexBuffer* vertexBuffer;
 	VertexBufferLayout* vertexBufferLayout;
 	IndexBuffer* indexBuffer;
 	VertexArray* vertexArray;
 	Shader* shader;
+
+	glm::mat4 modelMatrix;
 
 	const float* points;
 	int countOfPoints;

@@ -23,7 +23,7 @@ public:
 	void useProgram() const;
 	void unbindProgram() const;
 
-	void update(glm::mat4 view);
+	void update(glm::mat4 view, glm::vec3 position);
 
 	void sendUniform(const GLchar* name, glm::mat4 M4) const;
 	void sendUniform(const GLchar* name, glm::vec4 V4) const;

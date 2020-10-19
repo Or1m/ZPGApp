@@ -35,6 +35,7 @@ private:
 	float lastFrame;
 
 	void initShaderProgram() const;
+	void initObject() const;
 	void countDeltaTime();
 
 	Application(int width, int height, const char* title);

@@ -31,7 +31,7 @@ uniform vec3 viewPosition;
 in vec3 fragmentPosition;
 in vec3 normal;
 
-vec3 lightColor = vec3(1.0, 1.0, 1.0);
+uniform vec3 lightColor;// = vec3(1.0, 1.0, 1.0);
 
 void main () {
     // ambient

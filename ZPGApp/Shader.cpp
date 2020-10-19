@@ -89,10 +89,10 @@ void Shader::unbindProgram() const {
 
 
 // Observer
-void Shader::update(glm::mat4 view) {
+void Shader::update(glm::mat4 view, glm::vec3 position) {
 	this->sendUniform("viewMatrix", view);
+	this->sendUniform("viewPosition", position);
 }
-
 
 // Shader tests
 GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {

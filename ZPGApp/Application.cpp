@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Camera.h"
+#include "Light.h"
 
 Application* Application::instance = NULL;
 
@@ -22,7 +23,7 @@ Application* Application::getInstance(int width, int height, const char* title) 
 	return instance;
 }
 
-Application::Application(int width, int height, const char* title) 
+Application::Application(int width, int height, const char* title)
 :	window(Window::getInstance(width, height, title)), object(NULL), renderer(Renderer::getInstance()),
 	deltaTime(0.0), lastFrame(0.0) {}
 
@@ -37,8 +38,10 @@ void Application::createObject(std::string& shaderPath, const float floats[], in
 
 void Application::run() {
 	this->initShaderProgram();
-	
-	float test = 0.0;
+	this->initObject();
+
+	float test = 0.2f;
+	float step = 0.003f;
 	glm::vec3 V;
 
 	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
@@ -46,17 +49,14 @@ void Application::run() {
 	while (this->window->windowShouldNotClose()) {
 		this->renderer->clear();
 
-		V = glm::vec3(1.0f, test > 1 ? test = 0.0f: test += 0.005f, 0.0f);
-		this->object->sendUniformToShader("color", V);
-		this->object->sendUniformToShader("lightPosition", glm::vec3(0.0f, 0.0f, 0.0f));
+		if (test > 1) step = -step;
+		if (test < 0.2) step = -step;
 
-		this->object->sendUniformToShader("viewPosition", Camera::getInstance()->getCameraPosition());
-
+		V = glm::vec3(0.0f, test += step, 0.0f);
+		this->object->changeColor(V);
+		
 		for (int i = 0; i < 4; i++) {
-			glm::mat4 temp = glm::translate(glm::mat4(1.0f), vectors[i]);
-			temp = glm::rotate(temp, (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
-
-			this->object->sendUniformToShader("modelMatrix", temp);
+			this->object->move(vectors[i]);
 			this->renderer->draw(*this->object);
 		}
 		
@@ -83,12 +83,10 @@ void Application::initShaderProgram() const {
 	ASSERT(this->object != NULL);
 
 	this->object->useShaderProgram();
+}
 
-	this->object->sendUniformToShader("projectionMatrix", Camera::getInstance()->getProjection());
-	this->object->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
-	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
-
-	this->object->sendUniformToShader("lightPosition", glm::vec3(0.0f, 0.0, 0.0));
+void Application::initObject() const {
+	this->object->init();
 }
 
 void Application::printVersionInfo() const {
