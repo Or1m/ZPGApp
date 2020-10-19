@@ -8,17 +8,10 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
-uniform vec3 u_lightPosition;
-uniform vec3 u_color;
-
-out vec3 color;
-out vec3 lightPosition;
 out vec3 fragmentPosition;
 out vec3 normal;
 
 void main () {
-    color = u_color;
-    lightPosition = u_lightPosition;
 
     fragmentPosition = vec3(modelMatrix * vec4(vp, 1.0));
     normal = inverse(transpose(mat3(modelMatrix))) * vn;
@@ -31,8 +24,9 @@ void main () {
 
 out vec4 frag_colour;
 
-in vec3 color;
-in vec3 lightPosition;
+uniform vec3 color;
+uniform vec3 lightPosition;
+uniform vec3 viewPosition;
 
 in vec3 fragmentPosition;
 in vec3 normal;
@@ -49,7 +43,14 @@ void main () {
     vec3 lightDir = normalize(lightPosition - fragmentPosition);
     float diffuseStrength = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diffuseStrength * lightColor;
+
+    // specular
+    float specularStrength = 0.5;
+    vec3 viewDir = normalize(viewPosition - fragmentPosition);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = specularStrength * spec * lightColor;
     
-    vec3 result = (ambient + diffuse) * color;
+    vec3 result = (ambient + diffuse + specular) * color;
     frag_colour = vec4(result, 1.0);
 };

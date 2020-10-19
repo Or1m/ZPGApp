@@ -28,6 +28,10 @@ glm::mat4 Camera::getProjection() {
 	return this->projection;
 }
 
+glm::vec3 Camera::getCameraPosition() {
+	return this->eye;
+}
+
 
 void Camera::setCenter(int width, int height) {
 	this->lastX = width / 2.0f;

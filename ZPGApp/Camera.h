@@ -17,6 +17,7 @@ public:
 
 	glm::mat4 getCamera();
 	glm::mat4 getProjection();
+	glm::vec3 getCameraPosition();
 
 	void toFront();
 	void toLeft();
