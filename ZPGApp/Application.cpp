@@ -47,7 +47,8 @@ void Application::run() {
 		this->renderer->clear();
 
 		V = glm::vec3(1.0f, test > 1 ? test = 0.0f: test += 0.005f, 0.0f);
-		this->object->sendUniformToShader("col", V);
+		this->object->sendUniformToShader("u_color", V);
+		this->object->sendUniformToShader("u_lightPosition", V);
 
 		for (int i = 0; i < 4; i++) {
 			glm::mat4 temp = glm::translate(glm::mat4(1.0f), vectors[i]);
@@ -84,6 +85,8 @@ void Application::initShaderProgram() const {
 	this->object->sendUniformToShader("projectionMatrix", Camera::getInstance()->getProjection());
 	this->object->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
 	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
+
+	this->object->sendUniformToShader("u_lightPosition", glm::vec3(0.0f, 0.0, 0.0));
 }
 
 void Application::printVersionInfo() const {
