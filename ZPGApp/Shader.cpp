@@ -87,9 +87,12 @@ void Shader::unbindProgram() const {
 	glUseProgram(0);
 }
 
+
+// Observer
 void Shader::update(glm::mat4 view) {
 	this->sendUniform("viewMatrix", view);
 }
+
 
 // Shader tests
 GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {

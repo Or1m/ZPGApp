@@ -30,6 +30,7 @@ Application::~Application() {
 	delete this->object; 
 }
 
+
 void Application::createObject(std::string& shaderPath, const float floats[], int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes) {
 	this->object = new Object(floats, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
@@ -37,36 +38,24 @@ void Application::createObject(std::string& shaderPath, const float floats[], in
 void Application::run() {
 	this->initShaderProgram();
 	
-
 	float test = 0.0;
-	glm::mat4 M;
 	glm::vec3 V;
 
-	
-	this->object->sendUniformToShader("projectionMatrix", Camera::getInstance()->getProjection());
-	this->object->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
-	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
-
-	//Camera::getInstance()->toFront();
+	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
 
 	while (this->window->windowShouldNotClose()) {
-		M = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * 0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
-		V = glm::vec3(0.0f, test > 1 ? test = 0.0f: test += 0.005f, 1.0f);
-
 		this->renderer->clear();
 
-		//this->object->sendUniformToShader("modelMatrix", this->M);
-		//this->object->sendUniformToShader("viewMatrix", view);
+		V = glm::vec3(1.0f, test > 1 ? test = 0.0f: test += 0.005f, 0.0f);
 		this->object->sendUniformToShader("col", V);
 
-		this->renderer->draw(*this->object);
-		
-		/*this->object->sendUniformToShader("viewMatrix", glm::translate(glm::mat4(1.0), glm::vec3(400, 300, 0)));
-		this->object->sendUniformToShader("modelMatrix", glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f)));
-		this->object->sendUniformToShader("col", glm::vec3(1.0f, 0.0f, test > 1 ? test = 0.0f : test += 0.005f));
+		for (int i = 0; i < 4; i++) {
+			glm::mat4 temp = glm::translate(glm::mat4(1.0f), vectors[i]);
+			temp = glm::rotate(temp, (GLfloat)glfwGetTime() * -0.5f, glm::vec3(0.0f, 0.0f, 1.0f));
 
-		this->renderer->draw(*this->object);*/
-
+			this->object->sendUniformToShader("modelMatrix", temp);
+			this->renderer->draw(*this->object);
+		}
 		
 		this->window->pollEvents();
 		this->window->swapBuffer(); 
@@ -91,6 +80,10 @@ void Application::initShaderProgram() const {
 	ASSERT(this->object != NULL);
 
 	this->object->useShaderProgram();
+
+	this->object->sendUniformToShader("projectionMatrix", Camera::getInstance()->getProjection());
+	this->object->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
+	this->object->sendUniformToShader("modelMatrix", glm::mat4(1.0f));
 }
 
 void Application::printVersionInfo() const {
