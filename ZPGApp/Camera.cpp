@@ -15,7 +15,7 @@ Camera* Camera::getInstance() {
 Camera::Camera()
 :	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
 	eye(glm::vec3(0.0f, 0.0f, 3.0f)), target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
-	cameraSpeed(2.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-90.0f), pitch(0.0f), lastX(400), lastY(300), firstTimeMouse(true) {}
+	cameraSpeed(3.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-90.0f), pitch(0.0f), lastX(400), lastY(300), firstTimeMouse(true) {}
 
 
 glm::mat4 Camera::getCamera() {

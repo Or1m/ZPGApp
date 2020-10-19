@@ -25,13 +25,12 @@ void main () {
 out vec4 frag_colour;
 
 uniform vec3 color;
-uniform vec3 lightPosition;
 uniform vec3 viewPosition;
+uniform vec3 lightPosition;
+uniform vec3 lightColor;
 
 in vec3 fragmentPosition;
 in vec3 normal;
-
-uniform vec3 lightColor;// = vec3(1.0, 1.0, 1.0);
 
 void main () {
     // ambient

@@ -1,6 +1,5 @@
 #include "Application.h"
 #include "Camera.h"
-#include "Light.h"
 
 Application* Application::instance = NULL;
 
@@ -49,10 +48,10 @@ void Application::run() {
 	while (this->window->windowShouldNotClose()) {
 		this->renderer->clear();
 
-		if (test > 1) step = -step;
-		if (test < 0.2) step = -step;
+		if (test > 1)	step = -step;
+		if (test < 0.2)	step = -step;
 
-		V = glm::vec3(0.0f, test += step, 0.0f);
+		V = glm::vec3(0.0, test += step, 0.0);
 		this->object->changeColor(V);
 		
 		for (int i = 0; i < 4; i++) {
