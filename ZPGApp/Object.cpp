@@ -2,7 +2,7 @@
 #include "Camera.h"
 #include "Light.h"
 
-Object::Object(const float points[], int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath) 
+Object::Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath)
 :	modelMatrix(glm::mat4(1.0f)),
 	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes) {

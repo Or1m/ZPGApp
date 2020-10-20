@@ -1,6 +1,7 @@
 //2880
 //glDrawArrays(GL_TRIANGLES, 0, 2880);
 
+const int sphereCount = 2880;
 
 const float sphere[] = {
 -0.831470 , -0.555570 , 0.000000 , -0.833338 , -0.552751 , 0.000000, 

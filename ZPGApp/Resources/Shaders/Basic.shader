@@ -14,7 +14,7 @@ out vec3 normal;
 void main () {
 
     fragmentPosition = vec3(modelMatrix * vec4(vp, 1.0));
-    normal = inverse(transpose(mat3(modelMatrix))) * vn;
+    normal = normalize(inverse(transpose(mat3(modelMatrix))) * vn);
 
     gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4 (vp, 1.0);
 };
@@ -32,21 +32,21 @@ uniform vec3 lightColor;
 in vec3 fragmentPosition;
 in vec3 normal;
 
+const float ambientStrength = 0.1;
+const float specularStrength = 0.5;
+
 void main () {
     // ambient
-    float ambientStrength = 0.1;
     vec3 ambient = ambientStrength * lightColor;
 
     // diffuse
-    vec3 norm = normalize(normal);
     vec3 lightDir = normalize(lightPosition - fragmentPosition);
-    float diffuseStrength = max(dot(norm, lightDir), 0.0);
+    float diffuseStrength = max(dot(normal, lightDir), 0.0);
     vec3 diffuse = diffuseStrength * lightColor;
 
     // specular
-    float specularStrength = 0.5;
     vec3 viewDir = normalize(viewPosition - fragmentPosition);
-    vec3 reflectDir = reflect(-lightDir, norm);
+    vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
     

@@ -1,6 +1,7 @@
 //2904
 //glDrawArrays(GL_TRIANGLES, 0, 2904);
 
+const int suziSmoothCount = 2904;
 
 const float suziSmooth[] = {
 0.468750 , 0.242187 , 0.757812 , 0.970580 , -0.015168 , 0.240181,

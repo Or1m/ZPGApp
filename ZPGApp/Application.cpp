@@ -31,7 +31,7 @@ Application::~Application() {
 }
 
 
-void Application::createObject(std::string& shaderPath, const float floats[], int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes) {
+void Application::createObject(std::string& shaderPath, const float floats[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes) {
 	this->object = new Object(floats, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
 
