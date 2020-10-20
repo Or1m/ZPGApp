@@ -118,7 +118,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\Basic.shader">
+    <None Include="Resources\Shaders\Phong.shader">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\Constant.shader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
