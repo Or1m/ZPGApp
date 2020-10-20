@@ -6,7 +6,7 @@ int main(void)  {
 	std::string shaderPath = "Resources/Shaders/Basic.shader";
 
 	Application* application = Application::getInstance();
-	application->createObject(shaderPath, suziFlat, suziFlatCount, NULL, NULL, false);
+	application->createObject(shaderPath, sphere, sphereCount, NULL, NULL, false);
 
 	//application->printVersionInfo();
 	application->attachCallbacks();

@@ -45,11 +45,18 @@ void main () {
     vec3 diffuse = diffuseStrength * lightColor;
 
     // specular
-    vec3 viewDir = normalize(viewPosition - fragmentPosition);
-    vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    vec3 specular = specularStrength * spec * lightColor;
+    vec3 specular;
+    if (diffuseStrength == 0.0)
+        specular = vec3(0.0, 0.0, 0.0);
+    else {
+        vec3 viewDir = normalize(viewPosition - fragmentPosition);
+        vec3 reflectDir = reflect(-lightDir, normal);
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+        specular = specularStrength * spec * lightColor;
+    }
     
-    vec3 result = (ambient + diffuse + specular) * color;
+    vec3 result = (ambient + diffuse) * color + specular;
+    //vec3 result = (ambient + diffuse + specular) * color;
+
     frag_color = vec4(result, 1.0);
 };
