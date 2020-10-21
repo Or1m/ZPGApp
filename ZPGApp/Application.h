@@ -23,7 +23,7 @@ public:
 	void printVersionInfo() const;
 	void attachCallbacks() const;
 
-	void run();
+	void run(int scene);
 
 private:
 	static Application* instance;

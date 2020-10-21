@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Camera.h"
+#include "SceneManager.h"
 
 Application* Application::instance = NULL;
 
@@ -35,7 +36,17 @@ void Application::createObject(std::string& shaderPath, const float floats[], co
 	this->object = new Object(floats, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath);
 }
 
-void Application::run() {
+void Application::run(int scene) {
+
+	switch (scene)
+	{
+	case 1:
+		SceneManager::getInstance()->loadSceneOne();
+	default:
+		break;
+	}
+
+
 	this->initShaderProgram();
 	this->initObject();
 
