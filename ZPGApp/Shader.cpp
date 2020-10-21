@@ -52,6 +52,12 @@ ShaderProgramSource Shader::parseShader() {
 
 GLuint Shader::compileShader(GLuint type, const char* source) {
 	GLuint shaderID = glCreateShader(type);
+
+	/**
+	 * @param 1 Shader object to compile
+	 * @param 2 How many strings we're passing as source code
+	 * @param 3 Actual source code of the shader 
+	 */
 	glShaderSource(shaderID, 1, &source, NULL);
 	glCompileShader(shaderID);
 

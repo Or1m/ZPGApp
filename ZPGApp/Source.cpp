@@ -3,7 +3,7 @@
 #include "Resources/Models/suzi_flat.h"
 
 int main(void)  {
-	std::string shaderPath = "Resources/Shaders/Phong.shader";
+	std::string shaderPath = "Resources/Shaders/Constant.shader";
 
 	Application* application = Application::getInstance();
 	application->createObject(shaderPath, sphere, sphereCount, NULL, NULL, false);

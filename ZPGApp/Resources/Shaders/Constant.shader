@@ -1,10 +1,14 @@
 #shader vertex
 #version 400
 
-layout(location=0) in vec3 vp;
+layout(location = 0) in vec3 vp;
+
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 
 void main () {
-     gl_Position = vec4 (vp, 1.0);
+    gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(vp, 1.0);
 };
 
 #shader fragment
@@ -12,6 +16,8 @@ void main () {
 
 out vec4 frag_colour;
 
+uniform vec3 color;
+
 void main () {
-     frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);
+     frag_colour = vec4(color, 1.0);
 };
