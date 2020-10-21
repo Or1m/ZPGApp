@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "Window.h"
 
 class SceneManager {
 public:
@@ -9,7 +10,7 @@ public:
 	SceneManager() {}
 	~SceneManager() {}
 
-	Scene* loadSceneOne();
+	Scene* loadSceneOne(Window* window);
 
 private:
 	static SceneManager* instance;

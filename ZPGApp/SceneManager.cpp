@@ -17,7 +17,7 @@ SceneManager* SceneManager::getInstance() {
 	return instance;
 }
 
-Scene* SceneManager::loadSceneOne() {
+Scene* SceneManager::loadSceneOne(Window* window) {
 	std::vector<Object*> *objects = new std::vector<Object*>();
 	std::vector<Light*> *lights = new std::vector<Light*>();
 
@@ -37,6 +37,34 @@ Scene* SceneManager::loadSceneOne() {
 	glm::vec3 V = glm::vec3(0.0, 0.0, 0.0);
 
 	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
+
+
+
+	//while (window->windowShouldNotClose()) {
+	//	Renderer::getInstance()->clear();
+
+	//	/*if (test > 1)	step = -step;
+	//	if (test < 0.2)	step = -step;
+
+	//	V = glm::vec3(0.0, test += step, 0.0);
+	//	this->objects[0]->changeColor(V);
+
+	//	for (int i = 0; i < 4; i++) {
+	//		this->objects[0]->move(vectors[i]);
+	//		Renderer::getInstance()->draw(*this->objects[0]);
+	//	}*/
+
+	//	Renderer::getInstance()->draw(*object);
+
+	//	window->pollEvents();
+	//	window->swapBuffer();
+
+	//	//Application::getInstance()->countDeltaTime();
+	//}
+
+	//window->destroyWindow();
+	//window->terminateWindow();
+	//exit(EXIT_SUCCESS);
 
 	return new Scene(*objects, *lights, test, step, V, vectors);
 }

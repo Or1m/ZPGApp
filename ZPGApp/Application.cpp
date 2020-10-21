@@ -46,7 +46,7 @@ void Application::run(int scene) {
 		break;
 	}*/
 
-	this->scene = SceneManager::getInstance()->loadSceneOne();
+	this->scene = SceneManager::getInstance()->loadSceneOne(this->window);
 	/*this->initShaderProgram();
 	this->initObject();
 
