@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Scene.h"
+
 class SceneManager {
 public:
 	static SceneManager* getInstance();
@@ -6,7 +9,7 @@ public:
 	SceneManager() {}
 	~SceneManager() {}
 
-	void loadSceneOne();
+	Scene* loadSceneOne();
 
 private:
 	static SceneManager* instance;

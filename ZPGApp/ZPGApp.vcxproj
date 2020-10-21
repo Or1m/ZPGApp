@@ -135,6 +135,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Resources\Models\sphere.h" />
     <ClInclude Include="Resources\Models\suzi_flat.h" />
     <ClInclude Include="Resources\Models\suzi_smooth.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Utils.h" />

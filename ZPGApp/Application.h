@@ -1,5 +1,4 @@
 #pragma once
-//#include "Header.h"
 
 // Include GLM  
 #include <glm/vec3.hpp> // glm::vec3
@@ -12,6 +11,7 @@
 #include "Object.h"
 #include "Window.h"
 #include "Renderer.h"
+#include "Scene.h"
 
 class Application {
 public:
@@ -22,6 +22,7 @@ public:
 
 	void printVersionInfo() const;
 	void attachCallbacks() const;
+	void countDeltaTime();
 
 	void run(int scene);
 
@@ -31,12 +32,14 @@ private:
 	Object* object;
 	Renderer* renderer;
 
+	Scene* scene;
+
 	float deltaTime;
 	float lastFrame;
 
 	void initShaderProgram() const;
 	void initObject() const;
-	void countDeltaTime();
+	
 
 	Application(int width, int height, const char* title);
 	~Application();

@@ -37,26 +37,26 @@ void Application::createObject(std::string& shaderPath, const float floats[], co
 }
 
 void Application::run(int scene) {
-
-	switch (scene)
+	
+	/*switch (scene)
 	{
 	case 1:
-		SceneManager::getInstance()->loadSceneOne();
+		this->scene = SceneManager::getInstance()->loadSceneOne();
 	default:
 		break;
-	}
+	}*/
 
-
-	this->initShaderProgram();
+	this->scene = SceneManager::getInstance()->loadSceneOne();
+	/*this->initShaderProgram();
 	this->initObject();
 
 	float test = 0.2f;
 	float step = 0.003f;
 	glm::vec3 V;
 
-	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
+	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };*/
 
-	while (this->window->windowShouldNotClose()) {
+	/*while (this->window->windowShouldNotClose()) {
 		this->renderer->clear();
 
 		if (test > 1)	step = -step;
@@ -69,6 +69,8 @@ void Application::run(int scene) {
 			this->object->move(vectors[i]);
 			this->renderer->draw(*this->object);
 		}
+
+		this->scene->runScene(this->window);
 		
 		this->window->pollEvents();
 		this->window->swapBuffer(); 
@@ -78,7 +80,8 @@ void Application::run(int scene) {
 
 	this->window->destroyWindow();
 	this->window->terminateWindow();
-	exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);*/
+	this->scene->runScene(this->window);
 }
 
 void Application::countDeltaTime() {

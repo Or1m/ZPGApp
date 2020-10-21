@@ -8,6 +8,7 @@
 class Object {
 public:
 	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath);
+	Object() {}
 	~Object();
 
 	void bindBuffers() const;
