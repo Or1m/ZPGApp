@@ -35,6 +35,8 @@ void Application::run(int scene) {
 		SceneManager::getInstance()->loadSceneOne();
 	case 2:
 		SceneManager::getInstance()->loadSceneTwo();
+	case 3:
+		SceneManager::getInstance()->loadSceneThree();
 	default:
 		break;
 	}

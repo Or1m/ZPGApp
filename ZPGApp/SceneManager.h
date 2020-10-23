@@ -11,10 +11,14 @@ public:
 	~SceneManager() {}
 
 	void loadSceneOne();
-	void runSceneOne(std::vector<Object*>* objects);
+	void runSceneOne(Object& object);
 
 	void loadSceneTwo();
 	void runSceneTwo(Object& object);
+
+	void loadSceneThree();
+	void runSceneThree(std::vector<Object*>& objects);
+
 private:
 	static SceneManager* instance;
 };
