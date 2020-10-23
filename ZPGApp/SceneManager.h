@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "Object.h"
 #include "Window.h"
 
 class SceneManager {
@@ -10,8 +10,11 @@ public:
 	SceneManager() {}
 	~SceneManager() {}
 
-	Scene* loadSceneOne(Window* window);
+	void loadSceneOne();
+	void runSceneOne(std::vector<Object*>* objects);
 
+	void loadSceneTwo();
+	void runSceneTwo(Object& object);
 private:
 	static SceneManager* instance;
 };

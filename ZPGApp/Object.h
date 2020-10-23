@@ -8,7 +8,6 @@
 class Object {
 public:
 	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath);
-	Object() {}
 	~Object();
 
 	void bindBuffers() const;
@@ -25,7 +24,7 @@ public:
 
 	void init();
 	void changeColor(glm::vec3 color);
-	void move(glm::vec3 translation);
+	void moveTo(glm::vec3 translation);
 
 private:
 	VertexBuffer* vertexBuffer;

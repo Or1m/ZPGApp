@@ -62,6 +62,6 @@ void Object::changeColor(glm::vec3 color) {
 	this->shader->sendUniform("color", color);
 }
 
-void Object::move(glm::vec3 translation) {
+void Object::moveTo(glm::vec3 translation) {
 	this->shader->sendUniform("modelMatrix", glm::translate(glm::mat4(1.0f), translation));
 }

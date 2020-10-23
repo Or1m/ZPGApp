@@ -1,20 +1,17 @@
 #include "Application.h"
 
-#include "Resources/Models/sphere.h"
-#include "Resources/Models/suzi_flat.h"
-
 #include <iostream>
 
 int main(void)  {
-	std::string shaderPath = "Resources/Shaders/Phong.shader";
+	int scene = 1;
 
-	Application* application = Application::getInstance();
-	application->createObject(shaderPath, sphere, sphereCount, NULL, NULL, false);
+	std::cout << "Select scene" << std::endl;
+	std::cin >> scene;
+	if (std::cin.fail()) scene = 1;
 
-	//application->printVersionInfo();
-	application->attachCallbacks();
-	
-    application->run(1);
+	Application::getInstance()->attachCallbacks();
+	Application::getInstance()->printVersionInfo();
+	Application::getInstance()->run(scene);
     
 	return 0;
 }

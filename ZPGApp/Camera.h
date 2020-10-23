@@ -23,6 +23,7 @@ public:
 	void toBack();
 	void toRight();
 	void changeDirection(float mouseX, float mouseY);
+	void moveTo(glm::vec3 trans);
 
 	void setCenter(int width, int height);
 	void setDeltaTime(float delta);

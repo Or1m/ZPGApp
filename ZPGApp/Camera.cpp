@@ -107,6 +107,12 @@ void Camera::changeDirection(float mouseX, float mouseY) {
 	this->notify();
 }
 
+void Camera::moveTo(glm::vec3 trans) {
+	this->eye = trans;
+
+	this->notify();
+}
+
 
 // Observer
 void Camera::attach(IObserver* observer) {

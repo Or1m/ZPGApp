@@ -8,17 +8,12 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #include <glm/gtx/string_cast.hpp> // glm::to_string()
 
-#include "Object.h"
 #include "Window.h"
-#include "Renderer.h"
-#include "Scene.h"
 
 class Application {
 public:
 	static Application* getInstance();
 	static Application* getInstance(int width, int height, const char* title);
-
-	void createObject(std::string& shaderPath, const float floats[], const int sizeOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes);
 
 	void printVersionInfo() const;
 	void attachCallbacks() const;
@@ -29,18 +24,10 @@ public:
 private:
 	static Application* instance;
 	Window* window;
-	Object* object;
-	Renderer* renderer;
-
-	Scene* scene;
 
 	float deltaTime;
 	float lastFrame;
-
-	void initShaderProgram() const;
-	void initObject() const;
 	
-
 	Application(int width, int height, const char* title);
-	~Application();
+	~Application() {}
 };
