@@ -30,6 +30,7 @@ public:
 
 	void attach(IObserver* observer) override;
 	void detach(IObserver* observer) override;
+	void notify() override;
 
 private:
 	static Camera* instance;
@@ -52,8 +53,6 @@ private:
 
 	std::vector<IObserver*> observers;
 
-	void notify() override;
-	
 	Camera();
 	~Camera() {}
 };

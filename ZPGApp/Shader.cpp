@@ -9,7 +9,7 @@ Shader::Shader(const std::string& filePath)
 	this->fragmentShaderSource = source.fragmentSource.c_str();
 	this->createShader();
 
-	Camera::getInstance()->attach(this);
+	//Camera::getInstance()->attach(this);
 }
 
 Shader::~Shader() {
@@ -139,7 +139,7 @@ void Shader::sendUniform(const GLchar* name, glm::mat4 M4) const {
 
 	ASSERT(uniformLocation != -1);
 
-	GLCall(glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4))); // glm::value_ptr(M) == &M[0][0]
+	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4)); // glm::value_ptr(M) == &M[0][0]
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec4 V4) const {
@@ -153,9 +153,9 @@ void Shader::sendUniform(const GLchar* name, glm::vec4 V4) const {
 void Shader::sendUniform(const GLchar* name, glm::vec3 V3) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	ASSERT(uniformLocation != -1);
+	//ASSERT(uniformLocation != -1);
 
-	GLCall(glUniform3f(uniformLocation, V3.x, V3.y, V3.z));
+	glUniform3f(uniformLocation, V3.x, V3.y, V3.z);
 }
 
 void Shader::sendUniform(const GLchar* name, GLfloat F) const {

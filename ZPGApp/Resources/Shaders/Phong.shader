@@ -11,12 +11,12 @@ uniform mat4 projectionMatrix;
 out vec3 fragmentPosition;
 out vec3 normal;
 
-void main () {
+void main() {
 
     fragmentPosition = vec3(modelMatrix * vec4(vp, 1.0));
     normal = normalize(inverse(transpose(mat3(modelMatrix))) * vn);
 
-    gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4 (vp, 1.0);
+    gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(vp, 1.0);
 };
 
 #shader fragment
@@ -51,7 +51,7 @@ void main () {
     else {
         vec3 viewDir = normalize(viewPosition - fragmentPosition);
         vec3 reflectDir = reflect(-lightDir, normal);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8);
         specular = specularStrength * spec * lightColor;
     }
     

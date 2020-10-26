@@ -34,6 +34,9 @@ Object::~Object() {
 void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
+	//this->vertexArray->bind();
+
+	this->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
 
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
@@ -64,4 +67,9 @@ void Object::changeColor(glm::vec3 color) {
 
 void Object::moveTo(glm::vec3 translation) {
 	this->shader->sendUniform("modelMatrix", glm::translate(glm::mat4(1.0f), translation));
+}
+
+void Object::move(glm::vec3 translation) {
+	this->modelMatrix = glm::translate(modelMatrix, translation);
+	this->shader->sendUniform("modelMatrix", modelMatrix);
 }

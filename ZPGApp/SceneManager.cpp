@@ -107,11 +107,14 @@ void SceneManager::loadSceneThree() {
 	//std::vector<Light*>* lights = new std::vector<Light*>();
 
 	std::string shaderPath = "Resources/Shaders/Phong.shader";
+	std::string shaderPath2 = "Resources/Shaders/Constant.shader";
+	std::string shaderPath3 = "Resources/Shaders/Lambert.shader";
+	std::string shaderPath4 = "Resources/Shaders/Blinn-Phong.shader";
 
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath));
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath));
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath));
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath));
+	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath2));
+	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath3));
+	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath4));
 	//lights->push_back(new Light());
 
 	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
@@ -129,12 +132,13 @@ void SceneManager::loadSceneThree() {
 }
 
 void SceneManager::runSceneThree(std::vector<Object*>& objects) {
-		
-	while (Window::getInstance()->windowShouldNotClose()) {
+
+	while(Window::getInstance()->windowShouldNotClose()) {
 		Renderer::getInstance()->clear();
 
-		for (const auto& object : objects)
+		for (const auto& object : objects) {
 			Renderer::getInstance()->draw(*object);
+		}
 
 		Window::getInstance()->pollEvents();
 		Window::getInstance()->swapBuffer();

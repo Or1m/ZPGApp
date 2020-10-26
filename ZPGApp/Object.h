@@ -25,6 +25,7 @@ public:
 	void init();
 	void changeColor(glm::vec3 color);
 	void moveTo(glm::vec3 translation);
+	void move(glm::vec3 translation);
 
 private:
 	VertexBuffer* vertexBuffer;

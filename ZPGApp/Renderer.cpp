@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Camera.h"
 
 Renderer* Renderer::instance = NULL;
 
@@ -17,6 +18,7 @@ void Renderer::draw(const Object& objectToDraw) const {
 		glDrawElements(GL_TRIANGLES, objectToDraw.getIndexCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
 	else
 		glDrawArrays(GL_TRIANGLES, 0, objectToDraw.getVertexCount());
+
 }
 
 void Renderer::clear() const {
