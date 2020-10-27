@@ -133,5 +133,5 @@ void Camera::detach(IObserver* observer) {
 
 void Camera::notify() {
 	for (IObserver* observer : observers)
-		observer->update(this->getCamera(), this->eye);
+		observer->update(*this);
 }

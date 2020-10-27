@@ -15,6 +15,7 @@
 #include "Utils.h"
 #include "IObserver.h"
 
+
 class Shader : IObserver {
 public:
 	Shader(const std::string& filePath);
@@ -23,7 +24,7 @@ public:
 	void useProgram() const;
 	void unbindProgram() const;
 
-	void update(glm::mat4 view, glm::vec3 position);
+	void update(Camera& camera);
 
 	void sendUniform(const GLchar* name, glm::mat4 M4) const;
 	void sendUniform(const GLchar* name, glm::vec4 V4) const;

@@ -95,10 +95,10 @@ void Shader::unbindProgram() const {
 
 
 // Observer
-void Shader::update(glm::mat4 view, glm::vec3 position) {
+void Shader::update(Camera& camera) {
 	this->useProgram();
-	this->sendUniform("viewMatrix", view);
-	this->sendUniform("viewPosition", position);
+	this->sendUniform("viewMatrix", camera.getCamera());
+	this->sendUniform("viewPosition", camera.getPosition());
 	//this->unbindProgram();
 }
 

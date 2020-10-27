@@ -11,6 +11,7 @@
 #include "IObserver.h"
 #include <vector>
 
+
 class Camera : public ISubject {
 public:
 	static Camera* getInstance();
