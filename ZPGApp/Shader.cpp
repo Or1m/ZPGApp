@@ -9,7 +9,7 @@ Shader::Shader(const std::string& filePath)
 	this->fragmentShaderSource = source.fragmentSource.c_str();
 	this->createShader();
 
-	//Camera::getInstance()->attach(this);
+	Camera::getInstance()->attach(this);
 }
 
 Shader::~Shader() {
@@ -96,8 +96,10 @@ void Shader::unbindProgram() const {
 
 // Observer
 void Shader::update(glm::mat4 view, glm::vec3 position) {
+	this->useProgram();
 	this->sendUniform("viewMatrix", view);
 	this->sendUniform("viewPosition", position);
+	//this->unbindProgram();
 }
 
 // Shader tests
@@ -137,48 +139,42 @@ void Shader::testLinkStatus(GLint status) {
 void Shader::sendUniform(const GLchar* name, glm::mat4 M4) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	ASSERT(uniformLocation != -1);
-
-	glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4)); // glm::value_ptr(M) == &M[0][0]
+	if(uniformLocation != -1)
+		GLCall(glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4))); // glm::value_ptr(M) == &M[0][0]
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec4 V4) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	ASSERT(uniformLocation != -1);
-
-	GLCall(glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w));
+	if (uniformLocation != -1)
+		GLCall(glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w));
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec3 V3) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	//ASSERT(uniformLocation != -1);
-
-	glUniform3f(uniformLocation, V3.x, V3.y, V3.z);
+	if (uniformLocation != -1)
+		GLCall(glUniform3f(uniformLocation, (GLfloat)V3.x, (GLfloat)V3.y, (GLfloat)V3.z));
 }
 
 void Shader::sendUniform(const GLchar* name, GLfloat F) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	ASSERT(uniformLocation != -1);
-
-	GLCall(glUniform1f(uniformLocation, F));
+	if (uniformLocation != -1)
+		GLCall(glUniform1f(uniformLocation, F));
 }
 
 void Shader::sendUniform(const GLchar* name, GLint I) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	ASSERT(uniformLocation != -1);
-
-	GLCall(glUniform1i(uniformLocation, I));
+	if (uniformLocation != -1)
+		GLCall(glUniform1i(uniformLocation, I));
 }
 
 void Shader::sendUniform(const GLchar* name, GLuint U) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
-	ASSERT(uniformLocation != -1);
-
-	GLCall(glUniform1ui(uniformLocation, U));
+	if (uniformLocation != -1)
+		GLCall(glUniform1ui(uniformLocation, U));
 }
 #pragma endregion

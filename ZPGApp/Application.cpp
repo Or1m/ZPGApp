@@ -52,6 +52,7 @@ void Application::countDeltaTime() {
 
 void Application::printVersionInfo() const {
 
+	printf("\n---------------------INFO---------------------\n\n");
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
 	printf("Using GLEW %s\n", glewGetString(GLEW_VERSION));
 	printf("Vendor %s\n", glGetString(GL_VENDOR));
@@ -61,6 +62,7 @@ void Application::printVersionInfo() const {
 	int major, minor, revision;
 	glfwGetVersion(&major, &minor, &revision);
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
+	printf("\n-----------------END OF INFO------------------\n\n");
 }
 
 void Application::attachCallbacks() const {

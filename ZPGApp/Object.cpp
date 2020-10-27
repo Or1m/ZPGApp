@@ -36,10 +36,6 @@ void Object::bindBuffers() const {
 	this->vertexBuffer->bind();
 	//this->vertexArray->bind();
 
-	// Temporary
-	this->sendUniformToShader("viewMatrix", Camera::getInstance()->getCamera());
-	this->sendUniformToShader("viewPosition", Camera::getInstance()->getPosition());
-
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
 }
