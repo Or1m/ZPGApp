@@ -67,7 +67,7 @@ void Camera::toRight() {
 	this->notify();
 }
 
-// pozriet ine varianty
+
 void Camera::changeDirection(float mouseX, float mouseY) {
 
 	if (this->firstTimeMouse) {

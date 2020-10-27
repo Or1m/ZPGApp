@@ -50,7 +50,7 @@ Window::Window(int width, int height, const char* title) {
 	glViewport(0, 0, w_width, h_height);
 
 	glEnable(GL_DEPTH_TEST); 
-	//glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	Camera::getInstance()->setCenter(width, height);
 }

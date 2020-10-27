@@ -25,7 +25,6 @@ void main() {
 out vec4 frag_color;
 
 uniform vec3 color;
-uniform vec3 viewPosition;
 uniform vec3 lightPosition;
 uniform vec3 lightColor;
 

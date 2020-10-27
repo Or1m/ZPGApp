@@ -106,12 +106,12 @@ void SceneManager::loadSceneThree() {
 	std::vector<Object*>* objects = new std::vector<Object*>();
 	//std::vector<Light*>* lights = new std::vector<Light*>();
 
-	std::string shaderPath = "Resources/Shaders/Phong.shader";
+	std::string shaderPath1 = "Resources/Shaders/Phong.shader";
 	std::string shaderPath2 = "Resources/Shaders/Constant.shader";
 	std::string shaderPath3 = "Resources/Shaders/Lambert.shader";
 	std::string shaderPath4 = "Resources/Shaders/Blinn-Phong.shader";
 
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath));
+	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath1));
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath2));
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath3));
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath4));
