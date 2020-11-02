@@ -122,7 +122,7 @@ void SceneManager::loadSceneThree() {
 
 	//lights->push_back(new Light());
 
-	glm::vec3 vectors[5] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f) };
+	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
 
 	Light* light = new Light();
 
@@ -147,9 +147,8 @@ void SceneManager::runSceneThree(std::vector<Object*>& objects, Light& light) {
 	while(Window::getInstance()->windowShouldNotClose()) {
 		Renderer::getInstance()->clear();
 
-		for (const auto& object : objects) {
+		for (const auto& object : objects)
 			Renderer::getInstance()->draw(*object);
-		}
 
 		Window::getInstance()->pollEvents();
 		Window::getInstance()->swapBuffer();

@@ -6,8 +6,8 @@ class Light;
 
 class Observer {
 public:
-	virtual void update(Camera& camera); // = 0 -> pure virtual
-	virtual void update(Light& light);
+	virtual void update(Camera& camera) = 0;
+	virtual void update(Light& light) = 0;
 
 protected:
 	Observer() {};

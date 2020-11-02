@@ -34,12 +34,10 @@ Object::~Object() {
 void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
-	
+	this->vertexArray->bind();
 
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
-
-	this->vertexArray->bind();
 }
 
 void Object::useShaderProgram() const {
@@ -65,13 +63,13 @@ void Object::changeColor(glm::vec3 color) {
 }
 
 void Object::moveTo(glm::vec3 pos) {
-	//TransformableObject::moveTo(pos);
+	TransformableObject::moveTo(pos);
 
-	this->shader->sendUniform("modelMatrix", glm::translate(glm::mat4(1.0f), pos));
+	this->shader->sendUniform("modelMatrix", glm::translate(glm::mat4(1.0f), this->position));
 }
 
 void Object::move(glm::vec3 trans) {
-	TransformableObject::moveTo(trans);
+	TransformableObject::move(trans);
 
 	this->modelMatrix = glm::translate(modelMatrix, trans);
 	this->shader->sendUniform("modelMatrix", modelMatrix);
