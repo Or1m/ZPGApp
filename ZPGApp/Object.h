@@ -22,6 +22,7 @@ public:
 		this->shader->sendUniform(name, t);
 	}
 
+	void addLight(Light* light);
 	void init();
 	void changeColor(glm::vec3 color);
 	void moveTo(glm::vec3 translation);

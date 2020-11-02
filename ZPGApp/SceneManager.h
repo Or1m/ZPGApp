@@ -17,7 +17,7 @@ public:
 	void runSceneTwo(Object& object);
 
 	void loadSceneThree();
-	void runSceneThree(std::vector<Object*>& objects);
+	void runSceneThree(std::vector<Object*>& objects, Light& light);
 
 private:
 	static SceneManager* instance;

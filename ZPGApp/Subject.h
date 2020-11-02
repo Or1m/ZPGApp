@@ -12,4 +12,7 @@ public:
 
 protected:
 	std::vector<Observer*> observers;
+
+	Subject() {};
+	virtual ~Subject() {};
 };

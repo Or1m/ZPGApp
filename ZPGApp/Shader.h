@@ -27,6 +27,8 @@ public:
 	void update(Camera& camera);
 	void update(Light& light);
 
+	void addLight(Light* light);
+
 	void sendUniform(const GLchar* name, glm::mat4 M4) const;
 	void sendUniform(const GLchar* name, glm::vec4 V4) const;
 	void sendUniform(const GLchar* name, glm::vec3 V3) const;

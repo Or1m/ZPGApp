@@ -108,6 +108,10 @@ void Shader::update(Light& light) {
 	this->sendUniform("lightColor", light.getLightColor());
 }
 
+void Shader::addLight(Light* light) {
+	light->attach(this);
+}
+
 // Shader tests
 GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {
 

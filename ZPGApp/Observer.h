@@ -8,4 +8,8 @@ class Observer {
 public:
 	virtual void update(Camera& camera); // = 0 -> pure virtual
 	virtual void update(Light& light);
+
+protected:
+	Observer() {};
+	virtual ~Observer() {};
 };

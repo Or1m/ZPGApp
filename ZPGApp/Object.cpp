@@ -48,15 +48,14 @@ bool Object::isWithIndexes() const {
 	return this->hasIndexes;
 }
 
+void Object::addLight(Light* light) {
+	this->shader->addLight(light);
+}
 
 void Object::init() {
 	this->shader->sendUniform("modelMatrix", this->modelMatrix);
 	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
-
-	Light light;
-	this->shader->sendUniform("lightPosition", light.getLightPosition());
-	this->shader->sendUniform("lightColor", light.getLightColor());
 }
 
 void Object::changeColor(glm::vec3 color) {
