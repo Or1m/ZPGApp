@@ -11,8 +11,8 @@ public:
 	void notify(Light& light);
 
 protected:
-	std::vector<Observer*> observers;
+	std::vector<Observer*>* observers;
 
-	Subject() {};
-	virtual ~Subject() {};
+	Subject();
+	virtual ~Subject();
 };

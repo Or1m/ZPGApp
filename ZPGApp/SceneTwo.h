@@ -4,7 +4,7 @@
 class SceneTwo : public Scene {
 public:
 	SceneTwo();
-	~SceneTwo() {};
+	~SceneTwo();
 
 	void onLoad() override;
 	void onUpdate() override;

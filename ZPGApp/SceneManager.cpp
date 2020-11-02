@@ -19,6 +19,10 @@ SceneManager* SceneManager::getInstance() {
 SceneManager::SceneManager() 
 :	currentScene(nullptr) {}
 
+SceneManager::~SceneManager() {
+	delete this->currentScene;
+}
+
 
 void SceneManager::setScene(Scene& scene) {
 	this->currentScene = &scene;

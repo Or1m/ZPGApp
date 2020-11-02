@@ -11,11 +11,10 @@
 #include "SuziSmooth.h"
 #include "Plain.h"
 
-class Scene
-{
+class Scene {
 public:
 	Scene();
-	virtual ~Scene() {}
+	virtual ~Scene();
 
 	virtual void onLoad() {};
 	virtual void onUpdate() {};

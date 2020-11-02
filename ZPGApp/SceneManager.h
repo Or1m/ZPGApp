@@ -7,7 +7,7 @@ public:
 	static SceneManager* getInstance();
 	
 	SceneManager();
-	~SceneManager() {}
+	~SceneManager();
 
 	void setScene(Scene& scene);
 	void runScene();
