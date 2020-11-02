@@ -7,12 +7,11 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #include <glm/gtx/string_cast.hpp> // glm::to_string()
 
-#include "Subject.h"
-#include "Observer.h"
+#include "ISubject.h"
+#include "IObserver.h"
 #include <vector>
 
-
-class Camera : public Subject {
+class Camera : public ISubject {
 public:
 	static Camera* getInstance();
 
@@ -29,6 +28,10 @@ public:
 
 	void setCenter(int width, int height);
 	void setDeltaTime(float delta);
+
+	void attach(IObserver* observer) override;
+	void detach(IObserver* observer) override;
+	void notify() override;
 
 private:
 	static Camera* instance;
@@ -48,6 +51,8 @@ private:
 	float lastX;
 	float lastY;
 	bool firstTimeMouse;
+
+	std::vector<IObserver*> observers;
 
 	Camera();
 	~Camera() {}

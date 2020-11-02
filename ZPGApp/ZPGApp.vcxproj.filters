@@ -19,8 +19,11 @@
     <Filter Include="Resource Files\Models">
       <UniqueIdentifier>{70977cd5-98d2-4c53-abbc-854203c0e899}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Behavior">
+    <Filter Include="Header Files\Base Headers">
       <UniqueIdentifier>{8e91a89b-b820-43c7-821b-2fcebecd6d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base Classes">
+      <UniqueIdentifier>{536c51ef-a528-4958-83de-96e73fdaa916}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,12 +116,6 @@
     <ClInclude Include="Resources\Models\suzi_flat.h">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="IObserver.h">
-      <Filter>Header Files\Behavior</Filter>
-    </ClInclude>
-    <ClInclude Include="ISubject.h">
-      <Filter>Header Files\Behavior</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\Models\indexed_rectangle.h">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
@@ -121,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\Base Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files\Base Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

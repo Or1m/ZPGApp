@@ -46,25 +46,25 @@ void Camera::setDeltaTime(float delta) {
 void Camera::toFront() {
 	this->eye += glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
 
-	this->notify();
+	this->notify(*this);
 }
 
 void Camera::toBack() {
 	this->eye -= glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
 
-	this->notify();
+	this->notify(*this);
 }
 
 void Camera::toLeft() {
 	this->eye -= glm::normalize(glm::cross(this->target, this->up)) * this->cameraSpeed * this->deltaTime;
 
-	this->notify();
+	this->notify(*this);
 }
 
 void Camera::toRight() {
 	this->eye += glm::normalize(glm::cross(this->target, this->up)) * cameraSpeed * this->deltaTime;
 
-	this->notify();
+	this->notify(*this);
 }
 
 
@@ -109,29 +109,11 @@ void Camera::changeDirection(float mouseX, float mouseY) {
 
 	this->target = glm::normalize(direction);
 
-	this->notify();
+	this->notify(*this);
 }
 
 void Camera::moveTo(glm::vec3 trans) {
 	this->eye = trans;
 
-	this->notify();
-}
-
-
-// Observer
-void Camera::attach(IObserver* observer) {
-	this->observers.push_back(observer);
-}
-
-void Camera::detach(IObserver* observer) {
-	auto iterator = std::find(observers.begin(), observers.end(), observer);
-
-	if (iterator != observers.end())
-		observers.erase(iterator);
-}
-
-void Camera::notify() {
-	for (IObserver* observer : observers)
-		observer->update(*this);
+	this->notify(*this);
 }

@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include "Camera.h"
+#include "Light.h"
 
 Shader::Shader(const std::string& filePath) 
 : filePath(filePath), shaderProgram(0) {
@@ -99,7 +100,12 @@ void Shader::update(Camera& camera) {
 	this->useProgram();
 	this->sendUniform("viewMatrix", camera.getCamera());
 	this->sendUniform("viewPosition", camera.getPosition());
-	//this->unbindProgram();
+}
+
+void Shader::update(Light& light) {
+	this->useProgram();
+	this->sendUniform("lightPosition", light.getLightPosition());
+	this->sendUniform("lightColor", light.getLightColor());
 }
 
 // Shader tests

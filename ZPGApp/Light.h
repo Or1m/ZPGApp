@@ -1,7 +1,7 @@
 #pragma once
 #include <glm\ext\vector_float3.hpp>
 
-#include "ISubject.h"
+#include "Subject.h"
 #include <vector>
 
 class Light {

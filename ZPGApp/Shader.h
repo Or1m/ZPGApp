@@ -13,10 +13,10 @@
 #include <sstream>
 
 #include "Utils.h"
-#include "IObserver.h"
+#include "Observer.h"
 
 
-class Shader : IObserver {
+class Shader : Observer {
 public:
 	Shader(const std::string& filePath);
 	~Shader();
@@ -25,6 +25,7 @@ public:
 	void unbindProgram() const;
 
 	void update(Camera& camera);
+	void update(Light& light);
 
 	void sendUniform(const GLchar* name, glm::mat4 M4) const;
 	void sendUniform(const GLchar* name, glm::vec4 V4) const;
