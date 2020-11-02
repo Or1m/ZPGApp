@@ -1,12 +1,9 @@
 #include "SceneManager.h"
-#include "Object.h"
-#include "Light.h"
 
-#include <iostream>
-#include <vector>
 #include "Renderer.h"
 #include "Application.h"
 #include "Camera.h"
+#include "Window.h"
 
 
 SceneManager* SceneManager::instance = NULL;

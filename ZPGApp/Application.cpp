@@ -47,6 +47,8 @@ float Application::countDeltaTime() {
 	this->lastFrame = currentFrame;
 
 	Camera::getInstance()->setDeltaTime(this->deltaTime);
+
+	return this->deltaTime;
 }
 
 

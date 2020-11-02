@@ -1,9 +1,11 @@
 #pragma once
 #include <glm\ext\vector_float3.hpp>
 
+#include <vector>
+
 #include "Subject.h"
 #include "TransformableObject.h"
-#include <vector>
+
 
 class Light : public Subject, TransformableObject {
 public:

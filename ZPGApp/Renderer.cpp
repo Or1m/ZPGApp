@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "Camera.h"
 
 Renderer* Renderer::instance = NULL;
 
