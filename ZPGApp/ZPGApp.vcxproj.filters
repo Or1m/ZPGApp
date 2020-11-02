@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Base Classes">
       <UniqueIdentifier>{536c51ef-a528-4958-83de-96e73fdaa916}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Concrete Objects">
+      <UniqueIdentifier>{f7b740bc-5907-4046-a8f7-d32bdc0dfd02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -34,9 +37,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
@@ -72,15 +72,15 @@
     <ClCompile Include="TransformableObject.cpp">
       <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
@@ -136,6 +136,21 @@
     </ClInclude>
     <ClInclude Include="TransformableObject.h">
       <Filter>Header Files\Base Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Base Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SuziFlat.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SuziSmooth.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Plain.h">
+      <Filter>Header Files\Concrete Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

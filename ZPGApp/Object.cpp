@@ -34,10 +34,12 @@ Object::~Object() {
 void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
-	this->vertexArray->bind();
+	
 
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
+
+	this->vertexArray->bind();
 }
 
 void Object::useShaderProgram() const {

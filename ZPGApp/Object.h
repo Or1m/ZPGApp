@@ -9,7 +9,7 @@
 class Object : TransformableObject {
 public:
 	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath);
-	~Object();
+	virtual ~Object();
 
 	void bindBuffers() const;
 	void useShaderProgram() const;
@@ -29,7 +29,7 @@ public:
 	void moveTo(glm::vec3 pos);
 	void move(glm::vec3 trans);
 
-private:
+protected:
 	VertexBuffer* vertexBuffer;
 	VertexBufferLayout* vertexBufferLayout;
 	IndexBuffer* indexBuffer;

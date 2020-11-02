@@ -150,6 +150,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Plain.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Object.h" />
@@ -161,6 +163,8 @@
     <ClInclude Include="Resources\Models\suzi_smooth.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SuziFlat.h" />
+    <ClInclude Include="SuziSmooth.h" />
     <ClInclude Include="TransformableObject.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="VertexArray.h" />

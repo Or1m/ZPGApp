@@ -8,10 +8,10 @@
 #include "Application.h"
 #include "Camera.h"
 
-#include "Resources/Models/sphere.h"
-#include "Resources/Models/suzi_flat.h"
-#include "Resources/Models/plain.h"
-#include "Resources/Models/suzi_smooth.h"
+#include "Sphere.h"
+#include "SuziFlat.h"
+#include "SuziSmooth.h"
+#include "Plain.h"
 
 
 SceneManager* SceneManager::instance = NULL;
@@ -115,14 +115,14 @@ void SceneManager::loadSceneThree() {
 	std::string shaderPath3 = "Resources/Shaders/Lambert.shader";
 	std::string shaderPath4 = "Resources/Shaders/Blinn-Phong.shader";
 
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath1));
-	objects->push_back(new Object(suziFlat, suziFlatCount, NULL, NULL, false, shaderPath4));
-	objects->push_back(new Object(suziSmooth, suziSmoothCount, NULL, NULL, false, shaderPath3));
-	objects->push_back(new Object(plain, planeCount, NULL, NULL, false, shaderPath2));
+	objects->push_back(new Sphere(shaderPath1));
+	objects->push_back(new SuziFlat(shaderPath4));
+	objects->push_back(new SuziSmooth(shaderPath3));
+	objects->push_back(new Plain(shaderPath2));
 
 	//lights->push_back(new Light());
 
-	glm::vec3 vectors[4] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f) };
+	glm::vec3 vectors[5] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f) };
 
 	Light* light = new Light();
 
