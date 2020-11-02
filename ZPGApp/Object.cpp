@@ -34,7 +34,7 @@ Object::~Object() {
 void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
-	//this->vertexArray->bind();
+	this->vertexArray->bind();
 
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
