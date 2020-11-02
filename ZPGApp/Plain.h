@@ -5,9 +5,6 @@
 
 class Plain : public Object {
 public:
-	Plain(std::string& shaderPath) : Object(plain, planeCount, NULL, NULL, false, shaderPath) {}
+	Plain(const std::string& shaderPath) : Object(plain, planeCount, NULL, NULL, false, shaderPath) {}
 	~Plain() {};
-
-private:
-
 };

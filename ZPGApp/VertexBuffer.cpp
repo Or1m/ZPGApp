@@ -38,6 +38,7 @@ VertexBuffer::~VertexBuffer() {
 	glDeleteBuffers(1, &this->VBO); 
 }
 
+
 void VertexBuffer::bind() const {
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 }

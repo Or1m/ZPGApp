@@ -1,7 +1,8 @@
 #include "Light.h"
 
 Light::Light() 
-: lightColor(1.0, 1.0, 1.0) {}
+:	lightColor(1.0, 1.0, 1.0) {}
+
 
 void Light::moveTo(glm::vec3 pos) {
 	TransformableObject::moveTo(pos);

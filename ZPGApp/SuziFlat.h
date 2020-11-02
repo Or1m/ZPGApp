@@ -5,9 +5,6 @@
 
 class SuziFlat : public Object {
 public:
-	SuziFlat(std::string& shaderPath) : Object(suziFlat, suziFlatCount, NULL, NULL, false, shaderPath) {}
+	SuziFlat(const std::string& shaderPath) : Object(suziFlat, suziFlatCount, NULL, NULL, false, shaderPath) {}
 	~SuziFlat() {};
-
-private:
-
 };

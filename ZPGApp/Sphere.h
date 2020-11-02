@@ -5,9 +5,6 @@
 
 class Sphere : public Object {
 public:
-	Sphere(std::string& shaderPath) : Object(sphere, sphereCount, NULL, NULL, false, shaderPath) {}
+	Sphere(const std::string& shaderPath) : Object(sphere, sphereCount, NULL, NULL, false, shaderPath) {}
 	~Sphere() {};
-
-private:
-
 };

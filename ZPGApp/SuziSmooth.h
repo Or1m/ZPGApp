@@ -5,9 +5,6 @@
 
 class SuziSmooth : public Object {
 public:
-	SuziSmooth(std::string& shaderPath) : Object(suziSmooth, suziSmoothCount, NULL, NULL, false, shaderPath) {}
+	SuziSmooth(const std::string& shaderPath) : Object(suziSmooth, suziSmoothCount, NULL, NULL, false, shaderPath) {}
 	~SuziSmooth() {};
-
-private:
-
 };

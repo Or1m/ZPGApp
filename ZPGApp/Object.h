@@ -8,7 +8,7 @@
 
 class Object : TransformableObject {
 public:
-	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, std::string& shaderPath);
+	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, const std::string& shaderPath);
 	virtual ~Object();
 
 	void bindBuffers() const;

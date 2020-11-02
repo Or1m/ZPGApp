@@ -19,14 +19,20 @@
     <Filter Include="Resource Files\Models">
       <UniqueIdentifier>{70977cd5-98d2-4c53-abbc-854203c0e899}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Base Headers">
-      <UniqueIdentifier>{8e91a89b-b820-43c7-821b-2fcebecd6d52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Base Classes">
       <UniqueIdentifier>{536c51ef-a528-4958-83de-96e73fdaa916}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Concrete Objects">
       <UniqueIdentifier>{f7b740bc-5907-4046-a8f7-d32bdc0dfd02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Concrete Scenes">
+      <UniqueIdentifier>{2e07dbc3-4105-4328-9179-62f658570c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Concrete Scenes">
+      <UniqueIdentifier>{4e1bebb2-181f-436a-8671-5acc4fc191b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base Classes">
+      <UniqueIdentifier>{8e91a89b-b820-43c7-821b-2fcebecd6d52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +77,18 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOne.cpp">
+      <Filter>Source Files\Concrete Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTwo.cpp">
+      <Filter>Source Files\Concrete Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFactoryMethod.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,16 +144,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>Header Files\Base Headers</Filter>
+      <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="Subject.h">
-      <Filter>Header Files\Base Headers</Filter>
+      <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="TransformableObject.h">
-      <Filter>Header Files\Base Headers</Filter>
+      <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>Header Files\Base Headers</Filter>
+      <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\Concrete Objects</Filter>
@@ -148,6 +166,18 @@
     </ClInclude>
     <ClInclude Include="Plain.h">
       <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOne.h">
+      <Filter>Header Files\Concrete Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTwo.h">
+      <Filter>Header Files\Concrete Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFactoryMethod.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

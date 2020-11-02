@@ -11,6 +11,7 @@ Renderer* Renderer::getInstance() {
 	return instance;
 }
 
+
 void Renderer::draw(const Object& objectToDraw) const {
 	objectToDraw.bindBuffers();
 

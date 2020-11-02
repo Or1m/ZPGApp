@@ -1,6 +1,9 @@
 #include "Application.h"
+
 #include "Camera.h"
 #include "SceneManager.h"
+#include "SceneFactoryMethod.h"
+
 
 Application* Application::instance = NULL;
 
@@ -28,27 +31,24 @@ Application::Application(int width, int height, const char* title)
 
 
 void Application::run(int scene) {
-	
-	switch (scene)
-	{
-	case 1:
-		SceneManager::getInstance()->loadSceneOne();
-	case 2:
-		SceneManager::getInstance()->loadSceneTwo();
-	case 3:
-		SceneManager::getInstance()->loadSceneThree();
-	default:
-		break;
+
+	Scene* selected = SceneFactoryMethod::makeScene(scene);
+
+	if (selected) {
+		SceneManager::getInstance()->setScene(*selected);
+		SceneManager::getInstance()->runScene();
 	}
 }
 
-void Application::countDeltaTime() {
+
+float Application::countDeltaTime() {
 	float currentFrame = (float)glfwGetTime();
 	this->deltaTime = currentFrame - this->lastFrame;
 	this->lastFrame = currentFrame;
 
 	Camera::getInstance()->setDeltaTime(this->deltaTime);
 }
+
 
 void Application::printVersionInfo() const {
 
