@@ -69,6 +69,9 @@
     <ClCompile Include="Observer.cpp">
       <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
+    <ClCompile Include="TransformableObject.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -129,6 +132,9 @@
       <Filter>Header Files\Base Headers</Filter>
     </ClInclude>
     <ClInclude Include="Subject.h">
+      <Filter>Header Files\Base Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformableObject.h">
       <Filter>Header Files\Base Headers</Filter>
     </ClInclude>
   </ItemGroup>

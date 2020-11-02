@@ -140,6 +140,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="TransformableObject.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Resources\Models\suzi_smooth.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="TransformableObject.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />

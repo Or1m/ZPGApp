@@ -24,8 +24,8 @@ public:
 	void useProgram() const;
 	void unbindProgram() const;
 
-	void update(Camera& camera);
-	void update(Light& light);
+	void update(Camera& camera) override;
+	void update(Light& light) override;
 
 	void addLight(Light* light);
 

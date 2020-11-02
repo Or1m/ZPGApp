@@ -14,12 +14,15 @@ Camera* Camera::getInstance() {
 
 Camera::Camera()
 :	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
-	eye(glm::vec3(0.0f, 0.0f, 3.0f)), target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
-	cameraSpeed(3.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-89.0f), pitch(0.0f), lastX(400), lastY(300), firstTimeMouse(true) {}
+	target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
+	cameraSpeed(3.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-89.0f), pitch(0.0f), lastX(400), lastY(300), firstTimeMouse(true) {
+
+	this->position = glm::vec3(0.0f, 0.0f, 3.0f);
+}
 
 
 glm::mat4 Camera::getCamera() {
-	return glm::lookAt(this->eye, this->eye + this->target, this->up);
+	return glm::lookAt(this->position, this->position + this->target, this->up);
 }
 
 glm::mat4 Camera::getProjection() {
@@ -29,7 +32,7 @@ glm::mat4 Camera::getProjection() {
 }
 
 glm::vec3 Camera::getPosition() {
-	return this->eye;
+	return this->position;
 }
 
 
@@ -44,25 +47,25 @@ void Camera::setDeltaTime(float delta) {
 
 
 void Camera::toFront() {
-	this->eye += glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
+	this->position += glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
 
 	this->notify(*this);
 }
 
 void Camera::toBack() {
-	this->eye -= glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
+	this->position -= glm::normalize(this->target) * this->cameraSpeed * this->deltaTime;
 
 	this->notify(*this);
 }
 
 void Camera::toLeft() {
-	this->eye -= glm::normalize(glm::cross(this->target, this->up)) * this->cameraSpeed * this->deltaTime;
+	this->position -= glm::normalize(glm::cross(this->target, this->up)) * this->cameraSpeed * this->deltaTime;
 
 	this->notify(*this);
 }
 
 void Camera::toRight() {
-	this->eye += glm::normalize(glm::cross(this->target, this->up)) * cameraSpeed * this->deltaTime;
+	this->position += glm::normalize(glm::cross(this->target, this->up)) * cameraSpeed * this->deltaTime;
 
 	this->notify(*this);
 }
@@ -112,8 +115,14 @@ void Camera::changeDirection(float mouseX, float mouseY) {
 	this->notify(*this);
 }
 
-void Camera::moveTo(glm::vec3 trans) {
-	this->eye = trans;
+void Camera::move(glm::vec3 trans) {
+	TransformableObject::move(trans);
+
+	this->notify(*this);
+}
+
+void Camera::moveTo(glm::vec3 pos) {
+	TransformableObject::moveTo(pos);
 
 	this->notify(*this);
 }

@@ -9,10 +9,11 @@
 
 #include "Subject.h"
 #include "Observer.h"
+#include "TransformableObject.h"
 #include <vector>
 
 
-class Camera : public Subject {
+class Camera : public Subject, TransformableObject {
 public:
 	static Camera* getInstance();
 
@@ -25,7 +26,9 @@ public:
 	void toBack();
 	void toRight();
 	void changeDirection(float mouseX, float mouseY);
-	void moveTo(glm::vec3 trans);
+
+	void move(glm::vec3 trans);
+	void moveTo(glm::vec3 pos);
 
 	void setCenter(int width, int height);
 	void setDeltaTime(float delta);
@@ -35,7 +38,6 @@ private:
 
 	glm::mat4 projection;
 
-	glm::vec3 eye;
 	glm::vec3 target;
 	glm::vec3 up;
 
