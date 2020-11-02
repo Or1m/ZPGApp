@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include "Resources/Models/sphere.h"
 #include "Resources/Models/suzi_flat.h"
+#include "Resources/Models/plain.h"
+#include "Resources/Models/suzi_smooth.h"
 #include "Object.h"
 #include "Light.h"
 
@@ -112,9 +114,9 @@ void SceneManager::loadSceneThree() {
 	std::string shaderPath3 = "Resources/Shaders/Lambert.shader";
 	std::string shaderPath4 = "Resources/Shaders/Blinn-Phong.shader";
 
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath1));
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath2));
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath3));
+	objects->push_back(new Object(suziFlat, suziFlatCount, NULL, NULL, false, shaderPath1));
+	objects->push_back(new Object(suziFlat, suziFlatCount, NULL, NULL, false, shaderPath2));
+	objects->push_back(new Object(suziFlat, suziFlatCount, NULL, NULL, false, shaderPath3));
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, shaderPath4));
 	//lights->push_back(new Light());
 
