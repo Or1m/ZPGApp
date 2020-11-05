@@ -78,3 +78,8 @@ void Object::move(glm::vec3 trans) {
 	this->modelMatrix = glm::translate(modelMatrix, trans);
 	this->shader->sendUniform("modelMatrix", modelMatrix);
 }
+
+void Object::scale(glm::vec3 scale) {
+	this->modelMatrix = glm::scale(this->modelMatrix, scale);
+	this->shader->sendUniform("modelMatrix", modelMatrix);
+}

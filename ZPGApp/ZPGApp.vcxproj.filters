@@ -90,6 +90,9 @@
     <ClCompile Include="SceneFactoryMethod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SceneThree.cpp">
+      <Filter>Source Files\Concrete Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="SceneFactoryMethod.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneThree.h">
+      <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

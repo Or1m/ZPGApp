@@ -139,6 +139,7 @@
     <ClCompile Include="SceneFactoryMethod.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneOne.cpp" />
+    <ClCompile Include="SceneThree.cpp" />
     <ClCompile Include="SceneTwo.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFactoryMethod.h" />
     <ClInclude Include="SceneOne.h" />
+    <ClInclude Include="SceneThree.h" />
     <ClInclude Include="SceneTwo.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Subject.h" />
