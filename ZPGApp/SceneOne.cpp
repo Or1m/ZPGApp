@@ -1,10 +1,10 @@
 #include "SceneOne.h"
 
 void SceneOne::onLoad() {
-	objects->push_back(new Sphere(phongPath));
-	objects->push_back(new SuziFlat(blinnPhongPath));
-	objects->push_back(new SuziSmooth(lambertPath));
-	objects->push_back(new Plain(constantPath));
+	objects->push_back(new Sphere(lambertPath));
+	objects->push_back(new SuziFlat(phongPath));
+	objects->push_back(new SuziSmooth(constantPath));
+	objects->push_back(new Plain(blinnPhongPath));
 
 	lights->push_back(new Light());
 
