@@ -23,6 +23,8 @@ public:
 		this->shader->sendUniform(name, t);
 	}
 
+	int getID() const { return 69; }
+
 	void addLight(Light* light);
 	void init();
 	void changeColor(glm::vec3 color);

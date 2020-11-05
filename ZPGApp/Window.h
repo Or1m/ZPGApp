@@ -20,6 +20,10 @@ private:
 	static Window* instance;
 	GLFWwindow* window;
 
+	int width;
+	int height;
+	const char* title;
+
 	Window(int width, int height, const char* title);
 	~Window() {}
 

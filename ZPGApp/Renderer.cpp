@@ -14,6 +14,8 @@ Renderer* Renderer::getInstance() {
 void Renderer::draw(const Object& objectToDraw) const {
 	objectToDraw.bindBuffers();
 
+	glStencilFunc(GL_ALWAYS, objectToDraw.getID(), 0xFF);
+
 	if(objectToDraw.isWithIndexes())
 		glDrawElements(GL_TRIANGLES, objectToDraw.getIndexCount(), GL_UNSIGNED_INT, NULL); // Params - mode,first,count
 	else
@@ -22,5 +24,5 @@ void Renderer::draw(const Object& objectToDraw) const {
 }
 
 void Renderer::clear() const {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear color and depth buffer
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // clear color and depth buffer
 }

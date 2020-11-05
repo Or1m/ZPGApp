@@ -11,7 +11,7 @@ void SceneThree::onLoad() {
 
 		object->useShaderProgram();
 		object->init();
-		object->scale(glm::vec3(15.0f, 15.0f, 15.0f));
+		//object->scale(glm::vec3(15.0f, 15.0f, 15.0f));
 
 		object->changeColor(glm::vec3(0.45, 1.0, 1.0));
 		object->moveTo(glm::vec3(0.0, -.5, -.5));

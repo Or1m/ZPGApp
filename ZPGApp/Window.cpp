@@ -22,7 +22,8 @@ Window* Window::getInstance(int width, int height, const char* title) {
 	return instance;
 }
 
-Window::Window(int width, int height, const char* title) {
+Window::Window(int width, int height, const char* title) 
+:	width(width), height(height), title(title) {
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -30,7 +31,7 @@ Window::Window(int width, int height, const char* title) {
 		exit(EXIT_FAILURE);
 	}
 
-	this->window = glfwCreateWindow(width, height, title, NULL, NULL);
+	this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
 
 	if (!this->window) {
 		glfwTerminate();
@@ -49,8 +50,11 @@ Window::Window(int width, int height, const char* title) {
 	float ratio = w_width / (float)h_height;
 	glViewport(0, 0, w_width, h_height);
 
-	glEnable(GL_DEPTH_TEST); 
-	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+	//glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	Camera::getInstance()->setCenter(width, height);
 }
@@ -99,7 +103,7 @@ void Window::attachCallbacks() const{
 
 	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
 
-	//glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
+	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
 
 	//glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
 
@@ -158,6 +162,23 @@ void Window::button_callback(GLFWwindow* window, int button, int action, int mod
 		//getting cursor position
 		glfwGetCursorPos(window, &xpos, &ypos);
 		printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
+
+
+		//naètení ID a pozice ve svìtových souøadnicích
+		GLbyte color[4];
+		GLfloat depth;
+		GLuint index;
+
+		GLint x = (GLint)xpos;
+		GLint y = (GLint)ypos;
+
+		int newy = (int)getInstance()->height - y;
+
+		glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+		printf("Clicked on pixel %d, %d, color %02hhx %02hhx %02hhx %02hhx, depth %f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
 	}
 }
 #pragma endregion
