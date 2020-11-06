@@ -8,6 +8,7 @@
 #include <glm/gtx/string_cast.hpp>		// glm::to_string()
 
 #include "Window.h"
+#include "Scene.h"
 
 class Application {
 public:

@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include "Camera.h"
+#include "SceneManager.h"
 
 Window* Window::instance = NULL;
 
@@ -161,12 +162,12 @@ void Window::button_callback(GLFWwindow* window, int button, int action, int mod
 		double xpos, ypos;
 		//getting cursor position
 		glfwGetCursorPos(window, &xpos, &ypos);
-		printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
+		//printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
 
 
 		//naètení ID a pozice ve svìtových souøadnicích
-		GLbyte color[4];
-		GLfloat depth;
+		//GLbyte color[4];
+		//GLfloat depth;
 		GLuint index;
 
 		GLint x = (GLint)xpos;
@@ -174,11 +175,14 @@ void Window::button_callback(GLFWwindow* window, int button, int action, int mod
 
 		int newy = (int)getInstance()->height - y;
 
-		glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
-		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		//glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+		//glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
 		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
-		printf("Clicked on pixel %d, %d, color %02hhx %02hhx %02hhx %02hhx, depth %f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+		//printf("Clicked on pixel %d, %d, color %02hhx %02hhx %02hhx %02hhx, depth %f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+	
+		SceneManager::getInstance()->getScene()->setSelected(index);
+		//std::cout << index << std::endl;
 	}
 }
 #pragma endregion

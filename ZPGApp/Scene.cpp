@@ -13,3 +13,7 @@ Scene::~Scene() {
 	delete this->objects;
 	delete this->lights;
 }
+
+void Scene::setSelected(int selected) {
+	this->selected = selected;
+}

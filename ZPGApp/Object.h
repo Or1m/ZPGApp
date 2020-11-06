@@ -23,7 +23,7 @@ public:
 		this->shader->sendUniform(name, t);
 	}
 
-	int getID() const { return 69; }
+	int getID() const { return this->id; }
 
 	void addLight(Light* light);
 	void init();
@@ -48,4 +48,6 @@ protected:
 	unsigned int* indexes;
 	int countOfIndexes;
 	bool hasIndexes;
+
+	int id;
 };

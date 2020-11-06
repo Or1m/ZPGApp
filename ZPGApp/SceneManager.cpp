@@ -29,6 +29,10 @@ void SceneManager::setScene(Scene& scene) {
 	this->currentScene->onLoad();
 }
 
+Scene* SceneManager::getScene() {
+	return this->currentScene;
+}
+
 void SceneManager::runScene() {
 
 	while(Window::getInstance()->windowShouldNotClose()) {

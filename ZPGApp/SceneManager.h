@@ -10,6 +10,8 @@ public:
 	~SceneManager();
 
 	void setScene(Scene& scene);
+	Scene* getScene();
+
 	void runScene();
 
 private:
