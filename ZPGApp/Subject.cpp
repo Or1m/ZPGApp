@@ -4,7 +4,7 @@ Subject::Subject()
 	: observers(new std::vector<Observer*>()) {}
 
 Subject::~Subject() {
-	for (int i = 0; i < this->observers->size(); i++)
+	for (unsigned int i = 0; i < this->observers->size(); i++)
 		delete this->observers->at(i);
 
 	delete this->observers;
