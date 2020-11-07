@@ -70,8 +70,9 @@ void Object::changeColor(glm::vec3 color) {
 
 void Object::moveTo(glm::vec3 pos) {
 	TransformableObject::moveTo(pos);
-
-	this->shader->sendUniform("modelMatrix", glm::translate(glm::mat4(1.0f), this->position));
+	this->useShaderProgram();
+	this->modelMatrix = glm::translate(glm::mat4(1.0), this->position);
+	this->shader->sendUniform("modelMatrix", modelMatrix);
 }
 
 void Object::move(glm::vec3 trans) {
@@ -82,6 +83,7 @@ void Object::move(glm::vec3 trans) {
 }
 
 void Object::scale(glm::vec3 scale) {
+	this->useShaderProgram();
 	this->modelMatrix = glm::scale(this->modelMatrix, scale);
 	this->shader->sendUniform("modelMatrix", modelMatrix);
 }

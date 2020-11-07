@@ -1,7 +1,8 @@
 #include "Scene.h"
 
 Scene::Scene() 
-:	objects(new std::vector<Object*>()), lights(new std::vector<Light*>()) {}
+:	objects(new std::vector<Object*>()), lights(new std::vector<Light*>()),
+	selected(-1), selectionPos(glm::vec3(0.0)) {}
 
 Scene::~Scene() {
 	for (unsigned int i = 0; i < this->objects->size(); i++)
@@ -14,6 +15,7 @@ Scene::~Scene() {
 	delete this->lights;
 }
 
-void Scene::setSelected(int selected) {
+void Scene::setSelected(int selected, glm::vec3 pos) {
 	this->selected = selected;
+	this->selectionPos = pos;
 }

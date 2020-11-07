@@ -167,22 +167,30 @@ void Window::button_callback(GLFWwindow* window, int button, int action, int mod
 
 		//naètení ID a pozice ve svìtových souøadnicích
 		//GLbyte color[4];
-		//GLfloat depth;
+		GLfloat depth;
 		GLuint index;
 
 		GLint x = (GLint)xpos;
 		GLint y = (GLint)ypos;
 
-		int newy = (int)getInstance()->height - y;
+		int newy = (int)Window::getInstance()->height - y;
 
 		//glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
-		//glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
 		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
 		//printf("Clicked on pixel %d, %d, color %02hhx %02hhx %02hhx %02hhx, depth %f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
 	
-		SceneManager::getInstance()->getScene()->setSelected(index);
 		//std::cout << index << std::endl;
+
+		glm::vec3 screenX = glm::vec3(x, newy, depth);
+		glm::mat4 view = Camera::getInstance()->getCamera();
+		glm::mat4 projection = Camera::getInstance()->getProjection();
+		glm::vec4 viewPort = glm::vec4(0, 0, Window::getInstance()->width, Window::getInstance()->height);
+		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
+
+		SceneManager::getInstance()->getScene()->setSelected(index, pos);
+		printf("unProject[%f, %f, %f]\n", pos.x, pos.y, pos.z);
 	}
 }
 #pragma endregion

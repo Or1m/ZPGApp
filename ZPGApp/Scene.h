@@ -19,13 +19,14 @@ public:
 	virtual void onLoad() {};
 	virtual void onUpdate() {};
 
-	void setSelected(int selected);
+	void setSelected(int selected, glm::vec3 pos);
 
 protected:
 	std::vector<Object*>*	objects;
 	std::vector<Light*>*	lights;
 
 	int selected;
+	glm::vec3 selectionPos;
 
 	const std::string constantPath		= "Resources/Shaders/Constant.shader";
 	const std::string lambertPath		= "Resources/Shaders/Lambert.shader";
