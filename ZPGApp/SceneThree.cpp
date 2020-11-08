@@ -38,6 +38,16 @@ void SceneThree::onUpdate() {
 		if (this->selected == objects->at(0)->getID()) {
 			//lights->at(0)->moveTo(selectionPos);
 			objects->at(1)->moveTo(selectionPos);
+			//Sphere* sphere = new Sphere(lambertPath);
+			//sphere->addLight(lights->at(0));
+
+			//sphere->useShaderProgram();
+			//sphere->init();
+			//sphere->scale(glm::vec3(.5));
+			//sphere->moveTo(selectionPos);
+			////objects->push_back(sphere);
+			//Renderer::getInstance()->draw(*sphere);
+			//objects->push_back(sphere);
 		}
 	}
 }

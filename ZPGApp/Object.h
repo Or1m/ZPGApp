@@ -4,9 +4,8 @@
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
-#include "TransformableObject.h"
 
-class Object : TransformableObject {
+class Object {
 public:
 	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, const std::string& shaderPath);
 	virtual ~Object();

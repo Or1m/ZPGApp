@@ -11,10 +11,9 @@
 
 #include "Subject.h"
 #include "Observer.h"
-#include "TransformableObject.h"
 
 
-class Camera : public Subject, TransformableObject {
+class Camera : public Subject {
 public:
 	static Camera* getInstance();
 
@@ -39,6 +38,7 @@ private:
 
 	glm::mat4 projection;
 
+	glm::vec3 eye;
 	glm::vec3 target;
 	glm::vec3 up;
 

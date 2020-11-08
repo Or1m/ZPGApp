@@ -4,21 +4,21 @@
 #include <vector>
 
 #include "Subject.h"
-#include "TransformableObject.h"
 
 
-class Light : public Subject, TransformableObject {
+class Light : public Subject {
 public:
 	Light();
 	~Light() {}
 
 	void moveTo(glm::vec3 pos);
-	void move(glm::vec3 pos);
+	void move(glm::vec3 trans);
 
 	glm::vec3 getLightPosition();
 	glm::vec3 getLightColor();
 
 private:
+	glm::vec3 position;
 	glm::vec3 lightColor;
 };
 

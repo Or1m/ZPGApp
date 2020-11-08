@@ -5,13 +5,13 @@ Light::Light()
 
 
 void Light::moveTo(glm::vec3 pos) {
-	TransformableObject::moveTo(pos);
+	this->position = pos;
 
 	this->notify(*this);
 }
 
-void Light::move(glm::vec3 pos) {
-	TransformableObject::move(pos);
+void Light::move(glm::vec3 trans) {
+	this->position += trans;
 
 	this->notify(*this);
 }

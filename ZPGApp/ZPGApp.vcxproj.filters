@@ -72,9 +72,6 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
-    <ClCompile Include="TransformableObject.cpp">
-      <Filter>Source Files\Base Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
@@ -150,9 +147,6 @@
       <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="Subject.h">
-      <Filter>Header Files\Base Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformableObject.h">
       <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
