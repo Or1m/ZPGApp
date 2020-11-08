@@ -56,8 +56,6 @@ Window::Window(int width, int height, const char* title)
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-	//glfwSetInputMode(this->this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
 	Camera::getInstance()->setCenter(width, height);
 }
 
@@ -95,9 +93,9 @@ void Window::terminateWindow() const {
 }
 
 
+// Sets the key callback
 void Window::attachCallbacks() const {
 
-	// Sets the key callback
 	glfwSetKeyCallback(this->glfwWindow, Callbacks::key_callback); // stlacenie klavesy
 
 	glfwSetCursorPosCallback(this->glfwWindow, Callbacks::cursor_callback); // pohyb kurzora
@@ -110,6 +108,7 @@ void Window::attachCallbacks() const {
 
 	//glfwSetWindowIconifyCallback(this->glfwWindow, Callbacks::window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
 
-	/*glfwSetCursorPosCallback(this->glfwWindow, [](GLFWwindow* this->glfwWindow, double mouseXPos, double mouseYPos)
-		-> void {Window::getInstance()->cursor_callback(this->glfwWindow, mouseXPos, mouseYPos); });*/
+
+	/*glfwSetCursorPosCallback(this->glfwWindow, [](GLFWwindow* glfwWindow, double mouseXPos, double mouseYPos)
+		-> void {Callbacks::cursor_callback(glfwWindow, mouseXPos, mouseYPos); });*/
 }

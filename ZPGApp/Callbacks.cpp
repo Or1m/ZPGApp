@@ -6,7 +6,9 @@
 #include "Window.h"
 #include "SceneManager.h"
 
-
+//float x = 0;
+//float y = 0;
+//bool pressed = false;
 void Callbacks::error_callback(int error, const char* description) {
 	fputs(description, stderr);
 }
@@ -28,9 +30,20 @@ void Callbacks::key_callback(GLFWwindow* window, int key, int scancode, int acti
 }
 
 void Callbacks::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
-	//printf("cursor_pos_callback %f, %f; %d, %d\n", (float)mouseX, (float)mouseY, 0, 0); // (int)clickX, (int)clickY)
+	printf("cursor_pos_callback %f, %f; %d, %f\n", (float)mouseX, (float)mouseY, 0, 0); // (int)clickX, (int)clickY)
 
-	Camera::getInstance()->changeDirection((float)mouseX, (float)mouseY);
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+		Camera::getInstance()->changeDirection(/*x + */(float)mouseX,/* y + */(float)mouseY);
+
+		//pressed = true;
+	}
+
+
+	/*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE && pressed) {
+		x += mouseX;
+		y += mouseY;
+		pressed = false;
+	}*/
 }
 
 void Callbacks::window_size_callback(GLFWwindow* window, int width, int height) {

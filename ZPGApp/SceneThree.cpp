@@ -1,7 +1,7 @@
 #include "SceneThree.h"
 
 void SceneThree::onLoad() {
-	objects->push_back(new Plain(constantPath));
+	objects->push_back(new Plain(blinnPhongPath));
 	objects->push_back(new Sphere(lambertPath));
 
 	lights->push_back(new Light());
