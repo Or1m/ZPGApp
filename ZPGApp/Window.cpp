@@ -1,8 +1,9 @@
 #include "Window.h"
 
 #include<iostream>
+
+#include "Callbacks.h"
 #include "Camera.h"
-#include "SceneManager.h"
 
 Window* Window::instance = NULL;
 
@@ -25,7 +26,7 @@ Window* Window::getInstance(int width, int height, const char* title) {
 
 Window::Window(int width, int height, const char* title) 
 :	width(width), height(height), title(title) {
-	glfwSetErrorCallback(error_callback);
+	glfwSetErrorCallback(Callbacks::error_callback);
 
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
@@ -94,103 +95,21 @@ void Window::terminateWindow() const {
 }
 
 
-#pragma region Callbacks
 void Window::attachCallbacks() const{
 
 	// Sets the key callback
-	glfwSetKeyCallback(window, key_callback); // stlacenie klavesy
+	glfwSetKeyCallback(window, Callbacks::key_callback); // stlacenie klavesy
 
-	glfwSetCursorPosCallback(window, cursor_callback); // pohyb kurzora
+	glfwSetCursorPosCallback(window, Callbacks::cursor_callback); // pohyb kurzora
 
-	glfwSetWindowSizeCallback(window, window_size_callback); // resize okna
+	glfwSetWindowSizeCallback(window, Callbacks::window_size_callback); // resize okna
 
-	glfwSetMouseButtonCallback(window, button_callback); // stlacenie mysky
+	glfwSetMouseButtonCallback(window, Callbacks::button_callback); // stlacenie mysky
 
-	//glfwSetWindowFocusCallback(window, window_focus_callback); // focus na okno
+	//glfwSetWindowFocusCallback(window, Callbacks::window_focus_callback); // focus na okno
 
-	//glfwSetWindowIconifyCallback(window, window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
+	//glfwSetWindowIconifyCallback(window, Callbacks::window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
 
 	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
 		-> void {Window::getInstance()->cursor_callback(window, mouseXPos, mouseYPos); });*/
 }
-
-void Window::error_callback(int error, const char* description) {
-	fputs(description, stderr);
-}
-
-void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-	//printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
-	
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-
-	if (key == GLFW_KEY_W)
-		Camera::getInstance()->toFront();
-	if (key == GLFW_KEY_S)
-		Camera::getInstance()->toBack();
-	if (key == GLFW_KEY_A)
-		Camera::getInstance()->toLeft();
-	if (key == GLFW_KEY_D)
-		Camera::getInstance()->toRight();
-}
-
-void Window::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
-	//printf("cursor_pos_callback %f, %f; %d, %d\n", (float)mouseX, (float)mouseY, 0, 0); // (int)clickX, (int)clickY)
-
-	Camera::getInstance()->changeDirection((float)mouseX, (float)mouseY);
-}
-
-void Window::window_size_callback(GLFWwindow* window, int width, int height) {
-	//printf("resize %d, %d \n", width, height);
-	glViewport(0, 0, width, height);
-}
-
-
-void Window::window_focus_callback(GLFWwindow* window, int focused) {
-	printf("window_focus_callback \n");
-}
-
-void Window::window_iconify_callback(GLFWwindow* window, int iconified) {
-	printf("window_iconify_callback \n");
-}
-
-void Window::button_callback(GLFWwindow* window, int button, int action, int mode) {
-	//if (action == GLFW_PRESS) printf("button_callback [%d,%d,%d]\n", button, action, mode);
-
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-	{
-		double xpos, ypos;
-		//getting cursor position
-		glfwGetCursorPos(window, &xpos, &ypos);
-		//printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
-
-
-		//naètení ID a pozice ve svìtových souøadnicích
-		//GLbyte color[4];
-		GLfloat depth;
-		GLuint index;
-
-		GLint x = (GLint)xpos;
-		GLint y = (GLint)ypos;
-
-		int newy = (int)Window::getInstance()->height - y;
-
-		//glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
-		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
-		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
-
-		//printf("Clicked on pixel %d, %d, color %02hhx %02hhx %02hhx %02hhx, depth %f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
-	
-		//std::cout << index << std::endl;
-
-		glm::vec3 screenX = glm::vec3(x, newy, depth);
-		glm::mat4 view = Camera::getInstance()->getCamera();
-		glm::mat4 projection = Camera::getInstance()->getProjection();
-		glm::vec4 viewPort = glm::vec4(0, 0, Window::getInstance()->width, Window::getInstance()->height);
-		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
-
-		SceneManager::getInstance()->getScene()->setSelected(index, pos);
-		printf("unProject[%f, %f, %f]\n", pos.x, pos.y, pos.z);
-	}
-}
-#pragma endregion
