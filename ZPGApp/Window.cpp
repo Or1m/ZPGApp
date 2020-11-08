@@ -33,14 +33,14 @@ Window::Window(int width, int height, const char* title)
 		exit(EXIT_FAILURE);
 	}
 
-	this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
+	this->glfwWindow = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
 
-	if (!this->window) {
+	if (!this->glfwWindow) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
-	glfwMakeContextCurrent(this->window);
+	glfwMakeContextCurrent(this->glfwWindow);
 	glfwSwapInterval(1);
 
 	// start GLEW extension handler
@@ -48,7 +48,7 @@ Window::Window(int width, int height, const char* title)
 	glewInit();
 
 	int w_width, h_height;
-	glfwGetFramebufferSize(this->window, &w_width, &h_height);
+	glfwGetFramebufferSize(this->glfwWindow, &w_width, &h_height);
 	float ratio = w_width / (float)h_height;
 	glViewport(0, 0, w_width, h_height);
 
@@ -56,14 +56,14 @@ Window::Window(int width, int height, const char* title)
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-	//glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(this->this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	Camera::getInstance()->setCenter(width, height);
 }
 
 
 bool Window::windowShouldNotClose() const {
-	return !glfwWindowShouldClose(this->window);
+	return !glfwWindowShouldClose(this->glfwWindow);
 }
 
 void Window::swapBuffer() const { 
@@ -72,7 +72,7 @@ void Window::swapBuffer() const {
 	 * that is used to render to during this render iteration and show it as output to the screen.
 	 * Put the stuff we’ve been drawing onto the display
 	 */
-	glfwSwapBuffers(this->window);
+	glfwSwapBuffers(this->glfwWindow);
 }
 
 void Window::pollEvents() const {
@@ -84,7 +84,7 @@ void Window::pollEvents() const {
 }
 
 void Window::destroyWindow() const {
-	glfwDestroyWindow(this->window);
+	glfwDestroyWindow(this->glfwWindow);
 }
 
 void Window::terminateWindow() const {
@@ -95,21 +95,21 @@ void Window::terminateWindow() const {
 }
 
 
-void Window::attachCallbacks() const{
+void Window::attachCallbacks() const {
 
 	// Sets the key callback
-	glfwSetKeyCallback(window, Callbacks::key_callback); // stlacenie klavesy
+	glfwSetKeyCallback(this->glfwWindow, Callbacks::key_callback); // stlacenie klavesy
 
-	glfwSetCursorPosCallback(window, Callbacks::cursor_callback); // pohyb kurzora
+	glfwSetCursorPosCallback(this->glfwWindow, Callbacks::cursor_callback); // pohyb kurzora
 
-	glfwSetWindowSizeCallback(window, Callbacks::window_size_callback); // resize okna
+	glfwSetWindowSizeCallback(this->glfwWindow, Callbacks::window_size_callback); // resize okna
 
-	glfwSetMouseButtonCallback(window, Callbacks::button_callback); // stlacenie mysky
+	glfwSetMouseButtonCallback(this->glfwWindow, Callbacks::button_callback); // stlacenie mysky
 
-	//glfwSetWindowFocusCallback(window, Callbacks::window_focus_callback); // focus na okno
+	//glfwSetWindowFocusCallback(this->glfwWindow, Callbacks::window_focus_callback); // focus na okno
 
-	//glfwSetWindowIconifyCallback(window, Callbacks::window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
+	//glfwSetWindowIconifyCallback(this->glfwWindow, Callbacks::window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
 
-	/*glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)
-		-> void {Window::getInstance()->cursor_callback(window, mouseXPos, mouseYPos); });*/
+	/*glfwSetCursorPosCallback(this->glfwWindow, [](GLFWwindow* this->glfwWindow, double mouseXPos, double mouseYPos)
+		-> void {Window::getInstance()->cursor_callback(this->glfwWindow, mouseXPos, mouseYPos); });*/
 }

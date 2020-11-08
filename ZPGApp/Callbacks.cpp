@@ -38,15 +38,6 @@ void Callbacks::window_size_callback(GLFWwindow* window, int width, int height) 
 	glViewport(0, 0, width, height);
 }
 
-
-void Callbacks::window_focus_callback(GLFWwindow* window, int focused) {
-	printf("window_focus_callback \n");
-}
-
-void Callbacks::window_iconify_callback(GLFWwindow* window, int iconified) {
-	printf("window_iconify_callback \n");
-}
-
 void Callbacks::button_callback(GLFWwindow* window, int button, int action, int mode) {
 	//if (action == GLFW_PRESS) printf("button_callback [%d,%d,%d]\n", button, action, mode);
 
@@ -83,6 +74,15 @@ void Callbacks::button_callback(GLFWwindow* window, int button, int action, int 
 		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
 
 		SceneManager::getInstance()->getScene()->setSelected(index, pos);
-		printf("unProject[%f, %f, %f]\n", pos.x, pos.y, pos.z);
+		//printf("unProject[%f, %f, %f]\n", pos.x, pos.y, pos.z);
 	}
+}
+
+
+void Callbacks::window_focus_callback(GLFWwindow* window, int focused) {
+	printf("window_focus_callback \n");
+}
+
+void Callbacks::window_iconify_callback(GLFWwindow* window, int iconified) {
+	printf("window_iconify_callback \n");
 }
