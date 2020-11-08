@@ -30,11 +30,12 @@ void Callbacks::key_callback(GLFWwindow* window, int key, int scancode, int acti
 }
 
 void Callbacks::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
-	printf("cursor_pos_callback %f, %f; %d, %f\n", (float)mouseX, (float)mouseY, 0, 0); // (int)clickX, (int)clickY)
+	printf("cursor_pos_callback %f, %f; %d, %f\n", (float)mouseX, (float)mouseY, 0, 0.0); // (int)clickX, (int)clickY)
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
 		Camera::getInstance()->changeDirection(/*x + */(float)mouseX,/* y + */(float)mouseY);
 
+		// cursor disable?
 		//pressed = true;
 	}
 
@@ -42,6 +43,8 @@ void Callbacks::cursor_callback(GLFWwindow* window, double mouseX, double mouseY
 	/*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE && pressed) {
 		x += mouseX;
 		y += mouseY;
+
+		cursor enable?
 		pressed = false;
 	}*/
 }
