@@ -15,7 +15,8 @@ Camera* Camera::getInstance() {
 Camera::Camera()
 :	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
 	eye(glm::vec3(0.0f, 0.0f, 3.0f)), target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
-	cameraSpeed(3.5f), deltaTime(0.015f), sensitivity(0.1f), yaw(-89.0f), pitch(0.0f), lastX(400), lastY(300), firstTimeMouse(true) {}
+	cameraSpeed(5.0f), deltaTime(0.015f), sensitivity(5.0f), 
+	yaw(180.0f), pitch(0.0f), lastX(0), lastY(0) {}
 
 
 glm::mat4 Camera::getCamera() {
@@ -70,22 +71,13 @@ void Camera::toRight() {
 
 void Camera::changeDirection(float mouseX, float mouseY) {
 
-	if (this->firstTimeMouse) {
-		this->lastX = mouseX;
-		this->lastY = mouseY;
-		this->firstTimeMouse = false;
-	}
-
-	float xOffset = mouseX - this->lastX;
-	float yOffset = this->lastY - mouseY;
 	this->lastX = mouseX;
 	this->lastY = mouseY;
 
-	xOffset *= this->sensitivity;
-	yOffset *= this->sensitivity;
+	
+	this->yaw   += this->sensitivity * lastX * this->deltaTime;
+	this->pitch += this->sensitivity * lastY * this->deltaTime;
 
-	this->yaw += xOffset;
-	this->pitch += yOffset;
 
 	if (this->pitch > 89.0f)	this->pitch = 89.0f;
 	if (this->pitch < -89.0f)	this->pitch = -89.0f;
@@ -93,19 +85,11 @@ void Camera::changeDirection(float mouseX, float mouseY) {
 	if (this->yaw > 360.0f || this->yaw < -360.0f)
 		this->yaw = 0.0f;
 
-	// Direction
-	//target.x = cos(fi);
-	//target.z = sin(fi);
-	//target.y = sin(psi);
-
-	//direction.x = cos(glm::radians(yaw)); 2D rotation, yaw - dolava doprava
-	//direction.z = sin(glm::radians(yaw)); direction.y = 0
 
 	glm::vec3 direction;
-
-	direction.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch)); // funguje aj bez * cos(glm::radians(pitch)
+	direction.x = cos(glm::radians(this->pitch)) * sin(glm::radians(this->yaw));
 	direction.y = sin(glm::radians(this->pitch));
-	direction.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch)); // funguje aj bez * cos(glm::radians(pitch)
+	direction.z = cos(glm::radians(this->pitch)) * cos(glm::radians(this->yaw));
 
 	this->target = glm::normalize(direction);
 

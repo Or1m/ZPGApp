@@ -50,7 +50,6 @@ private:
 	float pitch;
 	float lastX;
 	float lastY;
-	bool firstTimeMouse;
 
 	Camera();
 	~Camera() {}
