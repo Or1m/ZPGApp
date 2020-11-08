@@ -57,6 +57,7 @@ void Callbacks::cursor_callback(GLFWwindow* window, double mouseX, double mouseY
 
 void Callbacks::window_size_callback(GLFWwindow* window, int width, int height) {
 	//printf("resize %d, %d \n", width, height);
+
 	glViewport(0, 0, width, height);
 }
 
@@ -66,10 +67,7 @@ void Callbacks::button_callback(GLFWwindow* window, int button, int action, int 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
 		double xpos, ypos;
-		//getting cursor position
 		glfwGetCursorPos(window, &xpos, &ypos);
-		//printf("cursor_click_callback %d, %d\n", (int)xpos, (int)ypos);
-
 
 		//naètení ID a pozice ve svìtových souøadnicích
 		//GLbyte color[4];
@@ -86,17 +84,22 @@ void Callbacks::button_callback(GLFWwindow* window, int button, int action, int 
 		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
 		//printf("Clicked on pixel %d, %d, color %02hhx %02hhx %02hhx %02hhx, depth %f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
-
 		//std::cout << index << std::endl;
 
-		glm::vec3 screenX = glm::vec3(x, newy, depth);
-		glm::mat4 view = Camera::getInstance()->getCamera();
-		glm::mat4 projection = Camera::getInstance()->getProjection();
-		glm::vec4 viewPort = glm::vec4(0, 0, Window::getInstance()->getWidth(), Window::getInstance()->getHeight());
-		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
+		/**
+		 * Prevadza bod spat do lokalneho alebo globalneho suradnicoveho systemu
+		 * @param 1 screenX
+		 * @param 2 view
+		 * @param 3 projection
+		 * @param 4 viewPort
+		 */
+		glm::vec3 pos = glm::unProject(
+			glm::vec3(x, newy, depth), Camera::getInstance()->getCamera(), Camera::getInstance()->getProjection(),
+			glm::vec4(0, 0, Window::getInstance()->getWidth(), Window::getInstance()->getHeight())
+		);  
+		//printf("unProject[%f, %f, %f]\n", pos.x, pos.y, pos.z);
 
 		SceneManager::getInstance()->getScene()->setSelected(index, pos);
-		//printf("unProject[%f, %f, %f]\n", pos.x, pos.y, pos.z);
 	}
 }
 

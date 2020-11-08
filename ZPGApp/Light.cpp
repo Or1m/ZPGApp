@@ -1,7 +1,7 @@
 #include "Light.h"
 
 Light::Light() 
-:	lightColor(1.0, 1.0, 1.0) {}
+:	lightColor(glm::vec3(1.0, 1.0, 1.0)), position(glm::vec3(0.0, 0.0, 0.0)) {}
 
 
 void Light::moveTo(glm::vec3 pos) {

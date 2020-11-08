@@ -24,6 +24,7 @@ Object::Object(const float points[], const int countOfPoints, unsigned int index
 		this->indexBuffer = new IndexBuffer(this->indexes, this->countOfIndexes);
 
 	this->shader = new Shader(shaderPath);
+	this->init();
 }
 
 Object::~Object() {
@@ -58,6 +59,8 @@ void Object::addLight(Light* light) {
 }
 
 void Object::init() {
+	this->useShaderProgram();
+
 	this->shader->sendUniform("modelMatrix", this->modelMatrix);
 	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
@@ -65,23 +68,28 @@ void Object::init() {
 
 
 void Object::changeColor(glm::vec3 color) {
+	this->useShaderProgram();
+
 	this->shader->sendUniform("color", color);
 }
 
 void Object::moveTo(glm::vec3 pos) {
 	this->useShaderProgram();
+
 	this->modelMatrix = glm::translate(glm::mat4(1.0), pos);
 	this->shader->sendUniform("modelMatrix", modelMatrix);
 }
 
 void Object::move(glm::vec3 trans) {
 	this->useShaderProgram();
+
 	this->modelMatrix = glm::translate(modelMatrix, trans);
 	this->shader->sendUniform("modelMatrix", modelMatrix);
 }
 
 void Object::scale(glm::vec3 scale) {
 	this->useShaderProgram();
+
 	this->modelMatrix = glm::scale(this->modelMatrix, scale);
 	this->shader->sendUniform("modelMatrix", modelMatrix);
 }
