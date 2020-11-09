@@ -82,11 +82,12 @@ void Object::changeColor(glm::vec3 color) {
 void Object::moveTo(glm::vec3 pos) {
 	this->useShaderProgram();
 
+	// OLD
 	this->modelMatrix = glm::translate(glm::mat4(1.0), pos);
 	/*this->shader->sendUniform("modelMatrix", modelMatrix);*/
 
+	// NEW
 	this->transformation->add(new Move(pos));
-
 	this->shader->sendUniform("modelMatrix", this->transformation->apply());
 }
 
