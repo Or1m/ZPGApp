@@ -55,6 +55,7 @@ bool Object::isWithIndexes() const {
 
 
 void Object::addLight(Light* light) {
+	this->useShaderProgram();
 	this->shader->addLight(light);
 }
 

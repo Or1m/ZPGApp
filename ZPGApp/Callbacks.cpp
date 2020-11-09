@@ -6,7 +6,7 @@
 #include "Window.h"
 #include "SceneManager.h"
 
-bool pressed = false;
+static bool pressed = false;
 
 void Callbacks::error_callback(int error, const char* description) {
 	fputs(description, stderr);
