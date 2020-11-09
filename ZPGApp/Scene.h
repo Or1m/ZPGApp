@@ -22,7 +22,7 @@ public:
 	virtual void onUpdate() {};
 
 	void setSelected(int selected, glm::vec3 pos);
-	
+		
 	static Scene* makeScene(int choice);
 
 protected:
@@ -32,6 +32,8 @@ protected:
 	int selected;
 	glm::vec3 selectionPos;
 
+	void deselect();
+		
 	const std::string constantPath		= "Resources/Shaders/Constant.shader";
 	const std::string lambertPath		= "Resources/Shaders/Lambert.shader";
 	const std::string phongPath			= "Resources/Shaders/Phong.shader";

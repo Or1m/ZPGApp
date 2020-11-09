@@ -31,11 +31,11 @@ void SceneThree::onUpdate() {
 
 		if (this->selected == object->getID() && object->getID() > 2) {
 			object->changeColor(glm::vec3(1.0, 0.0, 0.0));
-			this->selected = -1;
+			this->deselect();
 		}
 	}
 
-	if (this->selected == objects->at(0)->getID()) {
+	if (this->selected == this->objects->at(0)->getID()) {
 		//lights->at(0)->moveTo(selectionPos);
 		//objects->at(1)->moveTo(selectionPos);
 
@@ -47,11 +47,11 @@ void SceneThree::onUpdate() {
 		sphere->moveTo(selectionPos);
 
 		objects->push_back(sphere);
-		this->selected = -1;
+		this->deselect();
 	}
 
-	else if (this->selected == objects->at(1)->getID()) {
+	else if (this->selected == this->objects->at(1)->getID()) {
 		this->objects->at(1)->scale(glm::vec3(1.2, 1.2, 1.2));
-		this->selected = -1;
+		this->deselect();
 	}
 }

@@ -24,6 +24,12 @@ void Scene::setSelected(int selected, glm::vec3 pos) {
 	this->selectionPos = pos;
 }
 
+void Scene::deselect() {
+	this->selected = -1;
+}
+
+
+// Factory method
 Scene* Scene::makeScene(int choice)
 {
 	switch (choice)
