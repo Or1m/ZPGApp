@@ -1,5 +1,9 @@
 #include "Scene.h"
 
+#include "SceneOne.h"
+#include "SceneTwo.h"
+#include "SceneThree.h"
+
 Scene::Scene() 
 :	objects(new std::vector<Object*>()), lights(new std::vector<Light*>()),
 	selected(-1), selectionPos(glm::vec3(0.0)) {}
@@ -18,4 +22,22 @@ Scene::~Scene() {
 void Scene::setSelected(int selected, glm::vec3 pos) {
 	this->selected = selected;
 	this->selectionPos = pos;
+}
+
+Scene* Scene::makeScene(int choice)
+{
+	switch (choice)
+	{
+	case 1:
+		return new SceneOne();
+		break;
+	case 2:
+		return new SceneTwo();
+		break;
+	case 3:
+		return new SceneThree();
+		break;
+	default:
+		return nullptr;
+	}
 }

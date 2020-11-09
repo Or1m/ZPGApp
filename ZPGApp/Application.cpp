@@ -2,8 +2,6 @@
 
 #include "Camera.h"
 #include "SceneManager.h"
-#include "SceneFactoryMethod.h"
-#include "Callbacks.h"
 
 
 Application* Application::instance = NULL;
@@ -33,7 +31,7 @@ Application::Application(int width, int height, const char* title)
 
 void Application::run(int scene) {
 
-	Scene* selected = SceneFactoryMethod::makeScene(scene);
+	Scene* selected = Scene::makeScene(scene);
 
 	if (selected) {
 		SceneManager::getInstance()->setScene(*selected);

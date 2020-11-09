@@ -84,9 +84,6 @@
     <ClCompile Include="SceneTwo.cpp">
       <Filter>Source Files\Concrete Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneFactoryMethod.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SceneThree.cpp">
       <Filter>Source Files\Concrete Scenes</Filter>
     </ClCompile>
@@ -175,9 +172,6 @@
     </ClInclude>
     <ClInclude Include="SceneTwo.h">
       <Filter>Header Files\Concrete Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneFactoryMethod.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneThree.h">
       <Filter>Header Files\Concrete Scenes</Filter>

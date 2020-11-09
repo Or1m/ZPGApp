@@ -137,7 +137,6 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneFactoryMethod.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneOne.cpp" />
     <ClCompile Include="SceneThree.cpp" />
@@ -157,7 +156,6 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Plain.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneFactoryMethod.h" />
     <ClInclude Include="SceneOne.h" />
     <ClInclude Include="SceneThree.h" />
     <ClInclude Include="SceneTwo.h" />

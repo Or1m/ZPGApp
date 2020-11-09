@@ -20,6 +20,8 @@ public:
 	virtual void onUpdate() {};
 
 	void setSelected(int selected, glm::vec3 pos);
+	
+	static Scene* makeScene(int choice);
 
 protected:
 	std::vector<Object*>*	objects;
