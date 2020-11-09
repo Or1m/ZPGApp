@@ -68,6 +68,8 @@ void Object::init() {
 	this->shader->sendUniform("modelMatrix", this->modelMatrix);
 	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
+
+	this->shader->sendUniform("viewPosition", Camera::getInstance()->getPosition());
 }
 
 
