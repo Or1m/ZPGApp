@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Window.h"
+
 Camera* Camera::instance = NULL;
 
 Camera* Camera::getInstance() {
@@ -12,10 +14,22 @@ Camera* Camera::getInstance() {
 	return instance;
 }
 
-Camera::Camera()
-:	projection(glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f)),
+Camera* Camera::getInstance(int width, int height)
+{
+	if (instance != NULL)
+		std::cout << "Warning instance is already created";
+	else
+		instance = new Camera(width, height);
+
+	return instance;
+}
+
+Camera::Camera() : Camera(800, 600) {}
+
+Camera::Camera(int width, int height) 
+:	projection(glm::perspective(glm::radians(45.0f), width / (float)height, 0.1f, 100.0f)),
 	eye(glm::vec3(0.0f, 0.0f, 3.0f)), target(glm::vec3(0.0f, 0.0f, -1.0f)), up(glm::vec3(0.0f, 1.0f, 0.0f)),
-	cameraSpeed(5.0f), deltaTime(0.015f), sensitivity(5.0f), 
+	cameraSpeed(5.0f), deltaTime(0.015f), sensitivity(5.0f),
 	yaw(180.0f), pitch(0.0f), lastX(0), lastY(0) {}
 
 
@@ -33,11 +47,6 @@ glm::vec3 Camera::getPosition() {
 	return this->eye;
 }
 
-
-void Camera::setCenter(int width, int height) {
-	this->lastX = width / 2.0f;
-	this->lastY = height / 2.0f;
-}
 
 void Camera::setDeltaTime(float delta) {
 	this->deltaTime = delta;

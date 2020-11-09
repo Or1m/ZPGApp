@@ -16,6 +16,7 @@
 class Camera : public Subject {
 public:
 	static Camera* getInstance();
+	static Camera* getInstance(int width, int height);
 
 	glm::mat4 getCamera();
 	glm::mat4 getProjection();
@@ -30,7 +31,6 @@ public:
 	void move(glm::vec3 trans);
 	void moveTo(glm::vec3 pos);
 
-	void setCenter(int width, int height);
 	void setDeltaTime(float delta);
 
 private:
@@ -52,6 +52,7 @@ private:
 	float lastY;
 
 	Camera();
+	Camera(int width, int height);
 	~Camera() {}
 };
 

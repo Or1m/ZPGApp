@@ -58,7 +58,7 @@ Window::Window(int width, int height, const char* title)
 
 	//glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	Camera::getInstance()->setCenter(width, height);
+	Camera::getInstance(width, height);
 }
 
 
