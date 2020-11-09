@@ -34,6 +34,12 @@
     <Filter Include="Header Files\Base Classes">
       <UniqueIdentifier>{8e91a89b-b820-43c7-821b-2fcebecd6d52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Transformations">
+      <UniqueIdentifier>{d1afe235-55ab-45c8-bb81-918d21c1b266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Transformations">
+      <UniqueIdentifier>{80d07f45-a8f8-41b3-9cbc-9772590ac0dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -89,6 +95,15 @@
     </ClCompile>
     <ClCompile Include="Callbacks.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformation.cpp">
+      <Filter>Source Files\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexTransformation.cpp">
+      <Filter>Source Files\Transformations</Filter>
+    </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>Source Files\Transformations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +196,15 @@
     </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformation.h">
+      <Filter>Header Files\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ComplexTransformation.h">
+      <Filter>Header Files\Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>Header Files\Transformations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

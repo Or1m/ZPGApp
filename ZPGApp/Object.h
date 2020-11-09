@@ -4,6 +4,7 @@
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
+#include "ComplexTransformation.h"
 
 class Object {
 public:
@@ -37,6 +38,7 @@ protected:
 	IndexBuffer* indexBuffer;
 	VertexArray* vertexArray;
 	Shader* shader;
+	ComplexTransformation* transformation;
 
 	glm::mat4 modelMatrix;
 

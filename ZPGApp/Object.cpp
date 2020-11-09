@@ -2,12 +2,15 @@
 #include "Camera.h"
 #include "Light.h"
 
+#include "Move.h"
+
 static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath)
 :	modelMatrix(glm::mat4(1.0f)),
 	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
-	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), id(identificator++) {
+	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), id(identificator++),
+	transformation(new ComplexTransformation()) {
 
 	this->vertexArray = new VertexArray(); // creating VAO
 	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints); // creating VBO
@@ -74,11 +77,17 @@ void Object::changeColor(glm::vec3 color) {
 	this->shader->sendUniform("color", color);
 }
 
+
+// WORK IN PROGRESS
 void Object::moveTo(glm::vec3 pos) {
 	this->useShaderProgram();
 
 	this->modelMatrix = glm::translate(glm::mat4(1.0), pos);
-	this->shader->sendUniform("modelMatrix", modelMatrix);
+	/*this->shader->sendUniform("modelMatrix", modelMatrix);*/
+
+	this->transformation->add(new Move(pos));
+
+	this->shader->sendUniform("modelMatrix", this->transformation->apply());
 }
 
 void Object::move(glm::vec3 trans) {
