@@ -1,7 +1,6 @@
 #include "Application.h"
 
 #include "Camera.h"
-#include "SceneManager.h"
 
 
 Application* Application::instance = NULL;

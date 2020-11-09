@@ -155,6 +155,7 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Plain.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneOne.h" />
     <ClInclude Include="SceneThree.h" />

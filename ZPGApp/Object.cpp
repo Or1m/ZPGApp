@@ -4,7 +4,7 @@
 
 static int identificator = 1;
 
-Object::Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, const std::string& shaderPath)
+Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath)
 :	modelMatrix(glm::mat4(1.0f)),
 	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), id(identificator++) {

@@ -7,7 +7,7 @@
 
 class Object {
 public:
-	Object(const float points[], const int countOfPoints, unsigned int indexes[], int countOfIndexes, bool isWithIndexes, const std::string& shaderPath);
+	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath);
 	virtual ~Object();
 
 	void bindBuffers() const;
@@ -44,8 +44,8 @@ protected:
 	int countOfPoints;
 	int sizeOfPoints;
 
-	unsigned int* indexes;
-	int countOfIndexes;
+	const unsigned int* indexes;
+	const int countOfIndexes;
 	bool hasIndexes;
 
 	int id;
