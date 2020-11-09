@@ -31,10 +31,11 @@ void Callbacks::key_callback(GLFWwindow* window, int key, int scancode, int acti
 void Callbacks::cursor_callback(GLFWwindow* window, double mouseX, double mouseY) {
 	//printf("cursor_pos_callback %f, %f; %d, %f\n", (float)mouseX, (float)mouseY, 0, 0.0); // (int)clickX, (int)clickY)
 
-	float middleX = Window::getInstance()->getWidth() / 2.0f;
-	float middleY = Window::getInstance()->getHeight() / 2.0f;
-
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+
+		float middleX = Window::getInstance()->getWidth() / 2.0f;
+		float middleY = Window::getInstance()->getHeight() / 2.0f;
+
 		if (!pressed) {
 			mouseX = middleX;
 			mouseY = middleY;

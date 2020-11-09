@@ -2,6 +2,10 @@
 
 #include <iostream>
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <glm/vec3.hpp>	
+
 #define ASSERT(x) if (!(x)) __debugbreak();
 
 // use it like GLCall(glDrawElements(GL_TRIANGLES, 6, GL_INT, NULL));
@@ -29,6 +33,12 @@ static void glCheckError() {
 	while (GLenum error = glGetError())
 		std::cout << "OpenGL error: " << error << "\n";
 }
+
+
+static glm::vec3 fromRGB(int R, int G, int B) {
+	return glm::vec3(R / 255.0f, G / 255.0f, B / 255.0f);
+}
+
 
 struct ShaderProgramSource {
 	std::string vertexSource;

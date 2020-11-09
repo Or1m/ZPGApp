@@ -2,13 +2,14 @@
 
 void SceneThree::onLoad() {
 	objects->push_back(new Plain(blinnPhongPath));
-	objects->push_back(new Sphere(lambertPath));
+	objects->push_back(new SuziFlat(lambertPath));
 
 	lights->push_back(new Light());
 
 
-	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, 2.0, 0.0) };
-	glm::vec3 colors[] = { glm::vec3(0.45, 1.0, 1.0),  glm::vec3(0.0, 1.0, 0.0) };
+	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, 2.0, -5.0) };
+	glm::vec3 test = fromRGB(192, 242, 67);
+	glm::vec3 colors[] = { glm::vec3(0.62, 0.49, 1.0), test };
 
 	int i = 0;
 	for (const auto& object : *objects) {
@@ -39,7 +40,7 @@ void SceneThree::onUpdate() {
 		//objects->at(1)->moveTo(selectionPos);
 
 		Sphere* sphere = new Sphere(lambertPath);
-		sphere->changeColor(glm::vec3(0.0, 0.0, 1.0));
+		sphere->changeColor(fromRGB(133, 255, 139));
 		sphere->addLight(lights->at(0));
 
 		lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
