@@ -29,7 +29,7 @@ void SceneThree::onUpdate() {
 	for (const auto& object : *this->objects) {
 		Renderer::getInstance()->draw(*object);
 
-		if (this->selected == object->getID() && object->getID() > 1) {
+		if (this->selected == object->getID() && object->getID() > 2) {
 			object->changeColor(glm::vec3(1.0, 0.0, 0.0));
 			this->selected = -1;
 		}
@@ -47,6 +47,11 @@ void SceneThree::onUpdate() {
 		sphere->moveTo(selectionPos);
 
 		objects->push_back(sphere);
+		this->selected = -1;
+	}
+
+	else if (this->selected == objects->at(1)->getID()) {
+		this->objects->at(1)->scale(glm::vec3(1.2, 1.2, 1.2));
 		this->selected = -1;
 	}
 }
