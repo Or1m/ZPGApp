@@ -78,19 +78,6 @@ void Object::changeColor(glm::vec3 color) {
 }
 
 
-// Zatial nefunguje
-void Object::moveTo(glm::vec3 pos) {
-	/*this->useShaderProgram();
-
-	ComplexTransformation* comp = new ComplexTransformation();
-	comp->addNotApply(new Move(glm::vec3(0.0)));
-	comp->addNotApply(new Move(pos));
-
-	this->shader->sendUniform("modelMatrix", this->transformation->add(comp));*/
-
-	this->move(pos);
-}
-
 void Object::move(glm::vec3 trans) {
 	this->useShaderProgram();
 

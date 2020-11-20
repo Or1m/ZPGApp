@@ -28,7 +28,6 @@ public:
 	void addLight(Light* light);
 	void init();
 	void changeColor(glm::vec3 color);
-	void moveTo(glm::vec3 pos);
 	void move(glm::vec3 trans);
 	void scale(glm::vec3 scale);
 

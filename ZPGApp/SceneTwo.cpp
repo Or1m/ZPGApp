@@ -27,7 +27,7 @@ void SceneTwo::onLoad() {
 void SceneTwo::onUpdate() {
 
 	for (int i = 0; i < 4; i++) {
-		objects->at(0)->moveTo(vectors[i]);
+		objects->at(0)->move(vectors[i]);
 		Renderer::getInstance()->draw(*objects->at(0));
 	}
 }

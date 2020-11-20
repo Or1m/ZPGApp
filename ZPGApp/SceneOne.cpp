@@ -20,7 +20,7 @@ void SceneOne::onLoad() {
 		object->addLight(lights->at(0));
 
 		object->changeColor(glm::vec3(0.0, 1.0, 0.0));
-		object->moveTo(vectors[i++]);
+		object->move(vectors[i++]);
 	}
 
 	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));

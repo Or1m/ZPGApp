@@ -16,7 +16,7 @@ void SceneThree::onLoad() {
 		object->addLight(lights->at(0));
 
 		object->changeColor(colors[i]);
-		object->moveTo(positions[i]);
+		object->move(positions[i]);
 		i++;
 	}
 
@@ -44,7 +44,7 @@ void SceneThree::onUpdate() {
 		sphere->addLight(lights->at(0));
 
 		lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
-		sphere->moveTo(selectionPos);
+		sphere->move(selectionPos);
 
 		objects->push_back(sphere);
 		this->deselect();
