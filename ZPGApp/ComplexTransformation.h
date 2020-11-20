@@ -12,6 +12,7 @@ public:
 	~ComplexTransformation();
 
 	glm::mat4 add(Transformation* tr);
+	void addNotApply(Transformation* tr);
 	glm::mat4 apply() override;
 	glm::mat4 getTransformation() { return this->modelMatrix; }
 

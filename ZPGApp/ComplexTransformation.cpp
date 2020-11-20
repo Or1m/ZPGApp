@@ -20,6 +20,10 @@ glm::mat4 ComplexTransformation::add(Transformation* tr) {
 	return this->modelMatrix;
 }
 
+void ComplexTransformation::addNotApply(Transformation* tr) {
+	this->children->push_back(tr);
+}
+
 glm::mat4 ComplexTransformation::apply() {
 	glm::mat4 temp = glm::mat4(1.0);
 
