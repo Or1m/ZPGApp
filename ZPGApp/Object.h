@@ -40,8 +40,6 @@ protected:
 	Shader* shader;
 	ComplexTransformation* transformation;
 
-	glm::mat4 modelMatrix;
-
 	const float* points;
 	int countOfPoints;
 	int sizeOfPoints;

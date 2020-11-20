@@ -6,8 +6,7 @@
 static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath)
-:	modelMatrix(glm::mat4(1.0f)),
-	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
+:	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), id(identificator++),
 	transformation(new ComplexTransformation()) {
 
@@ -64,7 +63,7 @@ void Object::addLight(Light* light) {
 void Object::init() {
 	this->useShaderProgram();
 
-	this->shader->sendUniform("modelMatrix", this->modelMatrix);
+	this->shader->sendUniform("modelMatrix", glm::mat4(1.0f));
 	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
 
