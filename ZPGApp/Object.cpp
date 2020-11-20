@@ -2,7 +2,6 @@
 #include "Camera.h"
 #include "Light.h"
 
-#include "Move.h"
 
 static int identificator = 1;
 
@@ -84,25 +83,24 @@ void Object::changeColor(glm::vec3 color) {
 void Object::moveTo(glm::vec3 pos) {
 	this->useShaderProgram();
 
-	// OLD
-	this->modelMatrix = glm::translate(glm::mat4(1.0), pos);
-	/*this->shader->sendUniform("modelMatrix", modelMatrix);*/
+	ComplexTransformation* comp = new ComplexTransformation();
+	comp->add(new Move(glm::vec3(0.0)));
+	comp->add(new Move(pos));
 
-	// NEW
+	// Toto by chcelo nahradit complexnou
+	this->transformation->add(new Move(glm::vec3(0.0)));
 	this->transformation->add(new Move(pos));
-	this->shader->sendUniform("modelMatrix", this->transformation->apply());
+	this->shader->sendUniform("modelMatrix", comp->getTransformation());
 }
 
 void Object::move(glm::vec3 trans) {
 	this->useShaderProgram();
 
-	this->modelMatrix = glm::translate(modelMatrix, trans);
-	this->shader->sendUniform("modelMatrix", modelMatrix);
+	this->shader->sendUniform("modelMatrix", this->transformation->add(new Move(trans)));
 }
 
 void Object::scale(glm::vec3 scale) {
 	this->useShaderProgram();
 
-	this->modelMatrix = glm::scale(this->modelMatrix, scale);
-	this->shader->sendUniform("modelMatrix", modelMatrix);
+	this->shader->sendUniform("modelMatrix", this->transformation->add(new Scale(scale)));
 }

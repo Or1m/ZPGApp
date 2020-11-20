@@ -12,8 +12,12 @@ ComplexTransformation::~ComplexTransformation()
 }
 
 
-void ComplexTransformation::add(Transformation* tr) {
+glm::mat4 ComplexTransformation::add(Transformation* tr) {
 	this->children->push_back(tr);
+
+	this->modelMatrix *= tr->apply();
+
+	return this->modelMatrix;
 }
 
 glm::mat4 ComplexTransformation::apply() {

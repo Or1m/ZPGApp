@@ -105,6 +105,9 @@
     <ClCompile Include="Move.cpp">
       <Filter>Source Files\Transformations</Filter>
     </ClCompile>
+    <ClCompile Include="Scale.cpp">
+      <Filter>Source Files\Transformations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files\Transformations</Filter>
     </ClInclude>
     <ClInclude Include="Move.h">
+      <Filter>Header Files\Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scale.h">
       <Filter>Header Files\Transformations</Filter>
     </ClInclude>
   </ItemGroup>

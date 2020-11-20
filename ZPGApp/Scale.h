@@ -1,12 +1,13 @@
 #pragma once
+
 #include "Transformation.h"
 
-class Move : public Transformation {
+class Scale : public Transformation {
 public:
-	Move(glm::vec3 pos);
+	Scale(glm::vec3 scale);
 
 	glm::mat4 apply() override;
 
 private:
-	glm::vec3 position;
+	glm::vec3 scale;
 };
