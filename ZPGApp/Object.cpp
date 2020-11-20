@@ -79,20 +79,17 @@ void Object::changeColor(glm::vec3 color) {
 }
 
 
-// WORK IN PROGRESS
+// Zatial nefunguje
 void Object::moveTo(glm::vec3 pos) {
-	this->useShaderProgram();
+	/*this->useShaderProgram();
 
 	ComplexTransformation* comp = new ComplexTransformation();
 	comp->addNotApply(new Move(glm::vec3(0.0)));
 	comp->addNotApply(new Move(pos));
 
-	// Toto by chcelo nahradit complexnou
-	/*this->transformation->add(new Move(glm::vec3(0.0)));
-	this->transformation->add(new Move(pos));*/
-	//this->transformation->add(comp);
-	//this->shader->sendUniform("modelMatrix", comp->getTransformation());
-	this->shader->sendUniform("modelMatrix", this->transformation->add(comp));
+	this->shader->sendUniform("modelMatrix", this->transformation->add(comp));*/
+
+	this->move(pos);
 }
 
 void Object::move(glm::vec3 trans) {
