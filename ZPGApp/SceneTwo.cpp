@@ -10,7 +10,7 @@ SceneTwo::~SceneTwo() {
 
 void SceneTwo::onLoad() {
 
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, lambertPath));
+	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, phongPath));
 	lights->push_back(new Light());
 
 	for (const auto& object : *objects) {
