@@ -24,9 +24,20 @@ void main() {
 
 out vec4 frag_color;
 
+#define MAX_LIGHTS 4
+struct Light
+{
+    vec3 position;
+    vec3 color;
+
+    vec3 diffuse;
+    vec3 specular;
+};
+
+uniform Light lights[MAX_LIGHTS];
+uniform int numberOfLights;
+
 uniform vec3 color;
-uniform vec3 lightPosition;
-uniform vec3 lightColor;
 
 in vec3 fragmentPosition;
 in vec3 normal;
@@ -34,15 +45,20 @@ in vec3 normal;
 const float ambientStrength = 0.1;
 
 void main() {
-    // ambient
-    vec3 ambient = ambientStrength * lightColor;
+    vec3 result = vec3(0.0, 0.0, 0.0);
 
-    // diffuse
-    vec3 lightDir = normalize(lightPosition - fragmentPosition);
-    float diffuseStrength = max(dot(normal, lightDir), 0.0);
-    vec3 diffuse = diffuseStrength * lightColor;
+    // for all light sources
+    for (int i = 0; i < numberOfLights; i++) {
+        // ambient
+        vec3 ambient = ambientStrength * lights[i].color;
 
-    vec3 result = (ambient + diffuse) * color;
+        // diffuse
+        vec3 lightDir = normalize(lights[i].position - fragmentPosition);
+        float diffuseStrength = max(dot(normal, lightDir), 0.0);
+        vec3 diffuse = diffuseStrength * lights[i].color;
+
+        result += (ambient + diffuse) * color;
+    }
 
     frag_color = vec4(result, 1.0);
 };

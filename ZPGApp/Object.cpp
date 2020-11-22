@@ -63,6 +63,7 @@ void Object::addLight(Light* light) {
 void Object::init() {
 	this->useShaderProgram();
 
+	this->shader->sendUniform("numberOfLights", 1);
 	this->shader->sendUniform("modelMatrix", glm::mat4(1.0f));
 	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());

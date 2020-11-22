@@ -20,10 +20,8 @@ void SceneTwo::onLoad() {
 		object->addLight(lights->at(1));
 		object->addLight(lights->at(2));
 
-		object->useShaderProgram();
-		object->init();
-		object->move(glm::vec3(-2.0f, 0.0f, 0.0f));
 		object->changeColor(glm::vec3(0.0, 0.0, 1.0));
+		object->move(glm::vec3(-2.0f, 0.0f, 0.0f));
 	}
 
 	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));

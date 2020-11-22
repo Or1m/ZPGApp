@@ -22,6 +22,8 @@ void main() {
 #shader fragment
 #version 400
 
+out vec4 frag_color;
+
 #define MAX_LIGHTS 4
 struct Light
 {
@@ -35,16 +37,8 @@ struct Light
 uniform Light lights[MAX_LIGHTS];
 uniform int numberOfLights;
 
-// others
-out vec4 frag_color;
-
 uniform vec3 color;
 uniform vec3 viewPosition;
-
-// Deprecated
-uniform vec3 lightPosition;
-uniform vec3 lightColor;
-// end of depr
 
 in vec3 fragmentPosition;
 in vec3 normal;
