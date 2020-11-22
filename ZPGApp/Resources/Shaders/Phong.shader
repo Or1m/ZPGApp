@@ -22,12 +22,29 @@ void main() {
 #shader fragment
 #version 400
 
+#define MAX_LIGHTS 4
+struct Light
+{
+    vec3 position;
+    vec3 color;
+
+    vec3 diffuse;
+    vec3 specular;
+};
+
+uniform Light lights[MAX_LIGHTS];
+uniform int numberOfLights;
+
+// others
 out vec4 frag_color;
 
 uniform vec3 color;
 uniform vec3 viewPosition;
+
+// Deprecated
 uniform vec3 lightPosition;
 uniform vec3 lightColor;
+// end of depr
 
 in vec3 fragmentPosition;
 in vec3 normal;
@@ -36,27 +53,31 @@ const float ambientStrength = 0.1;
 const float specularStrength = 0.5;
 
 void main () {
-    // ambient
-    vec3 ambient = ambientStrength * lightColor;
+    vec3 result = vec3(0.0, 0.0, 0.0);
+    // for all light sources
+    for (int i = 0; i < numberOfLights; i++) {
+        // ambient
+        vec3 ambient = ambientStrength * lights[i].color;
 
-    // diffuse
-    vec3 lightDir = normalize(lightPosition - fragmentPosition);
-    float diffuseStrength = max(dot(normal, lightDir), 0.0);
-    vec3 diffuse = diffuseStrength * lightColor;
+        // diffuse
+        vec3 lightDir = normalize(lights[i].position - fragmentPosition);
+        float diffuseStrength = max(dot(normal, lightDir), 0.0);
+        vec3 diffuse = diffuseStrength * lights[i].color;
 
-    // specular
-    vec3 specular;
-    if (diffuseStrength == 0.0)
-        specular = vec3(0.0, 0.0, 0.0);
-    else {
-        vec3 viewDir = normalize(viewPosition - fragmentPosition);
-        vec3 reflectDir = reflect(-lightDir, normal);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8);
-        specular = specularStrength * spec * lightColor;
+        // specular
+        vec3 specular;
+        if (diffuseStrength == 0.0)
+            specular = vec3(0.0, 0.0, 0.0);
+        else {
+            vec3 viewDir = normalize(viewPosition - fragmentPosition);
+            vec3 reflectDir = reflect(-lightDir, normal);
+            float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8);
+            specular = specularStrength * spec * lights[i].color;
+        }
+
+        result += (ambient + diffuse) * color + specular;
+        //vec3 result = (ambient + diffuse + specular) * color;
     }
-    
-    vec3 result = (ambient + diffuse) * color + specular;
-    //vec3 result = (ambient + diffuse + specular) * color;
 
     frag_color = vec4(result, 1.0);
 };

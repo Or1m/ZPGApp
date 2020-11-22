@@ -2,6 +2,10 @@
 #include "Camera.h"
 #include "Light.h"
 
+#include <string>
+
+static int numOfLights = 0;
+
 Shader::Shader(const std::string& filePath) 
 : filePath(filePath), shaderProgram(0) {
 	
@@ -102,10 +106,23 @@ void Shader::update(Camera& camera) {
 	this->sendUniform("viewPosition", camera.getPosition());
 }
 
-void Shader::update(Light& light) {
+void Shader::update(Light& light, int idx) {
 	this->useProgram();
-	this->sendUniform("lightPosition", light.getLightPosition());
-	this->sendUniform("lightColor", light.getLightColor());
+
+	std::string prefix = "lights[";
+	std::string postfix1 = "].position";
+	std::string postfix2 = "].color";
+	std::string pos = prefix + std::to_string(idx) + postfix1;
+	std::string col = prefix + std::to_string(idx) + postfix2;
+
+	if (idx > numOfLights) {
+		numOfLights = idx;
+
+		this->sendUniform("numberOfLights", numOfLights + 1);
+	}
+
+	this->sendUniform(pos.c_str(), light.getLightPosition());
+	this->sendUniform(col.c_str(), light.getLightColor());
 }
 
 void Shader::addLight(Light* light) {
@@ -178,7 +195,7 @@ void Shader::sendUniform(const GLchar* name, GLint I) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		GLCall(glUniform1i(uniformLocation, I));
+		glUniform1i(uniformLocation, I);
 }
 
 void Shader::sendUniform(const GLchar* name, GLuint U) const {

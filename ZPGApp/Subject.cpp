@@ -29,5 +29,5 @@ void Subject::notify(Camera& camera) {
 
 void Subject::notify(Light& light) {
 	for (Observer* observer : *observers)
-		observer->update(light);
+		observer->update(light, this->idx);
 }

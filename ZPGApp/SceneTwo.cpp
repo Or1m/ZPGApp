@@ -12,9 +12,13 @@ void SceneTwo::onLoad() {
 
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, phongPath));
 	lights->push_back(new Light());
+	lights->push_back(new Light());
+	lights->push_back(new Light());
 
 	for (const auto& object : *objects) {
 		object->addLight(lights->at(0));
+		object->addLight(lights->at(1));
+		object->addLight(lights->at(2));
 
 		object->useShaderProgram();
 		object->init();
@@ -23,6 +27,8 @@ void SceneTwo::onLoad() {
 	}
 
 	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
+	lights->at(1)->moveTo(glm::vec3(6.0, 0.0, 0.0));
+	lights->at(2)->moveTo(glm::vec3(-6.0, 0.0, 0.0));
 }
 
 void SceneTwo::onUpdate() {
