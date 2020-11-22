@@ -31,8 +31,13 @@ struct Light
     vec3 direction;
     vec3 color;
 
-    vec3 diffuse;
-    vec3 specular;
+    vec3 ambient;  // not in use
+    vec3 diffuse;  // not in use
+    vec3 specular; // not in use
+
+    float constant;
+    float linear;
+    float quadratic;
 
     int type;
 };
@@ -58,8 +63,16 @@ void main () {
 
         // diffuse
         vec3 lightDir;
-        if(lights[i].type == 0)
-            lightDir = normalize(lights[i].position - fragmentPosition);
+        float attenuation = 1.0f;
+
+        if (lights[i].type == 0) {
+            vec3 lightFrag = lights[i].position - fragmentPosition;
+            lightDir = normalize(lightFrag);
+
+            float distance = length(lightFrag);
+            attenuation = 1.0 / (lights[i].constant + lights[i].linear * distance + lights[i].quadratic * (distance * distance));
+        }
+            
         else if(lights[i].type == 1)
             lightDir = normalize(-lights[i].direction);
 
@@ -75,6 +88,12 @@ void main () {
             vec3 reflectDir = reflect(-lightDir, normal);
             float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8);
             specular = specularStrength * spec * lights[i].color;
+        }
+
+        if (lights[i].type == 0) {
+            ambient *= attenuation;
+            diffuse *= attenuation;
+            specular *= attenuation;
         }
 
         result += (ambient + diffuse) * color + specular;

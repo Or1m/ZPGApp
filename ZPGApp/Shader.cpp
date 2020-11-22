@@ -115,13 +115,22 @@ void Shader::update(Light& light) {
 	std::string postfixCol	= "].color";
 	std::string postfixType = "].type";
 
-	int idx		  = light.getIndex();
-	int lightType = light.getType();
+	std::string postfixCons = "].constant";
+	std::string postfixLin  = "].linear";
+	std::string postfixQuad = "].quadratic";
+
+	int idx				  = light.getIndex();
+	int lightType		  = light.getType();
+	glm::vec3 attenuation = light.getAttenuation();
 	
 	std::string pos  = prefix + std::to_string(idx) + postfixPos;
 	std::string dir  = prefix + std::to_string(idx) + postfixDir;
 	std::string col  = prefix + std::to_string(idx) + postfixCol;
 	std::string type = prefix + std::to_string(idx) + postfixType;
+
+	std::string cons = prefix + std::to_string(idx) + postfixCons;
+	std::string lin  = prefix + std::to_string(idx) + postfixLin;
+	std::string quad = prefix + std::to_string(idx) + postfixQuad;
 
 	if (idx > numOfLights) {
 		numOfLights = idx;
@@ -132,8 +141,15 @@ void Shader::update(Light& light) {
 	this->sendUniform(col.c_str(), light.getLightColor());
 	this->sendUniform(type.c_str(), lightType);
 
-	if(lightType == 0)
+	if (lightType == 0) {
 		this->sendUniform(pos.c_str(), light.getLightPosition());
+
+		this->sendUniform(cons.c_str(), attenuation.x);
+		this->sendUniform(lin.c_str(), attenuation.y);
+		this->sendUniform(quad.c_str(), attenuation.z);
+
+	}
+		
 	else if(lightType == 1)
 		this->sendUniform(dir.c_str(), light.getLightDirection());
 }
