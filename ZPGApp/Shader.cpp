@@ -119,6 +119,8 @@ void Shader::update(Light& light) {
 	std::string postfixLin  = "].linear";
 	std::string postfixQuad = "].quadratic";
 
+	std::string postfixCut  = "].cutOff";
+
 	int idx				  = light.getIndex();
 	int lightType		  = light.getType();
 	glm::vec3 attenuation = light.getAttenuation();
@@ -131,17 +133,18 @@ void Shader::update(Light& light) {
 	std::string cons = prefix + std::to_string(idx) + postfixCons;
 	std::string lin  = prefix + std::to_string(idx) + postfixLin;
 	std::string quad = prefix + std::to_string(idx) + postfixQuad;
+	std::string cut  = prefix + std::to_string(idx) + postfixCut;
 
 	if (idx > numOfLights) {
 		numOfLights = idx;
-
+		
 		this->sendUniform("numberOfLights", numOfLights + 1);
 	}
 
 	this->sendUniform(col.c_str(), light.getLightColor());
 	this->sendUniform(type.c_str(), lightType);
 
-	if (lightType == 0) {
+	if (lightType == 0 || lightType == 2) {
 		this->sendUniform(pos.c_str(), light.getLightPosition());
 
 		this->sendUniform(cons.c_str(), attenuation.x);
@@ -150,8 +153,11 @@ void Shader::update(Light& light) {
 
 	}
 		
-	else if(lightType == 1)
+	if(lightType == 1 || lightType == 2)
 		this->sendUniform(dir.c_str(), light.getLightDirection());
+
+	if(lightType == 2)
+		this->sendUniform(cut.c_str(), light.getCutOff());
 }
 
 void Shader::addLight(Light* light) {

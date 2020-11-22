@@ -39,6 +39,8 @@ struct Light
     float linear;
     float quadratic;
 
+    float cutOff;
+
     int type;
 };
 
@@ -64,8 +66,9 @@ void main () {
         // diffuse
         vec3 lightDir;
         float attenuation = 1.0f;
+        float theta;
 
-        if (lights[i].type == 0) {
+        if (lights[i].type == 0 || lights[i].type == 2) {
             vec3 lightFrag = lights[i].position - fragmentPosition;
             lightDir = normalize(lightFrag);
 
@@ -73,8 +76,11 @@ void main () {
             attenuation = 1.0 / (lights[i].constant + lights[i].linear * distance + lights[i].quadratic * (distance * distance));
         }
             
-        else if(lights[i].type == 1)
+        if(lights[i].type == 1)
             lightDir = normalize(-lights[i].direction);
+
+        if(lights[i].type == 2)
+            theta = dot(lightDir, normalize(-lights[i].direction));
 
         float diffuseStrength = max(dot(normal, lightDir), 0.0);
         vec3 diffuse = diffuseStrength * lights[i].color;
@@ -90,14 +96,16 @@ void main () {
             specular = specularStrength * spec * lights[i].color;
         }
 
-        if (lights[i].type == 0) {
-            ambient *= attenuation;
-            diffuse *= attenuation;
+        if (lights[i].type == 0 || lights[i].type == 2) {
+            ambient  *= attenuation;
+            diffuse  *= attenuation;
             specular *= attenuation;
         }
 
-        result += (ambient + diffuse) * color + specular;
-        //vec3 result = (ambient + diffuse + specular) * color;
+        if (lights[i].type == 2 && theta < lights[i].cutOff)
+            result += ambient * color;
+        else
+            result += (ambient + diffuse) * color + specular;
     }
 
     frag_color = vec4(result, 1.0);

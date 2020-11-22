@@ -47,6 +47,10 @@ glm::vec3 Camera::getPosition() {
 	return this->eye;
 }
 
+glm::vec3 Camera::getTarget() {
+	return this->target;
+}
+
 
 void Camera::setDeltaTime(float delta) {
 	this->deltaTime = delta;
