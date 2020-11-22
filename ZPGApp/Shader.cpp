@@ -2,8 +2,6 @@
 #include "Camera.h"
 #include "Light.h"
 
-#include <string>
-
 static int numOfLights = 0;
 
 Shader::Shader(const std::string& filePath) 
@@ -109,31 +107,11 @@ void Shader::update(Camera& camera) {
 void Shader::update(Light& light) {
 	this->useProgram();
 
-	std::string prefix		= "lights[";
-	std::string postfixPos	= "].position";
-	std::string postfixDir	= "].direction";
-	std::string postfixCol	= "].color";
-	std::string postfixType = "].type";
+	int idx		  = light.getIndex();
+	int lightType = light.getType();
 
-	std::string postfixCons = "].constant";
-	std::string postfixLin  = "].linear";
-	std::string postfixQuad = "].quadratic";
-
-	std::string postfixCut  = "].cutOff";
-
-	int idx				  = light.getIndex();
-	int lightType		  = light.getType();
+	std::string idxString = std::to_string(light.getIndex());
 	glm::vec3 attenuation = light.getAttenuation();
-	
-	std::string pos  = prefix + std::to_string(idx) + postfixPos;
-	std::string dir  = prefix + std::to_string(idx) + postfixDir;
-	std::string col  = prefix + std::to_string(idx) + postfixCol;
-	std::string type = prefix + std::to_string(idx) + postfixType;
-
-	std::string cons = prefix + std::to_string(idx) + postfixCons;
-	std::string lin  = prefix + std::to_string(idx) + postfixLin;
-	std::string quad = prefix + std::to_string(idx) + postfixQuad;
-	std::string cut  = prefix + std::to_string(idx) + postfixCut;
 
 	if (idx > numOfLights) {
 		numOfLights = idx;
@@ -141,23 +119,22 @@ void Shader::update(Light& light) {
 		this->sendUniform("numberOfLights", numOfLights + 1);
 	}
 
-	this->sendUniform(col.c_str(), light.getLightColor());
-	this->sendUniform(type.c_str(), lightType);
+	this->sendUniform(("lights[" + idxString + "].color").c_str(), light.getLightColor());
+	this->sendUniform(("lights[" + idxString + "].type").c_str(), lightType);
 
 	if (lightType == 0 || lightType == 2) {
-		this->sendUniform(pos.c_str(), light.getLightPosition());
+		this->sendUniform(("lights[" + idxString + "].position").c_str(), light.getLightPosition());
 
-		this->sendUniform(cons.c_str(), attenuation.x);
-		this->sendUniform(lin.c_str(), attenuation.y);
-		this->sendUniform(quad.c_str(), attenuation.z);
-
+		this->sendUniform(("lights[" + idxString + "].constant").c_str(), attenuation.x);
+		this->sendUniform(("lights[" + idxString + "].linear").c_str(), attenuation.y);
+		this->sendUniform(("lights[" + idxString + "].quadratic").c_str(), attenuation.z);
 	}
 		
 	if(lightType == 1 || lightType == 2)
-		this->sendUniform(dir.c_str(), light.getLightDirection());
+		this->sendUniform(("lights[" + idxString + "].direction").c_str(), light.getLightDirection());
 
 	if(lightType == 2)
-		this->sendUniform(cut.c_str(), light.getCutOff());
+		this->sendUniform(("lights[" + idxString + "].cutOff").c_str(), light.getCutOff());
 }
 
 void Shader::addLight(Light* light) {
