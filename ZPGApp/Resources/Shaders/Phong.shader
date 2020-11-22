@@ -28,10 +28,13 @@ out vec4 frag_color;
 struct Light
 {
     vec3 position;
+    vec3 direction;
     vec3 color;
 
     vec3 diffuse;
     vec3 specular;
+
+    int type;
 };
 
 uniform Light lights[MAX_LIGHTS];
@@ -54,7 +57,12 @@ void main () {
         vec3 ambient = ambientStrength * lights[i].color;
 
         // diffuse
-        vec3 lightDir = normalize(lights[i].position - fragmentPosition);
+        vec3 lightDir;
+        if(lights[i].type == 0)
+            lightDir = normalize(lights[i].position - fragmentPosition);
+        else if(lights[i].type == 1)
+            lightDir = normalize(-lights[i].direction);
+
         float diffuseStrength = max(dot(normal, lightDir), 0.0);
         vec3 diffuse = diffuseStrength * lights[i].color;
 

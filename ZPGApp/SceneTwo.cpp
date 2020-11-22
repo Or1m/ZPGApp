@@ -12,21 +12,21 @@ void SceneTwo::onLoad() {
 
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, phongPath));
 	lights->push_back(new Light());
-	lights->push_back(new Light());
-	lights->push_back(new Light());
+	lights->push_back(new Light(1));
+	/*lights->push_back(new Light());*/
 
 	for (const auto& object : *objects) {
 		object->addLight(lights->at(0));
 		object->addLight(lights->at(1));
-		object->addLight(lights->at(2));
+		/*object->addLight(lights->at(2));*/
 
 		object->changeColor(glm::vec3(0.0, 0.0, 1.0));
 		object->move(glm::vec3(-2.0f, 0.0f, 0.0f));
 	}
 
 	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
-	lights->at(1)->moveTo(glm::vec3(6.0, 0.0, 0.0));
-	lights->at(2)->moveTo(glm::vec3(-6.0, 0.0, 0.0));
+	lights->at(1)->setDirection(glm::vec3(0.5, -1.0, 0.0));
+	/*lights->at(2)->moveTo(glm::vec3(-6.0, 0.0, 0.0));*/
 }
 
 void SceneTwo::onUpdate() {

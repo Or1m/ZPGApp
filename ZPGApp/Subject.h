@@ -13,8 +13,6 @@ public:
 protected:
 	std::vector<Observer*>* observers;
 
-	int idx;
-
 	Subject();
 	virtual ~Subject();
 };

@@ -106,14 +106,22 @@ void Shader::update(Camera& camera) {
 	this->sendUniform("viewPosition", camera.getPosition());
 }
 
-void Shader::update(Light& light, int idx) {
+void Shader::update(Light& light) {
 	this->useProgram();
 
-	std::string prefix = "lights[";
-	std::string postfix1 = "].position";
-	std::string postfix2 = "].color";
-	std::string pos = prefix + std::to_string(idx) + postfix1;
-	std::string col = prefix + std::to_string(idx) + postfix2;
+	std::string prefix		= "lights[";
+	std::string postfixPos	= "].position";
+	std::string postfixDir	= "].direction";
+	std::string postfixCol	= "].color";
+	std::string postfixType = "].type";
+
+	int idx		  = light.getIndex();
+	int lightType = light.getType();
+	
+	std::string pos  = prefix + std::to_string(idx) + postfixPos;
+	std::string dir  = prefix + std::to_string(idx) + postfixDir;
+	std::string col  = prefix + std::to_string(idx) + postfixCol;
+	std::string type = prefix + std::to_string(idx) + postfixType;
 
 	if (idx > numOfLights) {
 		numOfLights = idx;
@@ -121,8 +129,13 @@ void Shader::update(Light& light, int idx) {
 		this->sendUniform("numberOfLights", numOfLights + 1);
 	}
 
-	this->sendUniform(pos.c_str(), light.getLightPosition());
 	this->sendUniform(col.c_str(), light.getLightColor());
+	this->sendUniform(type.c_str(), lightType);
+
+	if(lightType == 0)
+		this->sendUniform(pos.c_str(), light.getLightPosition());
+	else if(lightType == 1)
+		this->sendUniform(dir.c_str(), light.getLightDirection());
 }
 
 void Shader::addLight(Light* light) {

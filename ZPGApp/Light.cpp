@@ -2,10 +2,11 @@
 
 static int identificator = 0;
 
-Light::Light() 
-:	lightColor(glm::vec3(1.0, 1.0, 1.0)), position(glm::vec3(0.0, 0.0, 0.0)) {
-	idx = identificator++;
-}
+Light::Light() : Light(0) {}
+
+Light::Light(int type)
+:	lightColor(glm::vec3(1.0, 1.0, 1.0)), position(glm::vec3(0.0, 0.0, 0.0)), direction(glm::vec3(0.0f, -1.0f, 0.0f)),
+	index(identificator++), lightType(type) {}
 
 
 void Light::moveTo(glm::vec3 pos) {
@@ -20,10 +21,8 @@ void Light::move(glm::vec3 trans) {
 	this->notify(*this);
 }
 
-glm::vec3 Light::getLightPosition() {
-	return this->position;
-}
+void Light::setDirection(glm::vec3 dir) {
+	this->direction = dir;
 
-glm::vec3 Light::getLightColor() {
-	return this->lightColor;
+	notify(*this);
 }

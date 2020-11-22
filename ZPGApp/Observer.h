@@ -7,7 +7,7 @@ class Light;
 class Observer {
 public:
 	virtual void update(Camera& camera) = 0;
-	virtual void update(Light& light, int idx)	= 0;
+	virtual void update(Light& light)	= 0;
 
 	Observer() {};
 	virtual ~Observer() {};
