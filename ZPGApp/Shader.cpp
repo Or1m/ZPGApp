@@ -2,8 +2,6 @@
 #include "Camera.h"
 #include "Light.h"
 
-static int numOfLights = 0;
-
 Shader::Shader(const std::string& filePath) 
 : filePath(filePath), shaderProgram(0) {
 	
@@ -112,12 +110,6 @@ void Shader::update(Light& light) {
 
 	std::string idxString = std::to_string(light.getIndex());
 	glm::vec3 attenuation = light.getAttenuation();
-
-	if (idx > numOfLights) {
-		numOfLights = idx;
-		
-		//this->sendUniform("numberOfLights", numOfLights + 1);
-	}
 
 	this->sendUniform(("lights[" + idxString + "].color").c_str(), light.getLightColor());
 	this->sendUniform(("lights[" + idxString + "].type").c_str(), lightType);
