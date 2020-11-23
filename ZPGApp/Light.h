@@ -21,7 +21,7 @@ public:
 	glm::vec3 getLightColor()		{ return this->lightColor; }
 	int getType()					{ return this->lightType; }
 	int getIndex()					{ return this->index; }
-	float getCutOff() { return this->cutOff; }
+	float getCutOff()				{ return this->cutOff; }
 	glm::vec3 getAttenuation()		{ return glm::vec3(this->constant, this->linear, this->quadratic); }
 	
 private:
