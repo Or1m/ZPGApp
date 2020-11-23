@@ -26,7 +26,7 @@ void SceneTwo::onLoad() {
 		object->move(glm::vec3(-2.0f, 0.0f, 0.0f));
 	}
 
-	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
+	lights->at(0)->moveTo(glm::vec3(4.0, 0.0, 0.0));
 	lights->at(1)->setDirection(glm::vec3(0.5, -1.0, 0.0));
 }
 

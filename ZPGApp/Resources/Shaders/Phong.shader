@@ -22,9 +22,12 @@ void main() {
 #shader fragment
 #version 400
 
+#define MAX_LIGHTS 4
+
+vec3 calcDirForPointLight(inout float attenuation, int i);
+
 out vec4 frag_color;
 
-#define MAX_LIGHTS 4
 struct Light
 {
     vec3 position;
@@ -57,24 +60,17 @@ const float ambientStrength = 0.1;
 const float specularStrength = 0.5;
 
 void main () {
+    float theta, attenuation = 1.0f;
     vec3 result = vec3(0.0, 0.0, 0.0);
-    // for all light sources
+    
     for (int i = 0; i < numberOfLights; i++) {
         // ambient
         vec3 ambient = ambientStrength * lights[i].color;
 
         // diffuse
         vec3 lightDir;
-        float attenuation = 1.0f;
-        float theta;
-
-        if (lights[i].type == 0 || lights[i].type == 2) {
-            vec3 lightFrag = lights[i].position - fragmentPosition;
-            lightDir = normalize(lightFrag);
-
-            float distance = length(lightFrag);
-            attenuation = 1.0 / (lights[i].constant + lights[i].linear * distance + lights[i].quadratic * (distance * distance));
-        }
+        if (lights[i].type == 0 || lights[i].type == 2)
+            lightDir = calcDirForPointLight(attenuation, i);
             
         if(lights[i].type == 1)
             lightDir = normalize(-lights[i].direction);
@@ -110,3 +106,12 @@ void main () {
 
     frag_color = vec4(result, 1.0);
 };
+
+vec3 calcDirForPointLight(inout float attenuation, int i) {
+    vec3 lightFrag = lights[i].position - fragmentPosition;
+    float distance = length(lightFrag);
+
+    attenuation = 1.0 / (lights[i].constant + lights[i].linear * distance + lights[i].quadratic * (distance * distance));
+
+    return normalize(lightFrag);
+}
