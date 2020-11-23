@@ -116,7 +116,7 @@ void Shader::update(Light& light) {
 	if (idx > numOfLights) {
 		numOfLights = idx;
 		
-		this->sendUniform("numberOfLights", numOfLights + 1);
+		//this->sendUniform("numberOfLights", numOfLights + 1);
 	}
 
 	this->sendUniform(("lights[" + idxString + "].color").c_str(), light.getLightColor());

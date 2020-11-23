@@ -2,14 +2,14 @@
 #include "Camera.h"
 
 void SceneThree::onLoad() {
-	objects->push_back(new Plain(blinnPhongPath));
-	objects->push_back(new SuziFlat(lambertPath));
+	// Vzdy len prvy objekt prijima svetlo s idx 1
+	objects->push_back(new Plain(blinnPhongPath, 2));
+	objects->push_back(new SuziFlat(lambertPath, 2));
 
-	// Preco len v tomto poradi?
+	lights->push_back(new Light(0));
 	lights->push_back(new Light(2));
-	lights->push_back(new Light());
 
-	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, 2.0, -3.0) };
+	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, 2.0, -5.0) };
 	glm::vec3 test = fromRGB(192, 242, 67);
 	glm::vec3 colors[] = { glm::vec3(0.62, 0.49, 1.0), test };
 
@@ -24,18 +24,15 @@ void SceneThree::onLoad() {
 	}
 
 	objects->at(0)->scale(glm::vec3(5.0f, 5.0f, 5.0f));
-
-	lights->at(1)->moveTo(glm::vec3(0.0, 0.0, 0.0));
-
-	lights->at(0)->moveTo(glm::vec3(0.0, 6.0, -3.0));
-	lights->at(0)->setDirection(glm::vec3(0.0f, -1.0f, 0.0f));
+	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
 }
 
 void SceneThree::onUpdate() {
-	
+
+	lights->at(1)->moveTo(Camera::getInstance()->getPosition());
+	lights->at(1)->setDirection(Camera::getInstance()->getTarget());
+
 	for (const auto& object : *this->objects) {
-		lights->at(0)->moveTo(Camera::getInstance()->getPosition());
-		lights->at(0)->setDirection(Camera::getInstance()->getTarget());
 
 		Renderer::getInstance()->draw(*object);
 
@@ -46,12 +43,10 @@ void SceneThree::onUpdate() {
 	}
 
 	if (this->selected == this->objects->at(0)->getID()) {
-		//lights->at(0)->moveTo(selectionPos);
-		//objects->at(1)->moveTo(selectionPos);
-
-		Sphere* sphere = new Sphere(blinnPhongPath);
+		Sphere* sphere = new Sphere(blinnPhongPath, 2);
 		sphere->changeColor(fromRGB(133, 255, 139));
 		sphere->addLight(lights->at(0));
+		sphere->addLight(lights->at(1));
 
 		lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
 		sphere->move(selectionPos);

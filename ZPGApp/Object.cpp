@@ -5,9 +5,9 @@
 
 static int identificator = 1;
 
-Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath)
+Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount)
 :	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
-	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), id(identificator++),
+	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), lightCount(lightCount), id(identificator++),
 	transformation(new ComplexTransformation()) {
 
 	this->vertexArray = new VertexArray(); // creating VAO
@@ -63,7 +63,7 @@ void Object::addLight(Light* light) {
 void Object::init() {
 	this->useShaderProgram();
 
-	this->shader->sendUniform("numberOfLights", 1);
+	this->shader->sendUniform("numberOfLights", this->lightCount);
 	this->shader->sendUniform("modelMatrix", glm::mat4(1.0f));
 	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());

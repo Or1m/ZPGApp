@@ -93,8 +93,8 @@ void main() {
         }
 
         if (lights[i].type == 0 || lights[i].type == 2) {
-            ambient *= attenuation;
-            diffuse *= attenuation;
+            ambient  *= attenuation;
+            diffuse  *= attenuation;
             specular *= attenuation;
         }
 
