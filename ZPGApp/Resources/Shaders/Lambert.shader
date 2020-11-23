@@ -22,16 +22,29 @@ void main() {
 #shader fragment
 #version 400
 
+#define MAX_LIGHTS 4
+
+vec3 calcDirForPointLight(inout float attenuation, int i);
+
 out vec4 frag_color;
 
-#define MAX_LIGHTS 4
 struct Light
 {
     vec3 position;
+    vec3 direction;
     vec3 color;
 
-    vec3 diffuse;
-    vec3 specular;
+    vec3 ambient;  // not in use
+    vec3 diffuse;  // not in use
+    vec3 specular; // not in use
+
+    float constant;
+    float linear;
+    float quadratic;
+
+    float cutOff;
+
+    int type;
 };
 
 uniform Light lights[MAX_LIGHTS];
@@ -45,20 +58,47 @@ in vec3 normal;
 const float ambientStrength = 0.1;
 
 void main() {
+    float theta, attenuation = 1.0f;
     vec3 result = vec3(0.0, 0.0, 0.0);
 
-    // for all light sources
     for (int i = 0; i < numberOfLights; i++) {
         // ambient
         vec3 ambient = ambientStrength * lights[i].color;
 
         // diffuse
-        vec3 lightDir = normalize(lights[i].position - fragmentPosition);
+        // diffuse
+        vec3 lightDir;
+        if (lights[i].type == 0 || lights[i].type == 2)
+            lightDir = calcDirForPointLight(attenuation, i);
+
+        if (lights[i].type == 1)
+            lightDir = normalize(-lights[i].direction);
+
+        if (lights[i].type == 2)
+            theta = dot(lightDir, normalize(-lights[i].direction));
+
         float diffuseStrength = max(dot(normal, lightDir), 0.0);
         vec3 diffuse = diffuseStrength * lights[i].color;
 
-        result += (ambient + diffuse) * color;
+        if (lights[i].type == 0 || lights[i].type == 2) {
+            ambient *= attenuation;
+            diffuse *= attenuation;
+        }
+
+        if (lights[i].type == 2 && theta < lights[i].cutOff)
+            result += ambient * color;
+        else
+            result += (ambient + diffuse) * color;
     }
 
     frag_color = vec4(result, 1.0);
 };
+
+vec3 calcDirForPointLight(inout float attenuation, int i) {
+    vec3 lightFrag = lights[i].position - fragmentPosition;
+    float distance = length(lightFrag);
+
+    attenuation = 1.0 / (lights[i].constant + lights[i].linear * distance + lights[i].quadratic * (distance * distance));
+
+    return normalize(lightFrag);
+}
