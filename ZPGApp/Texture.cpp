@@ -1,8 +1,6 @@
 #include "Texture.h"
 #include "SOIL.h"
 
-//#include "Vendor/stb_image/stb_image.h"
-
 Texture::Texture(const std::string& path) 
 :	filePath(path) {
 
