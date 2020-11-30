@@ -199,7 +199,7 @@ void Shader::sendUniform(const GLchar* name, GLint I) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		glUniform1i(uniformLocation, I);
+		GLCall(glUniform1i(uniformLocation, I));
 }
 
 void Shader::sendUniform(const GLchar* name, GLuint U) const {

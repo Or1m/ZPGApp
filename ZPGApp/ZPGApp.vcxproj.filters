@@ -120,9 +120,6 @@
     <ClCompile Include="SceneFour.cpp">
       <Filter>Source Files\Concrete Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Vendor\stb_image\stb_image.cpp">
-      <Filter>Source Files\Vendor</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -233,9 +230,6 @@
     <ClInclude Include="SceneFour.h">
       <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Vendor\stb_image\stb_image.h">
-      <Filter>Header Files\Vendor</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -261,7 +255,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Textures\grass.png">
+    <Image Include="Resources\Textures\mino.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\test.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Resources\Textures\ground.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>

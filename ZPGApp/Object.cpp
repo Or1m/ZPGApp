@@ -6,9 +6,11 @@
 static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount, bool isWithTexture)
-:	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
+:	points(points), countOfPoints(countOfPoints),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), lightCount(lightCount), id(identificator++),
 	transformation(new ComplexTransformation()) {
+
+	this->sizeOfPoints = isWithTexture ? countOfPoints * 8 * sizeof(float) : countOfPoints * 6 * sizeof(float);
 
 	this->vertexArray = new VertexArray(); // creating VAO
 	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints); // creating VBO
@@ -16,6 +18,8 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 	this->vertexBufferLayout = new VertexBufferLayout();
 	this->vertexBufferLayout->push<float>(3); // glVertexAttribPointer(0, 3 <---)
 	this->vertexBufferLayout->push<float>(3);
+	if(isWithTexture)
+		this->vertexBufferLayout->push<float>(2);
 
 	this->vertexArray->addBuffer(*this->vertexBuffer, *this->vertexBufferLayout);
 

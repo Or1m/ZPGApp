@@ -3,6 +3,7 @@
 
 layout(location = 0) in vec3 vp;
 layout(location = 1) in vec3 vn;
+layout(location = 2) in vec2 tc;
 
 uniform vec3 color;
 uniform mat4 modelMatrix;
@@ -11,10 +12,13 @@ uniform mat4 projectionMatrix;
 
 out vec3 fragmentPosition;
 out vec3 normal;
+out vec2 texCoord;
 
 void main() {
     fragmentPosition = vec3(modelMatrix * vec4(vp, 1.0));
     normal = normalize(inverse(transpose(mat3(modelMatrix))) * vn);
+
+    texCoord = tc;
 
     gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(vp, 1.0);
 };
@@ -53,6 +57,10 @@ uniform int numberOfLights;
 uniform vec3 color;
 uniform vec3 viewPosition;
 
+uniform sampler2D myTexture;
+uniform int hasTexture;
+
+in vec2 texCoord;
 in vec3 fragmentPosition;
 in vec3 normal;
 
@@ -62,6 +70,7 @@ const float specularStrength = 0.5;
 void main () {
     float theta, attenuation = 1.0f;
     vec3 result = vec3(0.0, 0.0, 0.0);
+    vec4 texColor = texture(myTexture, texCoord);
     
     for (int i = 0; i < numberOfLights; i++) {
         // ambient
@@ -104,7 +113,10 @@ void main () {
             result += (ambient + diffuse) * color + specular;
     }
 
-    frag_color = vec4(result, 1.0);
+    if (hasTexture == 1)
+        frag_color = vec4(result, 1.0) * texColor;
+    else
+        frag_color = vec4(result, 1.0);
 };
 
 vec3 calcDirForPointLight(inout float attenuation, int i) {

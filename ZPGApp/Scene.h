@@ -12,6 +12,7 @@
 #include "SuziFlat.h"
 #include "SuziSmooth.h"
 #include "Plain.h"
+#include "TexturedPlain.h"
 
 class Scene {
 public:
@@ -39,5 +40,5 @@ protected:
 	const std::string phongPath			= "Resources/Shaders/Phong.shader";
 	const std::string blinnPhongPath	= "Resources/Shaders/Blinn-Phong.shader";
 
-	const std::string texturePath		= "Resources/Textures/grass.png";
+	const std::string texturePath		= "Resources/Textures/ground.png";
 };
