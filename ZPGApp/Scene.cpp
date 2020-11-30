@@ -3,6 +3,7 @@
 #include "SceneOne.h"
 #include "SceneTwo.h"
 #include "SceneThree.h"
+#include "SceneFour.h"
 
 Scene::Scene() 
 :	objects(new std::vector<Object*>()), lights(new std::vector<Light*>()),
@@ -42,6 +43,9 @@ Scene* Scene::makeScene(int choice)
 		break;
 	case 3:
 		return new SceneThree();
+		break;
+	case 4:
+		return new SceneFour();
 		break;
 	default:
 		return nullptr;

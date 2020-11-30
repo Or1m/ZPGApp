@@ -140,6 +140,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scale.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneFour.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneOne.cpp" />
     <ClCompile Include="SceneThree.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Scale.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneFour.h" />
     <ClInclude Include="SceneOne.h" />
     <ClInclude Include="SceneThree.h" />
     <ClInclude Include="SceneTwo.h" />

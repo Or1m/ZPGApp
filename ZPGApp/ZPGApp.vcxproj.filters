@@ -108,6 +108,9 @@
     <ClCompile Include="Scale.cpp">
       <Filter>Source Files\Transformations</Filter>
     </ClCompile>
+    <ClCompile Include="SceneFour.cpp">
+      <Filter>Source Files\Concrete Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Scale.h">
       <Filter>Header Files\Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFour.h">
+      <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
