@@ -8,7 +8,7 @@
 
 class Object {
 public:
-	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount);
+	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount = 1, bool isWithTexture = false);
 	virtual ~Object();
 
 	void bindBuffers() const;

@@ -38,4 +38,6 @@ protected:
 	const std::string lambertPath		= "Resources/Shaders/Lambert.shader";
 	const std::string phongPath			= "Resources/Shaders/Phong.shader";
 	const std::string blinnPhongPath	= "Resources/Shaders/Blinn-Phong.shader";
+
+	const std::string texturePath		= "Resources/Textures/grass.png";
 };

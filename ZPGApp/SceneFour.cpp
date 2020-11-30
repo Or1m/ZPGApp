@@ -1,4 +1,5 @@
 #include "SceneFour.h"
+#include "Texture.h"
 
 void SceneFour::onLoad() {
 	objects->push_back(new Plain(blinnPhongPath, 1));
@@ -14,6 +15,9 @@ void SceneFour::onLoad() {
 
 	objects->at(0)->scale(glm::vec3(5.0f, 5.0f, 5.0f));
 	lights->at(0)->setDirection(glm::vec3(0.5, -1.0, 0.0));
+
+	Texture texture(texturePath);
+	texture.bind();
 }
 
 void SceneFour::onUpdate() {

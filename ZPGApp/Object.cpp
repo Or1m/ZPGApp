@@ -5,7 +5,7 @@
 
 static int identificator = 1;
 
-Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount)
+Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount, bool isWithTexture)
 :	points(points), countOfPoints(countOfPoints), sizeOfPoints(countOfPoints * 6 * sizeof(float)),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), lightCount(lightCount), id(identificator++),
 	transformation(new ComplexTransformation()) {

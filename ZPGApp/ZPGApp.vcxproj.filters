@@ -40,6 +40,15 @@
     <Filter Include="Source Files\Transformations">
       <UniqueIdentifier>{80d07f45-a8f8-41b3-9cbc-9772590ac0dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Textures">
+      <UniqueIdentifier>{1efd0b6f-de7d-4181-9323-0f3b738d7ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vendor">
+      <UniqueIdentifier>{6f2f5de1-80fc-413c-bdcb-ef66efe78240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vendor">
+      <UniqueIdentifier>{abd7bb96-ff07-4033-bbe9-8357efa5735c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -110,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="SceneFour.cpp">
       <Filter>Source Files\Concrete Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\stb_image\stb_image.cpp">
+      <Filter>Source Files\Vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +233,18 @@
     <ClInclude Include="SceneFour.h">
       <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Vendor\stb_image\stb_image.h">
+      <Filter>Header Files\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\textured_plain.h">
+      <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedPlain.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Phong.shader">
@@ -232,5 +259,10 @@
     <None Include="Resources\Shaders\Blinn-Phong.shader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\grass.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

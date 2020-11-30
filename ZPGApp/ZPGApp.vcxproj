@@ -148,7 +148,9 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transformation.cpp" />
+    <ClCompile Include="Vendor\stb_image\stb_image.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -163,6 +165,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Plain.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Resources\Models\textured_plain.h" />
     <ClInclude Include="Scale.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFour.h" />
@@ -183,8 +186,11 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SuziFlat.h" />
     <ClInclude Include="SuziSmooth.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TexturedPlain.h" />
     <ClInclude Include="Transformation.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vendor\stb_image\stb_image.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexBufferLayout.h" />
@@ -195,6 +201,9 @@
     <None Include="Resources\Shaders\Constant.shader" />
     <None Include="Resources\Shaders\Lambert.shader" />
     <None Include="Resources\Shaders\Phong.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\grass.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
