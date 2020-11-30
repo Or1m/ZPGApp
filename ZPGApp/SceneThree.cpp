@@ -2,7 +2,7 @@
 #include "Camera.h"
 
 void SceneThree::onLoad() {
-	// Vzdy len prvy objekt prijima svetlo s idx 1
+	
 	objects->push_back(new Plain(blinnPhongPath, 2));
 	objects->push_back(new SuziFlat(lambertPath, 2));
 
