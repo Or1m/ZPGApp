@@ -10,7 +10,13 @@
 class Object {
 public:
 	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, 
-		int lightCount = 1, bool isWithTexture = false, const std::string& texturePath = NULL);
+		bool isWithTexture = false, int lightCount = 1);
+
+	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
+		 const std::string& texturePath, bool isWithTexture = true, int lightCount = 1);
+
+	Object(const std::string& shaderPath, const std::string& texturePath, const std::string& modelPath);
+
 	virtual ~Object();
 
 	void bindBuffers() const;
@@ -22,6 +28,7 @@ public:
 
 	template <typename T>
 	void sendUniformToShader(const GLchar* name, T t) const {
+		this->useShaderProgram();
 		this->shader->sendUniform(name, t);
 	}
 
@@ -50,7 +57,7 @@ protected:
 	int floatsInPoint = 6;
 
 	const unsigned int* indexes;
-	const int countOfIndexes;
+	int countOfIndexes;
 	bool hasIndexes;
 	bool hasTexture;
 

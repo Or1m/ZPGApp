@@ -11,7 +11,7 @@ public:
 	void bind(unsigned int slot = 0) const;
 	void unbind();
 
-	int getDimension() { return this->dimension; }
+	//int getDimension() { return this->dimension; }
 
 private:
 	unsigned int textureId;

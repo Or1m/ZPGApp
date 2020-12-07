@@ -273,5 +273,8 @@
     <Image Include="Resources\Textures\ground.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+    <Image Include="Resources\Textures\skydome.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

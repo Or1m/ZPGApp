@@ -11,7 +11,8 @@ SceneTwo::~SceneTwo() {
 
 void SceneTwo::onLoad() {
 
-	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, phongPath, 3));
+	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, phongPath, false, 3));
+
 	lights->push_back(new Light());
 	lights->push_back(new Light(1));
 	lights->push_back(new Light(2));

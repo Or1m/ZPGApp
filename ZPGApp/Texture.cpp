@@ -12,8 +12,8 @@ Texture::Texture(const std::string& path)
 
 	if (textureId == 0)
 		std::cout << SOIL_last_result() << std::endl;
-	else
-		this->bind();
+	/*else
+		this->bind();*/
 }
 
 Texture::~Texture() {

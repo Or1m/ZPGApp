@@ -206,6 +206,7 @@
   <ItemGroup>
     <Image Include="Resources\Textures\ground.png" />
     <Image Include="Resources\Textures\mino.png" />
+    <Image Include="Resources\Textures\skydome.png" />
     <Image Include="Resources\Textures\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

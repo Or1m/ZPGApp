@@ -40,6 +40,7 @@ protected:
 	const std::string phongPath			= "Resources/Shaders/Phong.shader";
 	const std::string blinnPhongPath	= "Resources/Shaders/Blinn-Phong.shader";
 
-	const std::string texturePath		= "Resources/Textures/ground.png";
+	const std::string groundTexturePath	= "Resources/Textures/ground.png";
+	const std::string skyTexturePath	= "Resources/Textures/mino.png";
 	const std::string domePath			= "Resources/Objects/skydome.obj";
 };
