@@ -138,6 +138,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scale.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="ComplexTransformation.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Move.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Plain.h" />
     <ClInclude Include="Rectangle.h" />

@@ -113,10 +113,12 @@ void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
 	this->vertexArray->bind();
-	this->texture->bind();
 
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
+
+	if(this->hasTexture)
+		this->texture->bind();
 }
 
 void Object::useShaderProgram() const {
