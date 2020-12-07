@@ -206,6 +206,10 @@
     <None Include="Resources\Shaders\Phong.shader" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Textures\fulldome3.png" />
+    <Image Include="Resources\Textures\grass.png" />
+    <Image Include="Resources\Textures\grass2.png" />
+    <Image Include="Resources\Textures\grass3.png" />
     <Image Include="Resources\Textures\ground.png" />
     <Image Include="Resources\Textures\mino.png" />
     <Image Include="Resources\Textures\skydome.png" />
