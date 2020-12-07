@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer.h"
+#include <string>
 
 class Texture
 {
@@ -11,7 +11,11 @@ public:
 	void bind(unsigned int slot = 0) const;
 	void unbind();
 
+	int getDimension() { return this->dimension; }
+
 private:
 	unsigned int textureId;
+	int dimension = 2;
+
 	std::string filePath;
 };

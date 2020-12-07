@@ -1,10 +1,9 @@
 #include "SceneFour.h"
-#include "Texture.h"
 
 #include "Vendor/objloader.h"
 
 void SceneFour::onLoad() {
-	objects->push_back(new TexturedPlain(constantPath, 1));
+	objects->push_back(new TexturedPlain(constantPath, texturePath, 1));
 
 	/*std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
@@ -16,13 +15,8 @@ void SceneFour::onLoad() {
 	objects->push_back(new Object(&vertices[0], sphereCount, NULL, NULL, false, phongPath, 1));*/
 
 	lights->push_back(new Light(1));
-
-	Texture* texture = new Texture(texturePath);
 	
 	for (const auto& object : *objects) {
-		object->sendUniformToShader("myTexture", 0);
-		object->sendUniformToShader("hasTexture", 1);
-
 		object->addLight(lights->at(0));
 
 		object->changeColor(glm::vec3(1.0, 1.0, 1.0));

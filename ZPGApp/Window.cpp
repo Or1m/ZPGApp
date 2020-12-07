@@ -1,6 +1,6 @@
 #include "Window.h"
 
-#include<iostream>
+#include <iostream>
 
 #include "Callbacks.h"
 #include "Camera.h"

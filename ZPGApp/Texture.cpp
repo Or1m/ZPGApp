@@ -1,5 +1,9 @@
 #include "Texture.h"
 #include "SOIL.h"
+#include <iostream>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 Texture::Texture(const std::string& path) 
 :	filePath(path) {

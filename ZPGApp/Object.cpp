@@ -2,15 +2,20 @@
 #include "Camera.h"
 #include "Light.h"
 
-
 static int identificator = 1;
 
-Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount, bool isWithTexture)
+Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
+	int lightCount, bool isWithTexture, const std::string& texturePath)
 :	points(points), countOfPoints(countOfPoints),
-	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), 
+	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), hasTexture(isWithTexture),
 	lightCount(lightCount), id(identificator++), transformation(new ComplexTransformation()) {
 
-	this->sizeOfPoints = isWithTexture ? countOfPoints * 8 * sizeof(float) : countOfPoints * 6 * sizeof(float);
+	if (this->hasTexture) {
+		this->texture = new Texture(texturePath);
+		this->floatsInPoint += this->texture->getDimension();
+	}
+
+	this->sizeOfPoints = countOfPoints * floatsInPoint * sizeof(float);
 
 	this->vertexArray = new VertexArray(); // creating VAO
 	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints); // creating VBO
@@ -18,8 +23,9 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 	this->vertexBufferLayout = new VertexBufferLayout();
 	this->vertexBufferLayout->push<float>(3); // glVertexAttribPointer(0, 3 <---)
 	this->vertexBufferLayout->push<float>(3);
-	if(isWithTexture)
-		this->vertexBufferLayout->push<float>(2);
+
+	if(this->hasTexture)
+		this->vertexBufferLayout->push<float>(this->texture->getDimension());
 
 	this->vertexArray->addBuffer(*this->vertexBuffer, *this->vertexBufferLayout);
 
@@ -71,6 +77,11 @@ void Object::init() {
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
 
 	this->shader->sendUniform("viewPosition", Camera::getInstance()->getPosition());
+
+	if (this->hasTexture) {
+		this->shader->sendUniform("myTexture", 0);
+		this->shader->sendUniform("hasTexture", 1);
+	}
 }
 
 
