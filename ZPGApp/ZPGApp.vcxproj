@@ -206,13 +206,19 @@
     <None Include="Resources\Shaders\Phong.shader" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Textures\dry.png" />
+    <Image Include="Resources\Textures\floor.png" />
     <Image Include="Resources\Textures\fulldome3.png" />
     <Image Include="Resources\Textures\grass.png" />
     <Image Include="Resources\Textures\grass2.png" />
     <Image Include="Resources\Textures\grass3.png" />
     <Image Include="Resources\Textures\ground.png" />
+    <Image Include="Resources\Textures\ice.png" />
+    <Image Include="Resources\Textures\leaves.png" />
     <Image Include="Resources\Textures\mino.png" />
+    <Image Include="Resources\Textures\rocks.png" />
     <Image Include="Resources\Textures\skydome.png" />
+    <Image Include="Resources\Textures\smallRocks.png" />
     <Image Include="Resources\Textures\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -41,7 +41,7 @@ protected:
 	const std::string phongPath			= "Resources/Shaders/Phong.shader";
 	const std::string blinnPhongPath	= "Resources/Shaders/Blinn-Phong.shader";
 
-	const std::string groundTexturePath	= "Resources/Textures/grass2.png";
+	const std::string groundTexturePath	= "Resources/Textures/floor.png";
 	const std::string skyTexturePath	= "Resources/Textures/fulldome3.png";
 
 	const std::string domePath			= "Resources/Objects/skydome.obj";
