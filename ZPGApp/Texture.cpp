@@ -14,6 +14,9 @@ Texture::Texture(const std::string& path)
 
 	if (textureId == 0)
 		std::cout << SOIL_last_result() << std::endl;
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
 Texture::~Texture() {

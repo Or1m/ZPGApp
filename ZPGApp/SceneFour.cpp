@@ -6,8 +6,8 @@ void SceneFour::onLoad() {
 
 	lights->push_back(new Light(1));
 	
-	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, 0.0, 0.0) };
-	glm::vec3 scales[]	  = { glm::vec3(20.0f, 20.0f, 20.0f),  glm::vec3(1.0, 1.0, 1.0) };
+	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, -2.0, 0.0) };
+	glm::vec3 scales[]	  = { glm::vec3(40.0f, 40.0f, 40.0f),  glm::vec3(5.0f, 5.0f, 5.0f) };
 
 	int i = 0;
 	for (const auto& object : *objects) {
