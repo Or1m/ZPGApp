@@ -15,8 +15,6 @@ public:
 	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
 		 const std::string& texturePath, bool isWithTexture = true, int lightCount = 1);
 
-	Object(const std::string& shaderPath, const std::string& texturePath, const std::string& modelPath);
-
 	virtual ~Object();
 
 	void bindBuffers() const;

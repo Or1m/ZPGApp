@@ -62,45 +62,6 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 	this->init();
 }
 
-Object::Object(const std::string& shaderPath, const std::string& texturePath, const std::string& modelPath) {
-	/*std::vector<glm::vec3> vertices;
-	std::vector<glm::vec3> normals;
-	std::vector<glm::vec2> uvs;
-
-	loadOBJ(modelPath.c_str(), vertices, uvs, normals);
-
-	int count = vertices.size();
-	int size = count * 8;
-
-	float* arr = new float[size];
-
-	for (int i = 0, j = 0; i < size; i += 8, j += 1) {
-		arr[i + 0] = vertices[j].x;
-		arr[i + 1] = vertices[j].y;
-		arr[i + 2] = vertices[j].z;
-
-		arr[i + 3] = normals[j].x;
-		arr[i + 4] = normals[j].y;
-		arr[i + 5] = normals[j].z;
-
-		arr[i + 6] = uvs[j].x;
-		arr[i + 7] = uvs[j].y;
-	}
-
-	Object(arr, count, NULL, NULL, false, shaderPath, texturePath);*/
-
-	//Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string & shaderPath,
-	//const std::string & texturePath, bool isWithTexture, int lightCount)
-	
-
-	/*for (int i = 0; i < size; i += 8) {
-		std::cout << arr[i + 0] << arr[i + 1] << arr[i + 2] << " || " << arr[i + 3] << arr[i + 4] << arr[i + 5] << " || " << arr[i + 6] << arr[i + 7] << std::endl;
-	}*/
-
-	/*glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
-	objects->push_back(new Object(&vertices[0], sphereCount, NULL, NULL, false, phongPath, 1));*/
-}
-
 Object::~Object() {
 	delete this->vertexArray;
 	delete this->vertexBuffer;
