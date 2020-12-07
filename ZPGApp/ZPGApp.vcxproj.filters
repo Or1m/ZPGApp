@@ -288,9 +288,6 @@
     <Image Include="Resources\Textures\skydome.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
-    <Image Include="Resources\Textures\fulldome3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\Textures\grass.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -298,6 +295,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Textures\grass3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Textures\fulldome3.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
