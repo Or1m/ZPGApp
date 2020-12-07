@@ -8,14 +8,16 @@ public:
 	Texture(const std::string& path);
 	~Texture();
 
-	void bind(unsigned int slot = 0) const;
+	void bind() const;
 	void unbind();
 
-	//int getDimension() { return this->dimension; }
+	int getDimension()	{ return this->dimension; }
+	int getSlot()		{ return this->slot; }
 
 private:
 	unsigned int textureId;
 	int dimension = 2;
+	int slot;
 
 	std::string filePath;
 };

@@ -37,8 +37,8 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 	lightCount(lightCount), id(identificator++), transformation(new ComplexTransformation()) {
 
 	if (this->hasTexture) {
-		//this->texture = new Texture(texturePath, this->id - 1);
-		this->floatsInPoint += 2;
+		this->texture = new Texture(texturePath);
+		this->floatsInPoint += this->texture->getDimension();
 	}
 
 	this->sizeOfPoints = countOfPoints * floatsInPoint * sizeof(float);
@@ -51,7 +51,7 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 	this->vertexBufferLayout->push<float>(3);
 
 	if(this->hasTexture)
-		this->vertexBufferLayout->push<float>(2);
+		this->vertexBufferLayout->push<float>(this->texture->getDimension());
 
 	this->vertexArray->addBuffer(*this->vertexBuffer, *this->vertexBufferLayout);
 
@@ -113,6 +113,7 @@ void Object::bindBuffers() const {
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
 	this->vertexArray->bind();
+	this->texture->bind();
 
 	if (this->hasIndexes)
 		this->indexBuffer->bind();
@@ -142,6 +143,11 @@ void Object::init() {
 	this->shader->sendUniform("viewMatrix", Camera::getInstance()->getCamera());
 
 	this->shader->sendUniform("viewPosition", Camera::getInstance()->getPosition());
+
+	if (this->hasTexture) {
+		this->shader->sendUniform("myTexture", this->texture->getSlot());
+		this->shader->sendUniform("hasTexture", 1);
+	}
 }
 
 

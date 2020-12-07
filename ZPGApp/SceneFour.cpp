@@ -43,7 +43,6 @@ void SceneFour::onLoad() {
 
 	lights->push_back(new Light(1));
 	
-	int i = 0;
 	for (const auto& object : *objects) {
 		object->addLight(lights->at(0));
 
@@ -51,22 +50,11 @@ void SceneFour::onLoad() {
 		object->changeColor(glm::vec3(1.0, 1.0, 1.0));
 	}
 
-	Texture* texture = new Texture(groundTexturePath);
-	Texture* texture2 = new Texture(skyTexturePath);
-	
-	objects->at(0)->sendUniformToShader("myTexture", 0);
-	objects->at(0)->sendUniformToShader("hasTexture", 1);
-
-	objects->at(1)->sendUniformToShader("myTexture", 1);
-	objects->at(1)->sendUniformToShader("hasTexture", 1);
-
-	texture->bind(0);
-	texture2->bind(1);
-
 
 	objects->at(0)->move(glm::vec3(0.0, -1.0, -.5));
 	objects->at(1)->move(glm::vec3(0.0, 0.0, 0.0));
 	objects->at(0)->scale(glm::vec3(20.0f, 20.0f, 20.0f));
+
 	lights->at(0)->setDirection(glm::vec3(0.5, -1.0, 0.0));
 }
 
