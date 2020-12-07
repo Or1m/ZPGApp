@@ -41,4 +41,5 @@ protected:
 	const std::string blinnPhongPath	= "Resources/Shaders/Blinn-Phong.shader";
 
 	const std::string texturePath		= "Resources/Textures/ground.png";
+	const std::string domePath			= "Resources/Objects/skydome.obj";
 };

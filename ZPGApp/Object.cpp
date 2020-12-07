@@ -7,8 +7,8 @@ static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath, int lightCount, bool isWithTexture)
 :	points(points), countOfPoints(countOfPoints),
-	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), lightCount(lightCount), id(identificator++),
-	transformation(new ComplexTransformation()) {
+	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), 
+	lightCount(lightCount), id(identificator++), transformation(new ComplexTransformation()) {
 
 	this->sizeOfPoints = isWithTexture ? countOfPoints * 8 * sizeof(float) : countOfPoints * 6 * sizeof(float);
 
@@ -23,10 +23,8 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 
 	this->vertexArray->addBuffer(*this->vertexBuffer, *this->vertexBufferLayout);
 
-	if (!this->hasIndexes)
-		this->indexBuffer = NULL;
-	else
-		this->indexBuffer = new IndexBuffer(this->indexes, this->countOfIndexes);
+	
+	this->indexBuffer = this->hasIndexes ? new IndexBuffer(this->indexes, this->countOfIndexes) : NULL;
 
 	this->shader = new Shader(shaderPath);
 	this->init();

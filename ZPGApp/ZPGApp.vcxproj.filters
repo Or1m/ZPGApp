@@ -49,6 +49,9 @@
     <Filter Include="Source Files\Vendor">
       <UniqueIdentifier>{abd7bb96-ff07-4033-bbe9-8357efa5735c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Objects">
+      <UniqueIdentifier>{de85b1e8-70b6-471f-9045-62c3f5ca6a34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\objloader.cpp">
+      <Filter>Source Files\Vendor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="TexturedPlain.h">
       <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\objloader.h">
+      <Filter>Header Files\Vendor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

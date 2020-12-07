@@ -1,13 +1,24 @@
 #include "SceneFour.h"
 #include "Texture.h"
 
+#include "Vendor/objloader.h"
+
 void SceneFour::onLoad() {
 	objects->push_back(new TexturedPlain(constantPath, 1));
+
+	/*std::vector< glm::vec3 > vertices;
+	std::vector< glm::vec2 > uvs;
+	std::vector< glm::vec3 > normals;
+
+	loadOBJ(domePath.c_str(), vertices, uvs, normals);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+
+	objects->push_back(new Object(&vertices[0], sphereCount, NULL, NULL, false, phongPath, 1));*/
 
 	lights->push_back(new Light(1));
 
 	Texture* texture = new Texture(texturePath);
-
+	
 	for (const auto& object : *objects) {
 		object->sendUniformToShader("myTexture", 0);
 		object->sendUniformToShader("hasTexture", 1);
