@@ -8,36 +8,16 @@ static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
 	bool isWithTexture, int lightCount)
-:	points(points), countOfPoints(countOfPoints),
-	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), hasTexture(isWithTexture),
-	lightCount(lightCount), id(identificator++), transformation(new ComplexTransformation()) {
-
-	this->sizeOfPoints = countOfPoints * floatsInPoint * sizeof(float);
-
-	this->vertexArray = new VertexArray(); // creating VAO
-	this->vertexBuffer = new VertexBuffer(this->points, this->sizeOfPoints); // creating VBO
-
-	this->vertexBufferLayout = new VertexBufferLayout();
-	this->vertexBufferLayout->push<float>(3); // glVertexAttribPointer(0, 3 <---)
-	this->vertexBufferLayout->push<float>(3);
-
-	this->vertexArray->addBuffer(*this->vertexBuffer, *this->vertexBufferLayout);
-
-
-	this->indexBuffer = this->hasIndexes ? new IndexBuffer(this->indexes, this->countOfIndexes) : NULL;
-
-	this->shader = new Shader(shaderPath);
-	this->init();
-}
+	: Object(points, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath, nullptr, isWithTexture, lightCount) { }
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
-	const std::string& texturePath, bool isWithTexture, int lightCount)
+	const std::string* texturePath, bool isWithTexture, int lightCount)
 :	points(points), countOfPoints(countOfPoints),
 	indexes(indexes), countOfIndexes(countOfIndexes), hasIndexes(isWithIndexes), hasTexture(isWithTexture),
 	lightCount(lightCount), id(identificator++), transformation(new ComplexTransformation()) {
 
 	if (this->hasTexture) {
-		this->texture = new Texture(texturePath);
+		this->texture = new Texture(*texturePath);
 		this->floatsInPoint += this->texture->getDimension();
 	}
 

@@ -1,8 +1,8 @@
 #include "SceneFour.h"
 
 void SceneFour::onLoad() {
-	objects->push_back(new TexturedPlain(constantPath, groundTexturePath, 1));
-	objects->push_back(ObjectManager::getInstance()->loadAndCreateObject(domePath, constantPath, skyTexturePath));
+	objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
+	objects->push_back(ObjectManager::getInstance()->loadAndCreateObject(domePath, constantPath, &skyTexturePath));
 
 	lights->push_back(new Light(1));
 	

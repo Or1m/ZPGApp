@@ -13,7 +13,7 @@ public:
 		bool isWithTexture = false, int lightCount = 1);
 
 	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
-		 const std::string& texturePath, bool isWithTexture = true, int lightCount = 1);
+		 const std::string* texturePath, bool isWithTexture = true, int lightCount = 1);
 
 	virtual ~Object();
 

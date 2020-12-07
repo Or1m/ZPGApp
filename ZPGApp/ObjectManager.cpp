@@ -14,7 +14,7 @@ ObjectManager* ObjectManager::getInstance() {
 	return instance;
 }
 
-Object* ObjectManager::loadAndCreateObject(const std::string& modelPath, const std::string& shaderPath, const std::string& texturePath)
+Object* ObjectManager::loadAndCreateObject(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath)
 {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec3> normals;

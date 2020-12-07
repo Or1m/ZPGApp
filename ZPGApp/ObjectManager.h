@@ -9,7 +9,7 @@ public:
 	ObjectManager()  { }
 	~ObjectManager() { }
 
-	Object* loadAndCreateObject(const std::string& modelPath, const std::string& shaderPath, const std::string& texturePath);
+	Object* loadAndCreateObject(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath);
 
 
 private:
