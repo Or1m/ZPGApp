@@ -58,6 +58,15 @@
     <Filter Include="Resource Files\Textures\Cubemap">
       <UniqueIdentifier>{cac1fed6-7ce8-40e6-abdf-74c221c70af4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{53e5db18-4e41-41d6-94fc-d2af6a057838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Textures">
+      <UniqueIdentifier>{8d36df58-8121-4aba-85b3-921e7202d553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Concrete Objects">
+      <UniqueIdentifier>{17540d69-10f1-470c-b5a2-bcd0520f4832}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -126,9 +135,6 @@
     <ClCompile Include="SceneFour.cpp">
       <Filter>Source Files\Concrete Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vendor\objloader.cpp">
       <Filter>Source Files\Vendor</Filter>
     </ClCompile>
@@ -138,14 +144,17 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Cubemap.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Base Classes</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Cubemap.cpp">
+      <Filter>Source Files\Textures</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Concrete Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +260,6 @@
     <ClInclude Include="SceneFour.h">
       <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\Models\textured_plain.h">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
@@ -269,14 +275,17 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Cubemap.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="Texture2D.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubemap.h">
+      <Filter>Header Files\Textures</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
