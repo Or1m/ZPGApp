@@ -4,7 +4,7 @@
 
 class Cubemap : public Texture {
 public:
-	Cubemap(std::string  paths[6]);
+	Cubemap(const std::string paths[6]);
 
 	void bind() const override;
 };

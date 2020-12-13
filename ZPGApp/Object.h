@@ -5,7 +5,9 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "ComplexTransformation.h"
+
 #include "Texture2D.h"
+#include "Cubemap.h"
 
 class Object {
 public:
@@ -15,9 +17,12 @@ public:
 	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
 		 const std::string* texturePath, bool isWithTexture = true, int lightCount = 1);
 
+	Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
+		const std::string paths[6], bool sky = true, bool isWithTexture = true, int lightCount = 1);
+
 	virtual ~Object();
 
-	void bindBuffers() const;
+	virtual void bindBuffers() const;
 	void useShaderProgram() const;
 	bool isWithIndexes() const;
 

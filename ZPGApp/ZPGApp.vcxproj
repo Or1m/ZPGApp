@@ -149,6 +149,7 @@
     <ClCompile Include="SceneThree.cpp" />
     <ClCompile Include="SceneTwo.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="SceneOne.h" />
     <ClInclude Include="SceneThree.h" />
     <ClInclude Include="SceneTwo.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Light.h" />
@@ -206,6 +208,7 @@
   <ItemGroup>
     <None Include="Resources\Shaders\Blinn-Phong.shader" />
     <None Include="Resources\Shaders\Constant.shader" />
+    <None Include="Resources\Shaders\Cubemap.shader" />
     <None Include="Resources\Shaders\Lambert.shader" />
     <None Include="Resources\Shaders\Phong.shader" />
   </ItemGroup>
@@ -220,6 +223,12 @@
     <Image Include="Resources\Textures\ice.png" />
     <Image Include="Resources\Textures\leaves.png" />
     <Image Include="Resources\Textures\mino.png" />
+    <Image Include="Resources\Textures\negx.jpg" />
+    <Image Include="Resources\Textures\negy.jpg" />
+    <Image Include="Resources\Textures\negz.jpg" />
+    <Image Include="Resources\Textures\posx.jpg" />
+    <Image Include="Resources\Textures\posy.jpg" />
+    <Image Include="Resources\Textures\posz.jpg" />
     <Image Include="Resources\Textures\rocks.png" />
     <Image Include="Resources\Textures\skydome.png" />
     <Image Include="Resources\Textures\smallRocks.png" />
