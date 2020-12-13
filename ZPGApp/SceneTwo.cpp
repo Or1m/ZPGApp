@@ -37,7 +37,7 @@ void SceneTwo::onUpdate() {
 		objects->at(0)->move(vectors[i]);
 
 		((SpotLight*) lights->at(2))->moveTo(Camera::getInstance()->getPosition());
-		((SpotLight*)lights->at(2))->setDirection(Camera::getInstance()->getTarget());
+		((SpotLight*) lights->at(2))->setDirection(Camera::getInstance()->getTarget());
 
 
 		Renderer::getInstance()->draw(*objects->at(0));
