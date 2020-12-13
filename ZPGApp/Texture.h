@@ -1,23 +1,26 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
-class Texture
-{
+#include "SOIL.h"
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+class Texture {
 public:
-	Texture(const std::string& path);
+	Texture();
 	~Texture();
 
-	void bind() const;
+	virtual void bind() const;
 	void unbind();
 
 	int getDimension()	{ return this->dimension; }
 	int getSlot()		{ return this->slot; }
 
-private:
+protected:
 	unsigned int textureId;
-	int dimension = 2;
+	int dimension;
 	int slot;
-
-	std::string filePath;
 };

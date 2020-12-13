@@ -5,7 +5,7 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "ComplexTransformation.h"
-#include "Texture.h"
+#include "Texture2D.h"
 
 class Object {
 public:

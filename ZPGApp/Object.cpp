@@ -2,8 +2,6 @@
 #include "Camera.h"
 #include "Light.h"
 
-//#include "Vendor/objloader.h"
-
 static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
@@ -17,7 +15,7 @@ Object::Object(const float points[], const int countOfPoints, const unsigned int
 	lightCount(lightCount), id(identificator++), transformation(new ComplexTransformation()) {
 
 	if (this->hasTexture) {
-		this->texture = new Texture(*texturePath);
+		this->texture = new Texture2D(*texturePath);
 		this->floatsInPoint += this->texture->getDimension();
 	}
 

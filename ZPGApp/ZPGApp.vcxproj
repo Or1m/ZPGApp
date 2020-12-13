@@ -134,6 +134,7 @@
     <ClCompile Include="Callbacks.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ComplexTransformation.cpp" />
+    <ClCompile Include="Cubemap.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Move.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="Transformation.cpp" />
     <ClCompile Include="Vendor\objloader.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -162,6 +164,7 @@
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComplexTransformation.h" />
+    <ClInclude Include="Cubemap.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -190,6 +193,7 @@
     <ClInclude Include="SuziFlat.h" />
     <ClInclude Include="SuziSmooth.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Texture2D.h" />
     <ClInclude Include="TexturedPlain.h" />
     <ClInclude Include="Transformation.h" />
     <ClInclude Include="Utils.h" />
