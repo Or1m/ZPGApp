@@ -135,11 +135,13 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ComplexTransformation.cpp" />
     <ClCompile Include="Cubemap.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scale.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -151,6 +153,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Texture2D.cpp" />
@@ -166,11 +169,13 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComplexTransformation.h" />
     <ClInclude Include="Cubemap.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Plain.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Resources\Models\textured_plain.h" />
     <ClInclude Include="Scale.h" />
@@ -181,6 +186,7 @@
     <ClInclude Include="SceneTwo.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Object.h" />

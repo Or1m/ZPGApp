@@ -6,8 +6,8 @@ void SceneThree::onLoad() {
 	objects->push_back(new Plain(blinnPhongPath, 2));
 	objects->push_back(new SuziFlat(lambertPath, 2));
 
-	lights->push_back(new Light(0));
-	lights->push_back(new Light(2));
+	lights->push_back(new PointLight());
+	lights->push_back(new SpotLight());
 
 	glm::vec3 positions[] = { glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, 2.0, -5.0) };
 	glm::vec3 test = fromRGB(192, 242, 67);
@@ -24,13 +24,13 @@ void SceneThree::onLoad() {
 	}
 
 	objects->at(0)->scale(glm::vec3(5.0f, 5.0f, 5.0f));
-	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
+	((PointLight*) lights->at(0))->moveTo(glm::vec3(0.0, 0.0, 0.0));
 }
 
 void SceneThree::onUpdate() {
 
-	lights->at(1)->moveTo(Camera::getInstance()->getPosition());
-	lights->at(1)->setDirection(Camera::getInstance()->getTarget());
+	((SpotLight*)lights->at(1))->moveTo(Camera::getInstance()->getPosition());
+	((SpotLight*)lights->at(1))->setDirection(Camera::getInstance()->getTarget());
 
 	for (const auto& object : *this->objects) {
 
@@ -48,7 +48,7 @@ void SceneThree::onUpdate() {
 		sphere->addLight(lights->at(0));
 		sphere->addLight(lights->at(1));
 
-		lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
+		((PointLight*)lights->at(0))->moveTo(glm::vec3(0.0, 0.0, 0.0));
 		sphere->move(selectionPos);
 
 		objects->push_back(sphere);

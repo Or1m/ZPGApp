@@ -11,7 +11,7 @@ void SceneOne::onLoad() {
 	objects->push_back(new Rectangle(constantPath));
 
 
-	lights->push_back(new Light());
+	lights->push_back(new PointLight());
 
 	glm::vec3 vectors[5] = { glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f, 0.0f, -0.5f) };
 
@@ -23,7 +23,7 @@ void SceneOne::onLoad() {
 		object->move(vectors[i++]);
 	}
 
-	lights->at(0)->moveTo(glm::vec3(0.0, 0.0, 0.0));
+	((PointLight*) lights->at(0))->moveTo(glm::vec3(0.0, 0.0, 0.0));
 }
 
 void SceneOne::onUpdate() {

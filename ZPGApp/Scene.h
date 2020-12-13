@@ -8,6 +8,9 @@
 
 #include "Object.h"
 #include "Light.h"
+#include "DirectionalLight.h"
+#include "SpotLight.h"
+#include "PointLight.h"
 
 #include "Sphere.h"
 #include "SuziFlat.h"

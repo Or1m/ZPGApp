@@ -13,9 +13,9 @@ void SceneTwo::onLoad() {
 
 	objects->push_back(new Object(sphere, sphereCount, NULL, NULL, false, phongPath, false, 3));
 
-	lights->push_back(new Light());
-	lights->push_back(new Light(1));
-	lights->push_back(new Light(2));
+	lights->push_back(new PointLight());
+	lights->push_back(new DirectionalLight());
+	lights->push_back(new SpotLight());
 
 	// Bacha pocet svetiel sa berie z indexu, nezakomentovavat mimo poradia
 	for (const auto& object : *objects) {
@@ -27,8 +27,8 @@ void SceneTwo::onLoad() {
 		object->move(glm::vec3(-2.0f, 0.0f, 0.0f));
 	}
 
-	lights->at(0)->moveTo(glm::vec3(4.0, 0.0, 0.0));
-	lights->at(1)->setDirection(glm::vec3(0.5, -1.0, 0.0));
+	((PointLight*) lights->at(0))->moveTo(glm::vec3(4.0, 0.0, 0.0));
+	((DirectionalLight*) lights->at(1))->setDirection(glm::vec3(0.5, -1.0, 0.0));
 }
 
 void SceneTwo::onUpdate() {
@@ -36,8 +36,8 @@ void SceneTwo::onUpdate() {
 	for (int i = 0; i < 4; i++) {
 		objects->at(0)->move(vectors[i]);
 
-		lights->at(2)->moveTo(Camera::getInstance()->getPosition());
-		lights->at(2)->setDirection(Camera::getInstance()->getTarget());
+		((SpotLight*) lights->at(2))->moveTo(Camera::getInstance()->getPosition());
+		((SpotLight*)lights->at(2))->setDirection(Camera::getInstance()->getTarget());
 
 
 		Renderer::getInstance()->draw(*objects->at(0));

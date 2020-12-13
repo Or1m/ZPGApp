@@ -5,36 +5,28 @@
 
 #include "Subject.h"
 
+enum class LightType {
+	pointLight,
+	directionalLight,
+	spotLight
+};
+
 
 class Light : public Subject {
 public:
-	Light();
-	Light(int type);
+	Light(LightType type);
 	~Light() {}
 
-	void moveTo(glm::vec3 pos);
-	void move(glm::vec3 trans);
-	void setDirection(glm::vec3 dir);
-
-	glm::vec3 getLightPosition()	{ return this->position; }
-	glm::vec3 getLightDirection()	{ return this->direction; }
-	glm::vec3 getLightColor()		{ return this->lightColor; }
-	int getType()					{ return this->lightType; }
-	int getIndex()					{ return this->index; }
-	float getCutOff()				{ return this->cutOff; }
-	glm::vec3 getAttenuation()		{ return glm::vec3(this->constant, this->linear, this->quadratic); }
+	glm::vec3 getLightColor()	{ return this->lightColor; }
+	int getIndex()				{ return this->index; }
+	LightType getType()			{ return this->type; }
 	
 private:
-	glm::vec3 position;
-	glm::vec3 direction;
+	LightType type;
 	glm::vec3 lightColor;
-
-	float constant;
-	float linear;
-	float quadratic;
-
-	float cutOff;
-
 	int index;
-	int lightType;
+
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
 };

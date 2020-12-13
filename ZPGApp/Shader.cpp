@@ -1,6 +1,9 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Light.h"
+#include "PointLight.h"
+#include "SpotLight.h"
+#include "DirectionalLight.h"
 
 Shader::Shader(const std::string& filePath) 
 : filePath(filePath), shaderProgram(0) {
@@ -106,27 +109,37 @@ void Shader::update(Light& light) {
 	this->useProgram();
 
 	int idx		  = light.getIndex();
-	int lightType = light.getType();
+	LightType lightType = light.getType();
 
 	std::string idxString = std::to_string(light.getIndex());
-	glm::vec3 attenuation = light.getAttenuation();
-
+	
 	this->sendUniform(("lights[" + idxString + "].color").c_str(), light.getLightColor());
-	this->sendUniform(("lights[" + idxString + "].type").c_str(), lightType);
+	this->sendUniform(("lights[" + idxString + "].type").c_str(), (int)lightType);
 
-	if (lightType == 0 || lightType == 2) {
-		this->sendUniform(("lights[" + idxString + "].position").c_str(), light.getLightPosition());
+	glm::vec3 attenuation;
+	if (lightType == LightType::pointLight) {
+		attenuation = ((PointLight&) light).getAttenuation();
+		this->sendUniform(("lights[" + idxString + "].position").c_str(), ((PointLight&) light).getLightPosition());
+	}
+		
+	else if (lightType == LightType::spotLight) {
+		attenuation = ((SpotLight&)light).getAttenuation();
+		this->sendUniform(("lights[" + idxString + "].position").c_str(), ((SpotLight&) light).getLightPosition());
+	}
 
+	if(lightType == LightType::pointLight || lightType == LightType::spotLight) {
 		this->sendUniform(("lights[" + idxString + "].constant").c_str(), attenuation.x);
 		this->sendUniform(("lights[" + idxString + "].linear").c_str(), attenuation.y);
 		this->sendUniform(("lights[" + idxString + "].quadratic").c_str(), attenuation.z);
 	}
 		
-	if(lightType == 1 || lightType == 2)
-		this->sendUniform(("lights[" + idxString + "].direction").c_str(), light.getLightDirection());
+	if(lightType == LightType::directionalLight)
+		this->sendUniform(("lights[" + idxString + "].direction").c_str(), ((DirectionalLight&) light).getLightDirection());
 
-	if(lightType == 2)
-		this->sendUniform(("lights[" + idxString + "].cutOff").c_str(), light.getCutOff());
+	if (lightType == LightType::spotLight) {
+		this->sendUniform(("lights[" + idxString + "].direction").c_str(), ((SpotLight&) light).getLightDirection());
+		this->sendUniform(("lights[" + idxString + "].cutOff").c_str(), ((SpotLight&) light).getCutOff());
+	}
 }
 
 void Shader::addLight(Light* light) {

@@ -7,7 +7,7 @@ void SceneFour::onLoad() {
 	//objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
 	//objects->push_back(ObjectManager::getInstance()->loadAndCreateObject(domePath, constantPath, &skyTexturePath));
 	
-	lights->push_back(new Light(1));
+	lights->push_back(new DirectionalLight());
 
 	glm::vec3 positions[] = { glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, -3.0, 0.0) };
 	glm::vec3 scales[]    = { glm::vec3(1.0, 1.0, 1.0), glm::vec3(1.0, 1.0, 1.0),   glm::vec3(1.0, 1.0, 1.0)  };
@@ -26,7 +26,7 @@ void SceneFour::onLoad() {
 		i++;
 	}
 
-	lights->at(0)->setDirection(glm::vec3(0.5, -1.0, 0.0));
+	((DirectionalLight*) lights->at(0))->setDirection(glm::vec3(0.5, -1.0, 0.0));
 }
 
 void SceneFour::onUpdate() {
