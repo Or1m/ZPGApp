@@ -17,7 +17,6 @@ void SceneTwo::onLoad() {
 	lights->push_back(new DirectionalLight());
 	lights->push_back(new SpotLight());
 
-	// Bacha pocet svetiel sa berie z indexu, nezakomentovavat mimo poradia
 	for (const auto& object : *objects) {
 		object->addLight(lights->at(0));
 		object->addLight(lights->at(1));
