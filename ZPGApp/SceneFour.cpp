@@ -3,12 +3,12 @@
 void SceneFour::onLoad() {
 	objects->push_back(ObjectManager::getInstance()->loadAndCreateSkyBox(skyBoxPath, cubeMapPath));
 
-	objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
-	objects->push_back(ObjectManager::getInstance()->loadAndCreateObject(domePath, constantPath, &skyTexturePath));
+	//objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
+	//objects->push_back(ObjectManager::getInstance()->loadAndCreateObject(domePath, constantPath, &skyTexturePath));
 
 	lights->push_back(new Light(1));
 	
-	glm::vec3 positions[] = { glm::vec3(1.0, 1.0, 1.0), glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, -3.0, 0.0) };
+	glm::vec3 positions[] = { glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, -3.0, 0.0) };
 	glm::vec3 scales[]	  = { glm::vec3(1.0, 1.0, 1.0), glm::vec3(200.0f, 200.0f, 200.0f),  glm::vec3(20.0f, 20.0f, 20.0f) };
 
 	int i = 0;

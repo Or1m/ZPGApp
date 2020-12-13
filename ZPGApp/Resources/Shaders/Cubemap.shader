@@ -3,7 +3,7 @@
 
 layout(location = 0) in vec3 vp;
 layout(location = 1) in vec3 vn;
-layout(location = 2) in vec3 tc;
+layout(location = 2) in vec2 tc;
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
@@ -13,9 +13,10 @@ out vec3 textureDir;
 
 void main() {
 
-    textureDir = tc;
+    textureDir = vp;
+    mat4 test = mat4(mat3(viewMatrix));
 
-    gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(vp, 1.0);
+    gl_Position = (projectionMatrix * test * modelMatrix) * vec4(vp, 1.0);
 };
 
 #shader fragment
@@ -28,6 +29,7 @@ uniform samplerCube myTexture;
 uniform int hasTexture;
 
 in vec3 textureDir;
+
 
 vec3 temp;
 

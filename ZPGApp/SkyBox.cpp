@@ -19,6 +19,7 @@ SkyBox::SkyBox(const float points[], const int countOfPoints, const unsigned int
 SkyBox::~SkyBox() { }
 
 void SkyBox::bindBuffers() const {
+	glDepthMask(GL_FALSE);
 
 	this->shader->useProgram();
 	this->vertexBuffer->bind();
@@ -29,8 +30,4 @@ void SkyBox::bindBuffers() const {
 
 	if (this->hasTexture)
 		((Cubemap*)this->texture)->bind();
-
-	/*this->shader->sendUniform("modelMatrix", glm::mat4(1.0));
-	this->shader->sendUniform("viewMatrix", glm::mat3(Camera::getInstance()->getCamera()));
-	this->shader->sendUniform("projectionMatrix", Camera::getInstance()->getProjection());*/
 }

@@ -21,6 +21,7 @@ void Renderer::draw(const Object& objectToDraw) const {
 	else
 		glDrawArrays(GL_TRIANGLES, 0, objectToDraw.getVertexCount());
 
+	glDepthMask(GL_TRUE);
 }
 
 void Renderer::clear() const {

@@ -11,7 +11,7 @@ Cubemap::Cubemap(const std::string paths[6]) {
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-	this->dimension = 3;
+	this->dimension = 2;
 }
 
 void Cubemap::bind() const {

@@ -67,6 +67,7 @@ SkyBox* ObjectManager::loadAndCreateSkyBox(const std::string& modelPath, const s
 
 		arr[i + 6] = uvs[j].x;
 		arr[i + 7] = uvs[j].y;
+		//arr[i + 8] = 0;
 	}
 
 	//return new Object(arr, count, NULL, NULL, false, shaderPath, texturePath);

@@ -171,7 +171,7 @@ void Shader::sendUniform(const GLchar* name, glm::mat4 M4) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if(uniformLocation != -1)
-		GLCall(glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4))); // glm::value_ptr(M) == &M[0][0]
+		glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(M4)); // glm::value_ptr(M) == &M[0][0]
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec4 V4) const {
@@ -199,7 +199,7 @@ void Shader::sendUniform(const GLchar* name, GLint I) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		GLCall(glUniform1i(uniformLocation, I));
+		glUniform1i(uniformLocation, I);
 }
 
 void Shader::sendUniform(const GLchar* name, GLuint U) const {
