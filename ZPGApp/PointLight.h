@@ -5,6 +5,8 @@
 class PointLight : public Light {
 public:
 	PointLight();
+	PointLight(glm::vec3 position);
+	PointLight(glm::vec3 position, float constant, float linear, float quadratic);
 	~PointLight() { }
 
 	void moveTo(glm::vec3 pos);
@@ -20,4 +22,3 @@ private:
 	float linear;
 	float quadratic;
 };
-

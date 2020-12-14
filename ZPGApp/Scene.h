@@ -4,19 +4,13 @@
 #include "Utils.h"
 
 #include "Renderer.h"
-#include "ObjectManager.h"
-
+#include "ObjectFactory.h"
 #include "Object.h"
+
 #include "Light.h"
 #include "DirectionalLight.h"
 #include "SpotLight.h"
 #include "PointLight.h"
-
-#include "Sphere.h"
-#include "SuziFlat.h"
-#include "SuziSmooth.h"
-#include "Plain.h"
-#include "TexturedPlain.h"
 
 class Scene {
 public:

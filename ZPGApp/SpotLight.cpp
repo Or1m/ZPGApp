@@ -2,15 +2,25 @@
 
 #include <glm\trigonometric.hpp>
 
-SpotLight::SpotLight() : Light(LightType::spotLight) {
-	this->position = glm::vec3(0.0, 0.0, 0.0);
-	this->cutOff = glm::cos(glm::radians(20.0f));
-	this->direction = glm::vec3(0.0f, -1.0f, 0.0f);
+SpotLight::SpotLight() : SpotLight(glm::vec3(0.0, 0.0, 0.0)) { }
 
-	this->constant = 1.0f;
-	this->linear = 0.09f;
-	this->quadratic = 0.032f;
+SpotLight::SpotLight(glm::vec3 position) : SpotLight(position, glm::vec3(0.0f, -1.0f, 0.0f)) { }
+
+SpotLight::SpotLight(glm::vec3 position, glm::vec3 direction) : SpotLight(position, direction, 20.0f) { }
+
+SpotLight::SpotLight(glm::vec3 position, glm::vec3 direction, float cutOff) : SpotLight(position, direction, cutOff, 1.0f, 0.09f, 0.032f) { }
+
+SpotLight::SpotLight(glm::vec3 position, glm::vec3 direction, float cutOff, float constant, float linear, float quadratic) : Light(LightType::spotLight) {
+	this->position	= position;
+	this->direction = direction;
+	this->cutOff	= glm::cos(glm::radians(cutOff));
+	
+
+	this->constant	= constant;
+	this->linear	= linear;
+	this->quadratic = quadratic;
 }
+
 
 void SpotLight::moveTo(glm::vec3 pos) {
 	this->position = pos;
