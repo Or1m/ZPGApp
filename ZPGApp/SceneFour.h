@@ -7,7 +7,7 @@ public:
 	SceneFour() { };
 	~SceneFour() { };
 
-	void onLoad() override;
+	void onLoad()   override;
 	void onUpdate() override;
 
 private:
