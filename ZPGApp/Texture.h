@@ -8,9 +8,14 @@
 
 #include "SOIL.h"
 
+enum class TextureType {
+	texture2D = GL_TEXTURE_2D,
+	cubemap   = GL_TEXTURE_CUBE_MAP
+};
+
 class Texture {
 public:
-	Texture(int type);
+	Texture(TextureType type);
 	virtual ~Texture();
 
 	virtual void bind() const;
@@ -24,5 +29,5 @@ protected:
 	int dimension;
 	int slot;
 
-	int type; // GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP
+	TextureType type; // GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP
 };

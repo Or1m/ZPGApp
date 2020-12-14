@@ -1,6 +1,6 @@
 #include "Cubemap.h"
 
-Cubemap::Cubemap(const std::string paths[6]) : Texture(GL_TEXTURE_CUBE_MAP) {
+Cubemap::Cubemap(const std::string paths[6]) : Texture(TextureType::cubemap) {
 
 	this->textureId = SOIL_load_OGL_cubemap(paths[0].c_str(), paths[1].c_str(), paths[2].c_str(),
 		paths[3].c_str(), paths[4].c_str(), paths[5].c_str(), SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
