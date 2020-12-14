@@ -1,10 +1,9 @@
 #pragma once
 #include "Transformation.h"
-
-#include <vector>
-
 #include "Move.h"
 #include "Scale.h"
+
+#include <vector>
 
 class ComplexTransformation : public Transformation {
 public:
@@ -13,6 +12,7 @@ public:
 
 	glm::mat4 add(Transformation* tr);
 	void addNotApply(Transformation* tr);
+
 	glm::mat4 apply() override;
 
 private:

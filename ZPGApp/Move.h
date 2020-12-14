@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Transformation.h"
 
 class Move : public Transformation {

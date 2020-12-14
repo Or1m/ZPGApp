@@ -143,6 +143,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="Scale.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneFour.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Resources\Models\textured_plain.h" />
+    <ClInclude Include="Rotate.h" />
     <ClInclude Include="Scale.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFour.h" />

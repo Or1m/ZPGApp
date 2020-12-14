@@ -171,6 +171,9 @@
     <ClCompile Include="PointLight.cpp">
       <Filter>Source Files\Lights</Filter>
     </ClCompile>
+    <ClCompile Include="Rotate.cpp">
+      <Filter>Source Files\Transformations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="PointLight.h">
       <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotate.h">
+      <Filter>Header Files\Transformations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
