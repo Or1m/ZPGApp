@@ -126,6 +126,8 @@ void Shader::update(Light& light) {
 	else if (lightType == LightType::spotLight) {
 		attenuation = ((SpotLight&)light).getAttenuation();
 		this->sendUniform(("lights[" + idxString + "].position").c_str(), ((SpotLight&) light).getLightPosition());
+		this->sendUniform(("lights[" + idxString + "].direction").c_str(), ((SpotLight&)light).getLightDirection());
+		this->sendUniform(("lights[" + idxString + "].cutOff").c_str(), ((SpotLight&)light).getCutOff());
 	}
 
 	if(lightType == LightType::pointLight || lightType == LightType::spotLight) {
@@ -136,11 +138,6 @@ void Shader::update(Light& light) {
 		
 	if(lightType == LightType::directionalLight)
 		this->sendUniform(("lights[" + idxString + "].direction").c_str(), ((DirectionalLight&) light).getLightDirection());
-
-	if (lightType == LightType::spotLight) {
-		this->sendUniform(("lights[" + idxString + "].direction").c_str(), ((SpotLight&) light).getLightDirection());
-		this->sendUniform(("lights[" + idxString + "].cutOff").c_str(), ((SpotLight&) light).getCutOff());
-	}
 }
 
 

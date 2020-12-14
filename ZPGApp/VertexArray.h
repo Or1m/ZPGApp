@@ -1,4 +1,5 @@
 #pragma once
+
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
 
@@ -11,7 +12,7 @@ public:
 
 	void addBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& layout) const;
 
-	void bind() const;
+	void bind()   const;
 	void unbind() const;
 
 private:
