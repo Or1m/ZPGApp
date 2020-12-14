@@ -38,7 +38,6 @@ void SceneManager::runScene() {
 	while(Window::getInstance()->windowShouldNotClose()) {
 		Renderer::getInstance()->clear();
 
-		// TODO Zapracovat deltaTime
 		this->currentScene->onUpdate();
 
 		Window::getInstance()->pollEvents();
