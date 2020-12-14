@@ -1,17 +1,18 @@
 #include "SceneFour.h"
+#include "Camera.h"
 
 void SceneFour::onLoad() {
 	objects->push_back(ObjectFactory::createSkyBox(skyBoxPath, cubeMapPath));
-	objects->push_back(ObjectFactory::createTerrain(64, 64, 50, 50, 1, lambertPath));
+	objects->push_back(ObjectFactory::createTerrain(32, 32, 100, 100, 3, terraintPath));
 
-	objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
+	objects->push_back(new TexturedPlain(constantPath, &groundTexturePath));
 	//objects->push_back(ObjectManager::loadAndCreateObject(domePath, constantPath, &skyTexturePath));
 	
 	lights->push_back(new DirectionalLight());
 
 	glm::vec3 positions[] = { glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, -1.0, -.5),  glm::vec3(0.0, -3.0, 0.0) };
 	glm::vec3 scales[]    = { glm::vec3(1.0, 1.0, 1.0), glm::vec3(1.0, 1.0, 1.0),   glm::vec3(1.0, 1.0, 1.0)  };
-	glm::vec3 colors[]	  = { glm::vec3(1.0, 1.0, 1.0), glm::vec3(0.0, 1.0, 0.0),   glm::vec3(1.0, 1.0, 1.0)  };
+	glm::vec3 colors[]	  = { glm::vec3(1.0, 1.0, 1.0), fromRGB(56, 44, 11),   glm::vec3(1.0, 1.0, 1.0)  };
 
 	//glm::vec3 scales[] = { glm::vec3(1.0, 1.0, 1.0), glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(20.0f, 20.0f, 20.0f) };
 

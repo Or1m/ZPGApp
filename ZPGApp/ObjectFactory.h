@@ -18,6 +18,6 @@ public:
 	static Terrain* createTerrain(int xCount, int zCount, int width, int height, float range, const std::string& shaderPath);
 
 private:
-	static Object* internalLoadObject(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath);
+	static float* internalLoadObject(const std::string& modelPath, int& count);
 };
 

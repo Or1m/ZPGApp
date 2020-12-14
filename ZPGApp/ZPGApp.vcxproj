@@ -220,6 +220,7 @@
     <None Include="Resources\Shaders\Cubemap.shader" />
     <None Include="Resources\Shaders\Lambert.shader" />
     <None Include="Resources\Shaders\Phong.shader" />
+    <None Include="Resources\Shaders\Terrain.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\dry.png" />

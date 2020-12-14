@@ -13,8 +13,10 @@ out vec3 fragmentPosition;
 out vec3 normal;
 out vec2 texCoord;
 
-void main() {
+out float pos;
 
+void main() {
+    pos = vp.y;
     fragmentPosition = vec3(modelMatrix * vec4(vp, 1.0));
     normal = normalize(inverse(transpose(mat3(modelMatrix))) * vn);
 
@@ -38,8 +40,8 @@ struct Light
     vec3 direction;
     vec3 color;
 
-    vec3 ambient; 
-    vec3 diffuse; 
+    vec3 ambient;
+    vec3 diffuse;
     vec3 specular;
 
     float constant;
@@ -62,6 +64,8 @@ uniform int hasTexture;
 in vec2 texCoord;
 in vec3 fragmentPosition;
 in vec3 normal;
+
+in float pos;
 
 const float ambientStrength = 0.1;
 
@@ -93,10 +97,16 @@ void main() {
             diffuse *= attenuation;
         }
 
+        vec3 tempColor = color;
+        if (pos > 1.2f) {
+            tempColor = vec3(255.0, 255.0, 255.0);
+        }
+            
+
         if (lights[i].type == 2 && theta < lights[i].cutOff)
-            result += ambient * color;
+            result += ambient * tempColor;
         else
-            result += (ambient + diffuse) * color;
+            result += (ambient + diffuse) * tempColor;
     }
 
     if (hasTexture == 1)
