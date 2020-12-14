@@ -20,7 +20,8 @@ public:
 	virtual ~Object();
 
 
-	void init();
+	void init(const std::string& shaderPath);
+	void initValues();
 
 	virtual void bindBuffers()	const;
 	void useShaderProgram()		const;
