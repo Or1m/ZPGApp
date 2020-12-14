@@ -1,9 +1,8 @@
 #include "Window.h"
-
-#include <iostream>
-
 #include "Callbacks.h"
 #include "Camera.h"
+
+#include <iostream>
 
 Window* Window::instance = NULL;
 
@@ -66,6 +65,7 @@ bool Window::windowShouldNotClose() const {
 	return !glfwWindowShouldClose(this->glfwWindow);
 }
 
+
 void Window::swapBuffer() const { 
 	/**
 	 * Swaps the color buffer (a large 2D buffer that contains color values for each pixel in GLFW's window) 
@@ -95,7 +95,6 @@ void Window::terminateWindow() const {
 }
 
 
-// Sets the key callback
 void Window::attachCallbacks() const {
 
 	glfwSetKeyCallback(this->glfwWindow, Callbacks::key_callback); // stlacenie klavesy
@@ -109,8 +108,4 @@ void Window::attachCallbacks() const {
 	//glfwSetWindowFocusCallback(this->glfwWindow, Callbacks::window_focus_callback); // focus na okno
 
 	//glfwSetWindowIconifyCallback(this->glfwWindow, Callbacks::window_iconify_callback); // stlacenie jednej z troch hornych ikon okna
-
-
-	/*glfwSetCursorPosCallback(this->glfwWindow, [](GLFWwindow* glfwWindow, double mouseXPos, double mouseYPos)
-		-> void {Callbacks::cursor_callback(glfwWindow, mouseXPos, mouseYPos); });*/
 }

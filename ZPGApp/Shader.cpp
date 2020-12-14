@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include "Camera.h"
+
 #include "Light.h"
 #include "PointLight.h"
 #include "SpotLight.h"
@@ -9,8 +10,10 @@ Shader::Shader(const std::string& filePath)
 : filePath(filePath), shaderProgram(0) {
 	
 	ShaderProgramSource source = this->parseShader();
-	this->vertexShaderSource = source.vertexSource.c_str();
+
+	this->vertexShaderSource   = source.vertexSource.c_str();
 	this->fragmentShaderSource = source.fragmentSource.c_str();
+
 	this->createShader();
 
 	Camera::getInstance()->attach(this);
@@ -75,7 +78,7 @@ void Shader::createShader() {
 
 	this->shaderProgram = glCreateProgram(); // najdolezitejsie
 
-	this->vertexShader = compileShader(GL_VERTEX_SHADER, this->vertexShaderSource);
+	this->vertexShader   = compileShader(GL_VERTEX_SHADER, this->vertexShaderSource);
 	this->fragmentShader = compileShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
 	glAttachShader(this->shaderProgram, this->fragmentShader);
@@ -98,7 +101,7 @@ void Shader::unbindProgram() const {
 }
 
 
-// Observer
+#pragma region Observer
 void Shader::update(Camera& camera) {
 	this->useProgram();
 	this->sendUniform("viewMatrix", camera.getCamera());
@@ -108,9 +111,7 @@ void Shader::update(Camera& camera) {
 void Shader::update(Light& light) {
 	this->useProgram();
 
-	int idx		  = light.getIndex();
 	LightType lightType = light.getType();
-
 	std::string idxString = std::to_string(light.getIndex());
 	
 	this->sendUniform(("lights[" + idxString + "].color").c_str(), light.getLightColor());
@@ -142,11 +143,13 @@ void Shader::update(Light& light) {
 	}
 }
 
+
 void Shader::addLight(Light* light) {
 	light->attach(this);
 }
+#pragma endregion
 
-// Shader tests
+#pragma region Tests
 GLuint Shader::testCompileStatus(GLint status, GLuint shaderID, GLuint type) {
 
 	if (status == GL_FALSE) {
@@ -178,6 +181,7 @@ void Shader::testLinkStatus(GLint status) {
 		glDeleteProgram(this->shaderProgram);
 	}
 }
+#pragma endregion
 
 #pragma region SendUniforms
 void Shader::sendUniform(const GLchar* name, glm::mat4 M4) const {
@@ -191,21 +195,21 @@ void Shader::sendUniform(const GLchar* name, glm::vec4 V4) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		GLCall(glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w));
+		glUniform4f(uniformLocation, V4.x, V4.y, V4.z, V4.w);
 }
 
 void Shader::sendUniform(const GLchar* name, glm::vec3 V3) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		GLCall(glUniform3f(uniformLocation, (GLfloat)V3.x, (GLfloat)V3.y, (GLfloat)V3.z));
+		glUniform3f(uniformLocation, (GLfloat)V3.x, (GLfloat)V3.y, (GLfloat)V3.z);
 }
 
 void Shader::sendUniform(const GLchar* name, GLfloat F) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		GLCall(glUniform1f(uniformLocation, F));
+		glUniform1f(uniformLocation, F);
 }
 
 void Shader::sendUniform(const GLchar* name, GLint I) const {
@@ -219,6 +223,6 @@ void Shader::sendUniform(const GLchar* name, GLuint U) const {
 	GLint uniformLocation = glGetUniformLocation(this->shaderProgram, name);
 
 	if (uniformLocation != -1)
-		GLCall(glUniform1ui(uniformLocation, U));
+		glUniform1ui(uniformLocation, U);
 }
 #pragma endregion

@@ -15,26 +15,25 @@
 #include "Utils.h"
 #include "Observer.h"
 
-
 class Shader : Observer {
 public:
 	Shader(const std::string& filePath);
 	~Shader();
 
-	void useProgram() const;
+	void useProgram()	 const;
 	void unbindProgram() const;
 
 	void update(Camera& camera) override;
-	void update(Light& light) override;
+	void update(Light& light)	override;
 
 	void addLight(Light* light);
 
 	void sendUniform(const GLchar* name, glm::mat4 M4) const;
 	void sendUniform(const GLchar* name, glm::vec4 V4) const;
 	void sendUniform(const GLchar* name, glm::vec3 V3) const;
-	void sendUniform(const GLchar* name, GLfloat F) const;
-	void sendUniform(const GLchar* name, GLint I) const;
-	void sendUniform(const GLchar* name, GLuint U) const;
+	void sendUniform(const GLchar* name, GLfloat F)	   const;
+	void sendUniform(const GLchar* name, GLint I)	   const;
+	void sendUniform(const GLchar* name, GLuint U)	   const;
 
 private:
 	std::string filePath;

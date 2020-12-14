@@ -16,7 +16,7 @@ public:
 	static Application* getInstance(int width, int height, const char* title);
 
 	void printVersionInfo() const;
-	void attachCallbacks() const;
+	void attachCallbacks()  const;
 
 	float countDeltaTime();
 

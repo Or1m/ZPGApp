@@ -12,28 +12,27 @@
 #include "Subject.h"
 #include "Observer.h"
 
-
 class Camera : public Subject {
 public:
 	static Camera* getInstance();
 	static Camera* getInstance(int width, int height);
 
-	glm::mat4 getCamera();
-	glm::mat4 getProjection();
-	glm::vec3 getPosition();
-
-	glm::vec3 getTarget();
-
 	void toFront();
 	void toLeft();
 	void toBack();
 	void toRight();
+
 	void changeDirection(float mouseX, float mouseY);
 
 	void move(glm::vec3 trans);
 	void moveTo(glm::vec3 pos);
 
 	void setDeltaTime(float delta);
+
+	glm::mat4 getCamera();
+	glm::mat4 getProjection();
+	glm::vec3 getPosition();
+	glm::vec3 getTarget();
 
 private:
 	static Camera* instance;
@@ -55,6 +54,6 @@ private:
 
 	Camera();
 	Camera(int width, int height);
-	~Camera() {}
+	~Camera() { }
 };
 

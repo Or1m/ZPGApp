@@ -9,14 +9,15 @@ public:
 	static Window* getInstance(int width, int height, const char* title);
 
 	bool windowShouldNotClose() const;
-	void swapBuffer() const;
-	void pollEvents() const;
-	void destroyWindow() const;
-	void terminateWindow() const;
 
-	void attachCallbacks() const;
+	void swapBuffer()		const;
+	void pollEvents()		const;
+	void destroyWindow()	const;
+	void terminateWindow()	const;
 
-	int getWidth() const { return this->width; }
+	void attachCallbacks()	const;
+
+	int getWidth()  const { return this->width;  }
 	int getHeight() const { return this->height; }
 
 private:
@@ -30,4 +31,3 @@ private:
 	Window(int width, int height, const char* title);
 	~Window() {}
 };
-

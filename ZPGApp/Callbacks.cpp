@@ -1,10 +1,9 @@
 #include "Callbacks.h"
-
-#include <iostream>
-
 #include "Camera.h"
 #include "Window.h"
 #include "SceneManager.h"
+
+#include <iostream>
 
 static bool pressed = false;
 
