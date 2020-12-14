@@ -38,9 +38,9 @@ struct Light
     vec3 direction;
     vec3 color;
 
-    vec3 ambient;  // not in use
-    vec3 diffuse;  // not in use
-    vec3 specular; // not in use
+    vec3 ambient; 
+    vec3 diffuse; 
+    vec3 specular;
 
     float constant;
     float linear;
