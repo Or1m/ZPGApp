@@ -2,17 +2,19 @@
 
 static int staticSlot = 0;
 
-Texture::Texture() 
-:	textureId(0), dimension(0), slot(staticSlot++) { }
+Texture::Texture(int type)
+:	textureId(0), dimension(2), slot(staticSlot++), type(type) { }
 
 Texture::~Texture() {
 	glDeleteTextures(1, &this->textureId);
 }
 
+
 void Texture::bind() const {
 	glActiveTexture(GL_TEXTURE0 + slot);
+	glBindTexture(type, this->textureId);
 }
 
 void Texture::unbind() {
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(type, 0);
 }

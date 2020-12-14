@@ -4,7 +4,7 @@ void SceneFour::onLoad() {
 	objects->push_back(ObjectManager::getInstance()->loadAndCreateSkyBox(skyBoxPath, cubeMapPath));
 	objects->push_back(ObjectManager::getInstance()->createTerrain(64, 64, 50, 50, 1, lambertPath));
 
-	//objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
+	objects->push_back(new TexturedPlain(constantPath, &groundTexturePath, 1));
 	//objects->push_back(ObjectManager::getInstance()->loadAndCreateObject(domePath, constantPath, &skyTexturePath));
 	
 	lights->push_back(new DirectionalLight());
