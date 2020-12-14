@@ -98,7 +98,7 @@ void main() {
         }
 
         vec3 tempColor = color;
-        if (pos > 1.2f) {
+        if (pos > 1.5f) {
             tempColor = vec3(255.0, 255.0, 255.0);
         }
             

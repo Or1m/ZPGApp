@@ -14,103 +14,82 @@ SkyBox* ObjectFactory::createSkyBox(const std::string& modelPath, const std::str
 }
 
 Terrain* ObjectFactory::createTerrain(int xCount, int zCount, int width, int height, float range, const std::string& shaderPath) {
-	const int y = 0;
+	
+	std::vector<glm::vec3> plain;
+	float densityX = width / (float)xCount;
+	float densityZ = height / (float)zCount;
 
-	std::vector<glm::vec3> plain_points;
-
-	std::vector<glm::vec3> m_pos;
-	std::vector<glm::vec3> m_nor;
-	std::size_t m_numberOfVert;
-
-	float step_x = (float)width / (float)xCount;
-	float step_z = (float)height / (float)zCount;
-
-	for (float i = 0; i < (float)width; i += step_x)
-	{
-		for (float j = 0; j < (float)height; j += step_z)
-		{
-			float x = i;
-			float z = j;
-			glm::vec3 point = glm::vec3(x, y, z);
-
-			plain_points.emplace_back(point);
+	for (float i = 0; i < (float)width; i += densityX) {
+		for (float j = 0; j < (float)height; j += densityZ) {
+			glm::vec3 point = glm::vec3(i, 0, j);
+			plain.push_back(point);
 		}
 	}
 
+	std::vector<glm::vec3> pos, norms;
+	int plainSize = plain.size();
 
-	for (int i = 0; i < (int)plain_points.size(); i++)
-	{
-		glm::vec3 vertex1 = plain_points.at(i);
-		glm::vec3 vertex2 = glm::vec3(plain_points.at(i).x + step_x, plain_points.at(i).y, plain_points.at(i).z);
-		glm::vec3 vertex3 = glm::vec3(plain_points.at(i).x, plain_points.at(i).y, plain_points.at(i).z + step_z);
-		glm::vec3 vertex4 = glm::vec3(plain_points.at(i).x + step_x, plain_points.at(i).y, plain_points.at(i).z + step_z);
+	for (int i = 0; i < plainSize; i++) {
+		glm::vec3 v1 = plain.at(i);
+		glm::vec3 v2 = glm::vec3(plain.at(i).x + densityX, plain.at(i).y, plain.at(i).z);
+		glm::vec3 v3 = glm::vec3(plain.at(i).x, plain.at(i).y, plain.at(i).z + densityZ);
+		glm::vec3 v4 = glm::vec3(plain.at(i).x + densityX, plain.at(i).y, plain.at(i).z + densityZ);
 
-		if (vertex1.x != width - step_x && vertex1.z != height - step_z)
-		{
-			m_pos.emplace_back(vertex1);
-			m_pos.emplace_back(vertex2);
-			m_pos.emplace_back(vertex3);
+		if (v1.x != width - densityX && v1.z != height - densityZ) {
+			pos.push_back(v1);
+			pos.push_back(v2);
+			pos.push_back(v3);
 
-			m_pos.emplace_back(vertex4);
-			m_pos.emplace_back(vertex3);
-			m_pos.emplace_back(vertex2);
+			pos.push_back(v4);
+			pos.push_back(v3);
+			pos.push_back(v2);
 		}
 	}
 
-	m_numberOfVert = m_pos.size();
+	processPerlin(pos, norms, range);
+	float* arr = convertToArr(pos, norms);
 
-	float max = m_pos.at(0).y;
-	float min = m_pos.at(0).y;
-	for (int i = 0; i < m_numberOfVert; i++)
-	{
-		glm::vec2 vertex_xz = glm::vec2(m_pos.at(i).x, m_pos.at(i).z);
-		float new_y = range * glm::perlin(vertex_xz);
+	return new Terrain(arr, pos.size() * 6, NULL, NULL, false, shaderPath);
+}
 
-		m_pos.at(i) = glm::vec3(m_pos.at(i).x, new_y, m_pos.at(i).z);
 
-		if (m_pos.at(i).y > max)
-		{
-			max = m_pos.at(i).y;
-		}
+void ObjectFactory::processPerlin(std::vector<glm::vec3>& pos, std::vector<glm::vec3>& norms, int range) {
+	int posSize = pos.size();
 
-		if (m_pos.at(i).y < min)
-		{
-			min = m_pos.at(i).y;
-		}
+	for (int i = 0; i < posSize; i++) {
+		glm::vec2 v = glm::vec2(pos.at(i).x, pos.at(i).z);
+		float newY = range * glm::perlin(v);
+
+		pos.at(i) = glm::vec3(pos.at(i).x, newY, pos.at(i).z);
 	}
 
-	//this->m_shader->sendUniform("max_height", range * max);
-
-	////gen normals
-	for (int i = 0; i < m_numberOfVert; i += 3)
-	{
-		glm::vec3 vector1 = m_pos.at(i + 1) - m_pos.at(i);
-		glm::vec3 vector2 = m_pos.at(i + 2) - m_pos.at(i);
+	for (int i = 0; i < posSize; i += 3) {
+		glm::vec3 vector1 = pos.at(i + 1) - pos.at(i);
+		glm::vec3 vector2 = pos.at(i + 2) - pos.at(i);
 		glm::vec3 new_normal = glm::cross(vector1, vector2);
 
-		m_nor.emplace_back(-1.0f * new_normal);
-		m_nor.emplace_back(-1.0f * new_normal);
-		m_nor.emplace_back(-1.0f * new_normal);
+		norms.push_back(-1.0f * new_normal);
+		norms.push_back(-1.0f * new_normal);
+		norms.push_back(-1.0f * new_normal);
 	}
+}
 
-	int count = m_numberOfVert;
-	int size = count * 6;
-
+float* ObjectFactory::convertToArr(const std::vector<glm::vec3>& pos, const std::vector<glm::vec3>& norms) {
+	int size = pos.size() * 6;
 	float* arr = new float[size];
 
 	for (int i = 0, j = 0; i < size; i += 6, j += 1) {
-		arr[i + 0] = m_pos[j].x;
-		arr[i + 1] = m_pos[j].y;
-		arr[i + 2] = m_pos[j].z;
+		arr[i + 0] = pos[j].x;
+		arr[i + 1] = pos[j].y;
+		arr[i + 2] = pos[j].z;
 
-		arr[i + 3] = m_nor[j].x;
-		arr[i + 4] = m_nor[j].y;
-		arr[i + 5] = m_nor[j].z;
+		arr[i + 3] = norms[j].x;
+		arr[i + 4] = norms[j].y;
+		arr[i + 5] = norms[j].z;
 	}
 
-	return new Terrain(arr, count, NULL, NULL, false, shaderPath);
+	return arr;
 }
-
 
 float* ObjectFactory::internalLoadObject(const std::string& modelPath, int& count) {
 	std::vector<glm::vec3> vertices;

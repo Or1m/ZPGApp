@@ -19,5 +19,6 @@ public:
 
 private:
 	static float* internalLoadObject(const std::string& modelPath, int& count);
+	static void processPerlin(std::vector<glm::vec3>& pos, std::vector<glm::vec3>& norms, int range);
+	static float* convertToArr(const std::vector<glm::vec3>& pos, const std::vector<glm::vec3>& norms);
 };
-
