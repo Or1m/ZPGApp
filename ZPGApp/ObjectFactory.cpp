@@ -39,7 +39,6 @@ Terrain* ObjectFactory::createTerrain(int xCount, int zCount, int width, int hei
 			pos.push_back(v1);
 			pos.push_back(v2);
 			pos.push_back(v3);
-
 			pos.push_back(v4);
 			pos.push_back(v3);
 			pos.push_back(v2);
@@ -49,7 +48,7 @@ Terrain* ObjectFactory::createTerrain(int xCount, int zCount, int width, int hei
 	processPerlin(pos, norms, range);
 	float* arr = convertToArr(pos, norms);
 
-	return new Terrain(arr, pos.size() * 6, NULL, NULL, false, shaderPath);
+	return new Terrain(arr, pos.size(), NULL, NULL, false, shaderPath);
 }
 
 
