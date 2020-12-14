@@ -43,7 +43,9 @@ protected:
 
 	const std::string groundTexturePath	= "Resources/Textures/floor.png";
 	const std::string skyTexturePath	= "Resources/Textures/fulldome3.png";
+	const std::string pannaTexPath		= "Resources/Textures/panna.png";
 
 	const std::string domePath			= "Resources/Objects/skydome.obj";
 	const std::string skyBoxPath		= "Resources/Objects/skybox.obj";
+	const std::string pannaPath			= "Resources/Objects/panna.obj";
 };

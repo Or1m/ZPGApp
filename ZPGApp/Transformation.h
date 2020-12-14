@@ -10,6 +10,8 @@ public:
 
 	virtual glm::mat4 apply() = 0;
 
+	glm::mat4 getModelMatrix() { return this->modelMatrix; }
+
 protected:
 	glm::mat4 modelMatrix;
 };

@@ -51,8 +51,15 @@ Terrain* ObjectFactory::createTerrain(int xCount, int zCount, int width, int hei
 	return new Terrain(arr, pos.size(), NULL, NULL, false, shaderPath);
 }
 
+Doll* ObjectFactory::createDoll(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath, int lightCount) {
+	int count;
+	float* arr = internalLoadObject(modelPath, count);
 
-void ObjectFactory::processPerlin(std::vector<glm::vec3>& pos, std::vector<glm::vec3>& norms, int range) {
+	return new Doll(arr, count, shaderPath, texturePath, lightCount);
+}
+
+
+void ObjectFactory::processPerlin(std::vector<glm::vec3>& pos, std::vector<glm::vec3>& norms, float range) {
 	int posSize = pos.size();
 
 	for (int i = 0; i < posSize; i++) {
@@ -89,6 +96,7 @@ float* ObjectFactory::convertToArr(const std::vector<glm::vec3>& pos, const std:
 
 	return arr;
 }
+
 
 float* ObjectFactory::internalLoadObject(const std::string& modelPath, int& count) {
 	std::vector<glm::vec3> vertices;

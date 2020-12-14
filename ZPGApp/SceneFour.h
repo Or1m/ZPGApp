@@ -13,6 +13,6 @@ public:
 private:
 	glm::vec3* arr;
 
-	float t = 0;
-	float step = 0.01;
+	float t = 0.0f;
+	float step = 0.01f;
 };

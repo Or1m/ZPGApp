@@ -136,6 +136,7 @@
     <ClCompile Include="ComplexTransformation.cpp" />
     <ClCompile Include="Cubemap.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="Doll.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Move.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="ComplexTransformation.h" />
     <ClInclude Include="Cubemap.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="Doll.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="ObjectFactory.h" />
@@ -236,6 +238,7 @@
     <Image Include="Resources\Textures\negx.jpg" />
     <Image Include="Resources\Textures\negy.jpg" />
     <Image Include="Resources\Textures\negz.jpg" />
+    <Image Include="Resources\Textures\panna.png" />
     <Image Include="Resources\Textures\posx.jpg" />
     <Image Include="Resources\Textures\posy.jpg" />
     <Image Include="Resources\Textures\posz.jpg" />

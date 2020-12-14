@@ -168,6 +168,9 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Source Files\Concrete Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Doll.cpp">
+      <Filter>Source Files\Concrete Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -314,6 +317,9 @@
     <ClInclude Include="SkyBox.h">
       <Filter>Header Files\Concrete Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Doll.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Phong.shader">
@@ -395,6 +401,9 @@
     </Image>
     <Image Include="Resources\Textures\posy.jpg">
       <Filter>Resource Files\Textures\Cubemap</Filter>
+    </Image>
+    <Image Include="Resources\Textures\panna.png">
+      <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>
 </Project>

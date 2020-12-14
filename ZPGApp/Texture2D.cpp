@@ -3,7 +3,7 @@
 Texture2D::Texture2D(const std::string& path) : Texture(TextureType::texture2D) {
 
 	this->filePath = path;
-	this->textureId = SOIL_load_OGL_texture(this->filePath.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	this->textureId = SOIL_load_OGL_texture(this->filePath.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, 0); // invert Y
 
 	if (textureId == 0)
 		std::cout << SOIL_last_result() << std::endl;

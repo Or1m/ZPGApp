@@ -126,9 +126,10 @@ void Object::move(glm::vec3 trans) {
 void Object::moveTo(glm::vec3 pos) {
 	this->useShaderProgram();
 
-	glm::mat4 test = glm::mat4(1.0);
-	test[3] = glm::vec4(pos, 1.0f);
-	this->shader->sendUniform("modelMatrix", test);
+	glm::mat4 temp = this->transformation->getModelMatrix();
+	temp[3] = glm::vec4(pos, 1.0f);
+
+	this->shader->sendUniform("modelMatrix", temp);
 }
 
 void Object::scale(glm::vec3 scale) {
