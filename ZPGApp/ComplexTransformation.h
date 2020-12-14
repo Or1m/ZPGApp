@@ -1,7 +1,9 @@
 #pragma once
+
 #include "Transformation.h"
 #include "Move.h"
 #include "Scale.h"
+#include "Rotate.h"
 
 #include <vector>
 

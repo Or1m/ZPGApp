@@ -2,11 +2,10 @@
 #include "Camera.h"
 #include "Light.h"
 
-static int identificator = 1;
+#include "Texture2D.h"
+#include "Cubemap.h"
 
-Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
-	bool isWithTexture, int lightCount)
-	: Object(points, countOfPoints, indexes, countOfIndexes, isWithIndexes, shaderPath, nullptr, isWithTexture, lightCount) { }
+static int identificator = 1;
 
 Object::Object(const float points[], const int countOfPoints, const unsigned int indexes[], const int countOfIndexes, bool isWithIndexes, const std::string& shaderPath,
 	const std::string* texturePath, bool isWithTexture, int lightCount)
@@ -140,4 +139,10 @@ void Object::scale(glm::vec3 scale) {
 	this->useShaderProgram();
 
 	this->shader->sendUniform("modelMatrix", this->transformation->add(new Scale(scale)));
+}
+
+void Object::rotate(float angle, glm::vec3 direction) {
+	this->useShaderProgram();
+
+	this->shader->sendUniform("modelMatrix", this->transformation->add(new Rotate(angle, direction)));
 }
