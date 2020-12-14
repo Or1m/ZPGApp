@@ -117,9 +117,6 @@
     <ClCompile Include="Callbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transformation.cpp">
-      <Filter>Source Files\Base Classes</Filter>
-    </ClCompile>
     <ClCompile Include="ComplexTransformation.cpp">
       <Filter>Source Files\Transformations</Filter>
     </ClCompile>

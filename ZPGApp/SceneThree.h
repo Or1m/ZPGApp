@@ -4,8 +4,8 @@
 
 class SceneThree : public Scene {
 public:
-	SceneThree() {}
-	~SceneThree() {}
+	SceneThree() { }
+	~SceneThree() { }
 
 	void onLoad() override;
 	void onUpdate() override;

@@ -5,8 +5,8 @@
 
 class Transformation {
 public:
-	Transformation();
-	~Transformation() {}
+	Transformation() : modelMatrix(glm::mat4(1.0)) { }
+	~Transformation() { }
 
 	virtual glm::mat4 apply() = 0;
 
