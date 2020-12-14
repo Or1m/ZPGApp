@@ -123,6 +123,14 @@ void Object::move(glm::vec3 trans) {
 	this->shader->sendUniform("modelMatrix", this->transformation->add(new Move(trans)));
 }
 
+void Object::moveTo(glm::vec3 pos) {
+	this->useShaderProgram();
+
+	glm::mat4 test = glm::mat4(1.0);
+	test[3] = glm::vec4(pos, 1.0f);
+	this->shader->sendUniform("modelMatrix", test);
+}
+
 void Object::scale(glm::vec3 scale) {
 	this->useShaderProgram();
 

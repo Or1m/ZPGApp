@@ -9,4 +9,10 @@ public:
 
 	void onLoad() override;
 	void onUpdate() override;
+
+private:
+	glm::vec3* arr;
+
+	float t = 0;
+	float step = 0.01;
 };

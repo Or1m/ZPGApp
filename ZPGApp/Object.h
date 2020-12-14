@@ -44,6 +44,7 @@ public:
 	void changeColor(glm::vec3 color);
 
 	void move(glm::vec3 trans);
+	void moveTo(glm::vec3 pos);
 	void scale(glm::vec3 scale);
 	void rotate(float angle, glm::vec3 direction);
 

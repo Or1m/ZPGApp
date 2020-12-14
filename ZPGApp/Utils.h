@@ -4,7 +4,13 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <glm/vec3.hpp>	
+
+#include <glm/vec3.hpp>					// glm::vec3
+#include <glm/vec4.hpp>					// glm::vec4
+#include <glm/mat4x4.hpp>				// glm::mat4
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/gtc/type_ptr.hpp>			// glm::value_ptr
+#include <glm/gtx/string_cast.hpp>		// glm::to_string()
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 
@@ -44,3 +50,21 @@ struct ShaderProgramSource {
 	std::string vertexSource;
 	std::string fragmentSource;
 };
+
+
+static float bazierMatrix[] = {
+	   -1,  3, -3,  1,
+		3, -6,  3,  0,
+	   -3,  3,  0,  0,
+		1,  0,  0,  0
+};
+
+static glm::vec3 calcBazier(float t, glm::vec3* arr) {
+
+	glm::vec4 vec = glm::vec4(t * t * t, t * t, t, 1);
+	glm::mat4x3 points = glm::mat4x3(arr[0], arr[1], arr[2], arr[3]);
+
+	glm::vec3 pos = vec * glm::make_mat4(bazierMatrix) * points;
+
+	return pos;
+}
