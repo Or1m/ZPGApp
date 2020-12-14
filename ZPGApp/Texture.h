@@ -21,8 +21,9 @@ public:
 	virtual void bind() const;
 	void unbind();
 
-	int getDimension()	{ return this->dimension; }
-	int getSlot()		{ return this->slot; }
+	int getDimension()	  { return this->dimension; }
+	int getSlot()		  { return this->slot; }
+	TextureType getType() { return this->type; }
 
 protected:
 	unsigned int textureId;
