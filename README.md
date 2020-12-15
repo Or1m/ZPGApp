@@ -1,3 +1,3 @@
 # ZPGApp
 
-## Semestral project for subject ZPG
+## Semestral project for subject Principles of Computer Graphics
