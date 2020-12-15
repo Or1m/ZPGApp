@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Resources/Models/suzi_smooth.h"
+#include "Resources/Models/suzi_smooth.hpp"
 
 class SuziSmooth : public Object {
 public:

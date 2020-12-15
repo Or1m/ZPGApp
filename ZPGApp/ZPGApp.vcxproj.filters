@@ -203,9 +203,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Models\suzi_smooth.h">
-      <Filter>Resource Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\Models\plain.h">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
@@ -319,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="Doll.h">
       <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\suzi_smooth.hpp">
+      <Filter>Resource Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

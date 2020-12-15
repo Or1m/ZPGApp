@@ -199,7 +199,7 @@
     <ClInclude Include="Resources\Models\plain.h" />
     <ClInclude Include="Resources\Models\sphere.h" />
     <ClInclude Include="Resources\Models\suzi_flat.h" />
-    <ClInclude Include="Resources\Models\suzi_smooth.h" />
+    <ClInclude Include="Resources\Models\suzi_smooth.hpp" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SuziFlat.h" />
