@@ -197,8 +197,8 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resources\Models\indexed_rectangle.h" />
     <ClInclude Include="Resources\Models\plain.h" />
-    <ClInclude Include="Resources\Models\sphere.h" />
-    <ClInclude Include="Resources\Models\suzi_flat.h" />
+    <ClInclude Include="Resources\Models\sphere.hpp" />
+    <ClInclude Include="Resources\Models\suzi_flat.hpp" />
     <ClInclude Include="Resources\Models\suzi_smooth.hpp" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />

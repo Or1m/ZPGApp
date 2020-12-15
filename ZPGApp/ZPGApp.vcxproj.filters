@@ -206,12 +206,6 @@
     <ClInclude Include="Resources\Models\plain.h">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Models\sphere.h">
-      <Filter>Resource Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Models\suzi_flat.h">
-      <Filter>Resource Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\Models\indexed_rectangle.h">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
@@ -318,6 +312,12 @@
       <Filter>Header Files\Concrete Objects</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Models\suzi_smooth.hpp">
+      <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\suzi_flat.hpp">
+      <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\sphere.hpp">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
