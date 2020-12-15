@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Resources/Models/indexed_rectangle.h"
+#include "Resources/Models/indexed_rectangle.hpp"
 
 class Rectangle : public Object {
 public:

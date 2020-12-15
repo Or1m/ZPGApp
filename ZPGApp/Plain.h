@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Resources/Models/plain.h"
+#include "Resources/Models/plain.hpp"
 
 class Plain : public Object {
 public:

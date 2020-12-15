@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Resources/Models/textured_plain.h"
+#include "Resources/Models/textured_plain.hpp"
 
 class TexturedPlain : public Object {
 public:

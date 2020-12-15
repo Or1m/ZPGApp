@@ -203,12 +203,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Models\plain.h">
-      <Filter>Resource Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Models\indexed_rectangle.h">
-      <Filter>Resource Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Header Files\Base Classes</Filter>
     </ClInclude>
@@ -263,12 +257,6 @@
     <ClInclude Include="SceneFour.h">
       <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Models\textured_plain.h">
-      <Filter>Resource Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturedPlain.h">
-      <Filter>Header Files\Concrete Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Vendor\objloader.h">
       <Filter>Header Files\Vendor</Filter>
     </ClInclude>
@@ -318,6 +306,18 @@
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Models\sphere.hpp">
+      <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedPlain.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\textured_plain.hpp">
+      <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\plain.hpp">
+      <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Models\indexed_rectangle.hpp">
       <Filter>Resource Files\Models</Filter>
     </ClInclude>
   </ItemGroup>

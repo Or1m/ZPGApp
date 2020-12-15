@@ -180,7 +180,7 @@
     <ClInclude Include="Plain.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="Resources\Models\textured_plain.h" />
+    <ClInclude Include="Resources\Models\textured_plain.hpp" />
     <ClInclude Include="Rotate.h" />
     <ClInclude Include="Scale.h" />
     <ClInclude Include="Scene.h" />
@@ -195,8 +195,8 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Resources\Models\indexed_rectangle.h" />
-    <ClInclude Include="Resources\Models\plain.h" />
+    <ClInclude Include="Resources\Models\indexed_rectangle.hpp" />
+    <ClInclude Include="Resources\Models\plain.hpp" />
     <ClInclude Include="Resources\Models\sphere.hpp" />
     <ClInclude Include="Resources\Models\suzi_flat.hpp" />
     <ClInclude Include="Resources\Models\suzi_smooth.hpp" />
