@@ -78,6 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\..\glm;..\..\glfw-3.3.2.bin.WIN32\include;..\..\glew-2.1.0\include;..\..\soil\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +134,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Callbacks.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Chair.cpp" />
     <ClCompile Include="ComplexTransformation.cpp" />
     <ClCompile Include="Cubemap.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
@@ -149,6 +151,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneFour.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneMGA.cpp" />
     <ClCompile Include="SceneOne.cpp" />
     <ClCompile Include="SceneThree.cpp" />
     <ClCompile Include="SceneTwo.cpp" />
@@ -169,6 +172,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Callbacks.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Chair.h" />
     <ClInclude Include="ComplexTransformation.h" />
     <ClInclude Include="Cubemap.h" />
     <ClInclude Include="DirectionalLight.h" />
@@ -185,6 +189,7 @@
     <ClInclude Include="Scale.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFour.h" />
+    <ClInclude Include="SceneMGA.h" />
     <ClInclude Include="SceneOne.h" />
     <ClInclude Include="SceneThree.h" />
     <ClInclude Include="SceneTwo.h" />

@@ -12,12 +12,15 @@
 #include "Plain.h"
 #include "TexturedPlain.h"
 #include "Doll.h"
+#include "Chair.h"
 
 class ObjectFactory {
 public:
 	static SkyBox* createSkyBox(const std::string& modelPath, const std::string& shaderPath);
 	static Terrain* createTerrain(int xCount, int zCount, int width, int height, float range, const std::string& shaderPath);
 	static Doll* createDoll(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath, int lightCount);
+	static Chair* createChair(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath, int lightCount);
+	static Object* createGenericObject(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath, int lightCount);
 
 private:
 	static float* internalLoadObject(const std::string& modelPath, int& count);

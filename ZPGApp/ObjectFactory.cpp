@@ -58,6 +58,21 @@ Doll* ObjectFactory::createDoll(const std::string& modelPath, const std::string&
 	return new Doll(arr, count, shaderPath, texturePath, lightCount);
 }
 
+Chair* ObjectFactory::createChair(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath, int lightCount) {
+	int count;
+	float* arr = internalLoadObject(modelPath, count);
+
+	return new Chair(arr, count, shaderPath, texturePath, lightCount);
+}
+
+Object* ObjectFactory::createGenericObject(const std::string& modelPath, const std::string& shaderPath, const std::string* texturePath, int lightCount)
+{
+	int count;
+	float* arr = internalLoadObject(modelPath, count);
+
+	return new Object(arr, count, NULL, NULL, false, shaderPath, texturePath, true, lightCount);
+}
+
 
 void ObjectFactory::processPerlin(std::vector<glm::vec3>& pos, std::vector<glm::vec3>& norms, float range) {
 	int posSize = pos.size();

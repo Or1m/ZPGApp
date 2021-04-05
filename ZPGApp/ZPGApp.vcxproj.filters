@@ -171,6 +171,12 @@
     <ClCompile Include="Doll.cpp">
       <Filter>Source Files\Concrete Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Chair.cpp">
+      <Filter>Source Files\Concrete Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMGA.cpp">
+      <Filter>Source Files\Concrete Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -319,6 +325,12 @@
     </ClInclude>
     <ClInclude Include="Resources\Models\indexed_rectangle.hpp">
       <Filter>Resource Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Chair.h">
+      <Filter>Header Files\Concrete Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMGA.h">
+      <Filter>Header Files\Concrete Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

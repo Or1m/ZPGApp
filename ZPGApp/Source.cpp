@@ -5,7 +5,7 @@
 int main(void)  {
 	int scene = 1;
 
-	std::cout << "Select scene<1-4>:" << std::endl;
+	std::cout << "Select scene<1-5>:" << std::endl;
 	std::cin >> scene;
 	if (std::cin.fail()) scene = 1;
 
