@@ -50,6 +50,13 @@ protected:
 	const std::string livingfTexPath	= "Resources/Textures/living.png";
 	const std::string barrelTexPath		= "Resources/Textures/barrel.png";
 	const std::string stolickyTexPath	= "Resources/Textures/stolickas.png";
+	const std::string wellTexPath		= "Resources/Textures/well.png";
+	const std::string plateTexPath		= "Resources/Textures/plate.png";
+	const std::string coffeeTexPath		= "Resources/Textures/coffeee.png";
+	const std::string cofTexPath		= "Resources/Textures/cof.png";
+	const std::string grassTexPath		= "Resources/Textures/grass.png";
+	const std::string studnaTexPath		= "Resources/Textures/studna.png";
+	const std::string donutTexPath		= "Resources/Textures/donut.png";
 
 	const std::string domePath			= "Resources/Objects/skydome.obj";
 	const std::string skyBoxPath		= "Resources/Objects/skybox.obj";
@@ -60,4 +67,11 @@ protected:
 	const std::string livingfPath		= "Resources/Objects/living.obj";
 	const std::string barrelPath		= "Resources/Objects/barrel.obj";
 	const std::string stolickyPath		= "Resources/Objects/stolickas.obj";
+	const std::string wellPath			= "Resources/Objects/well.obj";
+	const std::string platePath			= "Resources/Objects/plate.obj";
+	const std::string coffeePath		= "Resources/Objects/coffeee.obj";
+	const std::string cofPath			= "Resources/Objects/cof.obj";
+	const std::string grassPath			= "Resources/Objects/grass.obj";
+	const std::string studnaPath		= "Resources/Objects/studna.obj";
+	const std::string donutPath			= "Resources/Objects/donut.obj";
 };

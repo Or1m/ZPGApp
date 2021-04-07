@@ -5,7 +5,7 @@
 
 void SceneFour::onLoad() {
 	objects->push_back(ObjectFactory::createSkyBox(skyBoxPath, cubeMapPath));
-	objects->push_back(ObjectFactory::createTerrain(32, 32, 100, 100, 3, terraintPath));
+	objects->push_back(ObjectFactory::createTerrain(32, 32, 100, 100, .3f, phongPath));
 
 	//objects->push_back(new TexturedPlain(constantPath, &groundTexturePath));
 	//objects->push_back(ObjectManager::loadAndCreateObject(domePath, constantPath, &skyTexturePath));
