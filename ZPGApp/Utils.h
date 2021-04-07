@@ -68,3 +68,28 @@ static glm::vec3 calcBazier(float t, glm::vec3* arr) {
 
 	return pos;
 }
+
+const int MAX = 8;
+static int visited[MAX];
+
+static int randomWithoutRepetition() {
+	srand((unsigned int)time((time_t*)NULL));
+	
+	int i = 0, num = 0;
+	while (i < MAX) {
+		num = rand() % MAX;
+
+		if (visited[num] == 0) {
+			visited[num] = 1;
+
+			return num;
+		}
+	}
+}
+
+static void clearVisited() {
+	for (int i = 0; i < MAX; i++)
+	{
+		visited[i] = 0;
+	}
+}

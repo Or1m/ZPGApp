@@ -64,7 +64,7 @@ protected:
 	const std::string enviroPath		= "Resources/Objects/enviroment.obj";
 	const std::string setPath			= "Resources/Objects/set.obj";
 	const std::string bookshelfPath		= "Resources/Objects/bookshelf.obj";
-	const std::string livingfPath		= "Resources/Objects/living.obj";
+	const std::string livingfPath		= "Resources/Objects/living2.obj";
 	const std::string barrelPath		= "Resources/Objects/barrel.obj";
 	const std::string stolickyPath		= "Resources/Objects/stolickas.obj";
 	const std::string wellPath			= "Resources/Objects/well.obj";
@@ -73,5 +73,6 @@ protected:
 	const std::string cofPath			= "Resources/Objects/cof.obj";
 	const std::string grassPath			= "Resources/Objects/grass.obj";
 	const std::string studnaPath		= "Resources/Objects/studna.obj";
-	const std::string donutPath			= "Resources/Objects/donut.obj";
+	const std::string donutPath			= "Resources/Objects/donutik.obj";
+	const std::string bigDonutPath		= "Resources/Objects/donut.obj";
 };
